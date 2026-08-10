@@ -1,5 +1,5 @@
 seed,mAP50_test,mAP50_95_test,note,min
-42,0.789,0.4851,từ notebook 01 (tham chiếu),
+42,0.789,0.4851,from notebook 01 (reference),
 0,0.7924,0.487,,175.2
 1,0.7935,0.4886,,174.1
 2,0.7944,0.4851,,174.2

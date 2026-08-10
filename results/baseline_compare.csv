@@ -1,5 +1,5 @@
-Nguồn,Dataset,mAP50,Ghi chú
-Đồ án này – RT-DETR-L (Transformer),"PPE-Unified v1, 12 lớp (test 10%)",0.7959,"HPO đầy đủ, split cố định seed 42, tái lập được"
-snehilsanyal/Construction-Site-Safety-PPE-Detection (YOLOv8n),"Roboflow CSS 2.801 ảnh, 10 lớp",,KHÔNG công bố số liệu; chỉ có curve/confusion matrix
-jomarkow/Safety-Helmet-Detection (YOLOv8n),Kaggle Hard Hat 5k (khác dataset),,KHÔNG công bố số liệu; 10 epochs proof-of-concept
-lyuwenyu/RT-DETR (R18 official),COCO val2017 (80 lớp),,"official 46.5 mAP50-95 trên COCO – chỉ tham chiếu, khác dataset"
+Source,Dataset,mAP50,Notes
+This work – RT-DETR-L (Transformer),"PPE-Unified v1, 12 classes (10% test)",0.7959,"Full HPO, fixed split seed 42, reproducible"
+snehilsanyal/Construction-Site-Safety-PPE-Detection (YOLOv8n),"Roboflow CSS, 2,801 images, 10 classes",,No metrics published; only curves/confusion matrix
+jomarkow/Safety-Helmet-Detection (YOLOv8n),Kaggle Hard Hat 5k (different dataset),,No metrics published; 10-epoch proof of concept
+lyuwenyu/RT-DETR (R18 official),COCO val2017 (80 classes),,"Official 46.5 mAP50-95 on COCO – reference only, different dataset"

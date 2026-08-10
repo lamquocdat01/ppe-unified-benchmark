@@ -1,19 +1,18 @@
-# Báo cáo so sánh: CNN vs RNN vs Transformer – Safety-PPE Detection 12 lớp
-Đồ án Deep Learning · Active AI Camera – An toàn lao động nhà máy · Lâm Quốc Đạt
+# Comparison report: CNN vs RNN vs Transformer – Safety-PPE detection, 12 classes
 
 ## 1. Dataset & protocol
-- PPE-Unified v1 (gộp 3 nguồn CC BY 4.0, khử leakage theo ảnh gốc + MD5, chuẩn hóa 640×640), 12 lớp = 6 cặp tuân thủ/vi phạm, 17.951 ảnh.
-- Split cố định 70/20/10 theo nhóm ảnh gốc (group-aware, seed 42), dùng chung cho cả 3 nhánh; TEST chỉ dùng 1 lần. Public: kaggle.com/datasets/quocdatlam/ppe-unified-v1
-- Chống mất cân bằng: repeat-factor oversampling (train), undersampling crop, class weights, chọn model theo macro-F1.
+- PPE-Unified v1 (three CC BY 4.0 sources merged, leakage removed by source image + MD5, normalised to 640×640), 12 classes = 6 compliant/violation pairs, 17,951 images.
+- Fixed 70/20/10 split grouped by source image (group-aware, seed 42), shared by all three branches; TEST is used exactly once. Public: kaggle.com/datasets/quocdatlam/ppe-unified-v1
+- Imbalance handling: repeat-factor oversampling (train), crop undersampling, class weights, model selection by macro-F1.
 
-## 2. Kết quả DETECTION (TEST)
+## 2. DETECTION results (TEST)
 | model                   | branch      | cfg                                |   mAP50_val |   mAP50_test |   mAP50_95_test |   precision_test |   recall_test |   infer_ms |   train_min |
 |:------------------------|:------------|:-----------------------------------|------------:|-------------:|----------------:|-----------------:|--------------:|-----------:|------------:|
 | RT-DETR-L (Transformer) | Transformer | {'lr0': 0.0001}                    |      0.8161 |       0.7959 |          0.4884 |           0.7693 |        0.7682 |      37.5  |        61.8 |
 | YOLO26s (CNN)           | CNN         | {'lr0': 0.01, 'optimizer': 'auto'} |      0.811  |       0.789  |          0.4851 |           0.7675 |        0.7377 |       9.78 |       165.4 |
 | Faster R-CNN (CNN)      | CNN         | lr=0.005,SGD,8ep                   |      0.7247 |       0.7207 |          0.387  |         nan      |      nan      |      86.29 |       396.5 |
 
-## 3. Kết quả CLASSIFICATION 12 lớp (TEST)
+## 3. CLASSIFICATION results, 12 classes (TEST)
 | model                  | branch      | cfg                                                                             |   accuracy |   macro_f1 |   worst_class_f1 |   train_min |
 |:-----------------------|:------------|:--------------------------------------------------------------------------------|-----------:|-----------:|-----------------:|------------:|
 | ViT-B/16 (Transformer) | Transformer | vit_base_patch16_224, {'lr': 5e-05, 'wd': 0.1}                                  |     0.9521 |     0.8711 |           0.7967 |        19   |
@@ -25,19 +24,19 @@
 | BiLSTM-ref (RNN)       | RNN         | BiLSTM, hidden 256                                                              |     0.7879 |     0.6533 |           0.4512 |         3.6 |
 | LSTM-ref (RNN)         | RNN         | LSTM, hidden 256                                                                |     0.7302 |     0.5942 |           0.4211 |         2.2 |
 
-## 4. Model được chọn
+## 4. Selected models
 - Detection: **RT-DETR-L (Transformer)** | Classification: **ViT-B/16 (Transformer)**
-- Pipeline triển khai: RT-DETR-L (Transformer) + RNN temporal smoothing trên chuỗi frame camera.
+- Deployment pipeline: RT-DETR-L (Transformer) + RNN temporal smoothing over the camera frame sequence.
 
-## 5. So sánh baseline GitHub 2023–2026
-| Nguồn                                                         | Dataset                           |    mAP50 | Ghi chú                                                         |
-|:--------------------------------------------------------------|:----------------------------------|---------:|:----------------------------------------------------------------|
-| Đồ án này – RT-DETR-L (Transformer)                           | PPE-Unified v1, 12 lớp (test 10%) |   0.7959 | HPO đầy đủ, split cố định seed 42, tái lập được                 |
-| snehilsanyal/Construction-Site-Safety-PPE-Detection (YOLOv8n) | Roboflow CSS 2.801 ảnh, 10 lớp    | nan      | KHÔNG công bố số liệu; chỉ có curve/confusion matrix            |
-| jomarkow/Safety-Helmet-Detection (YOLOv8n)                    | Kaggle Hard Hat 5k (khác dataset) | nan      | KHÔNG công bố số liệu; 10 epochs proof-of-concept               |
-| lyuwenyu/RT-DETR (R18 official)                               | COCO val2017 (80 lớp)             | nan      | official 46.5 mAP50-95 trên COCO – chỉ tham chiếu, khác dataset |
+## 5. Comparison against GitHub baselines, 2023–2026
+| Source                                                        | Dataset                                 |    mAP50 | Notes                                                          |
+|:--------------------------------------------------------------|:----------------------------------------|---------:|:----------------------------------------------------------------|
+| This work – RT-DETR-L (Transformer)                           | PPE-Unified v1, 12 classes (10% test)   |   0.7959 | Full HPO, fixed split seed 42, reproducible                    |
+| snehilsanyal/Construction-Site-Safety-PPE-Detection (YOLOv8n) | Roboflow CSS, 2,801 images, 10 classes  | nan      | No metrics published; only curves/confusion matrix             |
+| jomarkow/Safety-Helmet-Detection (YOLOv8n)                    | Kaggle Hard Hat 5k (different dataset)  | nan      | No metrics published; 10-epoch proof of concept                |
+| lyuwenyu/RT-DETR (R18 official)                               | COCO val2017 (80 classes)               | nan      | Official 46.5 mAP50-95 on COCO – reference only, different dataset |
 
-## 6. Phụ lục: các bảng sàng lọc hyperparameter
+## 6. Appendix: hyperparameter screening tables
 
 ### HPO – CNN_cls
 
@@ -98,4 +97,3 @@
 | GRU    |      256 |       0.4 | rmsprop |         0.5861 |   1.1 |
 | GRU    |      256 |       0.2 | adam    |         0.5523 |   1.1 |
 | GRU    |      256 |       0.4 | adam    |         0.5427 |   1.1 |
-
