@@ -1,0 +1,16 @@
+{
+ "B_testcasque": {
+  "images": 5140,
+  "src_groups": 2670,
+  "groups_in_multi_split": 573,
+  "train_val_overlap": 430,
+  "train_test_overlap": 240
+ },
+ "C_mohamed": {
+  "images": 30911,
+  "src_groups": 11110,
+  "groups_in_multi_split": 831,
+  "train_val_overlap": 497,
+  "train_test_overlap": 270
+ }
+}

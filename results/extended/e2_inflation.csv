@@ -1,0 +1,3 @@
+dataset,clean,leaky,inflation_mAP50,inflation_mAP50_95
+B_testcasque,0.5436,0.5628,0.0192,0.0194
+C_mohamed,0.9136,0.9542,0.0406,0.0456

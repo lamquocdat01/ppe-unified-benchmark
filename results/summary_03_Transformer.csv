@@ -1,0 +1,4 @@
+branch,task,model,cfg,mAP50_val,mAP50_test,mAP50_95_test,precision_test,recall_test,infer_ms,train_min,accuracy,macro_f1,worst_class_f1
+Transformer,detection,RT-DETR-L (Transformer),{'lr0': 0.0001},0.8161,0.7959,0.4884,0.7693,0.7682,37.5,61.8,,,
+Transformer,classification,ViT-B/16 (Transformer),"vit_base_patch16_224, {'lr': 5e-05, 'wd': 0.1}",,,,,,,19.0,0.9521,0.8711,0.7967
+Transformer,classification,ViT-S/16 (Transformer),"vit_small_patch16_224, {'lr': 5e-05, 'wd': 0.1}",,,,,,,7.0,0.9453,0.8429,0.8193

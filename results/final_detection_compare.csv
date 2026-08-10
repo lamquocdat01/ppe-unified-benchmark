@@ -1,0 +1,4 @@
+model,branch,cfg,mAP50_val,mAP50_test,mAP50_95_test,precision_test,recall_test,infer_ms,train_min
+RT-DETR-L (Transformer),Transformer,{'lr0': 0.0001},0.8161,0.7959,0.4884,0.7693,0.7682,37.5,61.8
+YOLO26s (CNN),CNN,"{'lr0': 0.01, 'optimizer': 'auto'}",0.811,0.789,0.4851,0.7675,0.7377,9.78,165.4
+Faster R-CNN (CNN),CNN,"lr=0.005,SGD,8ep",0.7247,0.7207,0.387,,,86.29,396.5

@@ -1,0 +1,3 @@
+arm,mAP50_test,mAP50_95_test,AP50_no_vest,AP50_boots,AP50_no_boots,AP50_mask,AP50_no_mask,min
+rfs_on,0.7902,0.4858,0.5389,0.886,0.0272,0.9213,0.9454,82.1
+rfs_off,0.7825,0.4753,0.5293,0.8988,0.0061,0.875,0.9084,71.5

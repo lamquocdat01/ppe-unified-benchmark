@@ -1,0 +1,5 @@
+dataset,arm,epochs,mAP50_val,mAP50_test,mAP50_95_test,min
+B_testcasque,leaky,15,0.5532,0.5628,0.3486,23.3
+B_testcasque,clean,15,0.5448,0.5436,0.3292,22.9
+C_mohamed,leaky,15,0.9506,0.9542,0.5839,151.2
+C_mohamed,clean,15,0.9124,0.9136,0.5383,132.9

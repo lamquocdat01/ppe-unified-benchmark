@@ -1,0 +1,5 @@
+branch,task,model,cfg,accuracy,macro_f1,worst_class_f1,train_min
+RNN,classification,GRU-256x1 (RNN),"{'cell': 'GRU', 'hidden': 256, 'dropout': 0.2, 'opt': 'rmsprop', 'n_layers': 1}",0.8075,0.678,0.5333,2.0
+RNN,classification,GRU-ref (RNN),"GRU, hidden 256",0.8023,0.6796,0.5126,2.0
+RNN,classification,LSTM-ref (RNN),"LSTM, hidden 256",0.7302,0.5942,0.4211,2.2
+RNN,classification,BiLSTM-ref (RNN),"BiLSTM, hidden 256",0.7879,0.6533,0.4512,3.6

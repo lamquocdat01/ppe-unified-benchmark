@@ -1,0 +1,40 @@
+# ============================================================
+# AIN501 - Deep Learning | Do an: Active AI Camera (Safety-PPE)
+# Moi truong thuc nghiem: Kaggle Notebooks (Python 3.11, 07/2026)
+# GPU: NVIDIA Tesla T4/P100 | Random seed: 42
+# Cai dat: pip install -r requirements.txt
+# ============================================================
+
+# --- Detection (YOLO26s, RT-DETR-L) ---
+ultralytics>=8.3.0
+
+# --- PyTorch stack (Faster R-CNN external model, ViT) ---
+torch>=2.3.0
+torchvision>=0.18.0
+timm>=1.0.0
+
+# --- TensorFlow/Keras (VGG16, ResNet50, GRU/LSTM/BiLSTM) ---
+tensorflow>=2.16.0
+
+# --- Xu ly anh & du lieu ---
+opencv-python>=4.9.0
+Pillow>=10.0.0
+numpy>=1.26.0
+pandas>=2.1.0
+PyYAML>=6.0
+
+# --- Danh gia & truc quan hoa ---
+scikit-learn>=1.4.0
+matplotlib>=3.8.0
+tabulate>=0.9.0
+
+# --- Tien ich Kaggle ---
+kagglehub>=0.3.0
+tqdm>=4.66.0
+
+# Ghi chu:
+# - Notebook 01/03 can Internet ON (tai pretrained weights COCO/ImageNet).
+# - Dataset: kaggle.com/datasets/quocdatlam/ppe-unified-v1 (CC BY 4.0),
+#   notebook doc truc tiep tu /kaggle/input (glob de quy).
+# - License ma nguon tham khao: Ultralytics AGPL-3.0,
+#   torchvision BSD-3-Clause, timm Apache-2.0.

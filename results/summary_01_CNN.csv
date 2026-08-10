@@ -1,0 +1,5 @@
+branch,task,model,cfg,mAP50_val,mAP50_test,mAP50_95_test,precision_test,recall_test,infer_ms,train_min,accuracy,macro_f1,worst_class_f1
+CNN,detection,YOLO26s (CNN),"{'lr0': 0.01, 'optimizer': 'auto'}",0.811,0.789,0.4851,0.7675,0.7377,9.78,165.4,,,
+CNN,detection,Faster R-CNN (CNN),"lr=0.005,SGD,8ep",0.7247,0.7207,0.387,,,86.29,396.5,,,
+CNN,classification,VGG16 (CNN),"{'backbone': 'VGG16', 'lr': 0.001, 'dropout': 0.3}+unfreeze block5",,,,,,,16.4,0.8966,0.7894,0.7167
+CNN,classification,ResNet50 (CNN),"{'backbone': 'ResNet50', 'lr': 0.001, 'dropout': 0.5}+unfreeze conv5",,,,,,,9.3,0.9014,0.8072,0.7353
