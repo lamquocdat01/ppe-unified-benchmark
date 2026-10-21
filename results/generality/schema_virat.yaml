@@ -1,0 +1,15 @@
+# VIRAT ground video, IARPA DIVA annotations, frames every 30 (1 fps) - official clip-level split (generality/prepare_virat.py).
+# Non-PPE: no compliance-violation pairs; mixed resolutions (no uniform size); two official splits with no target ratio.
+# scene_k is in file-number units (frame index): 60 = +-2 samples at a 30-frame step.
+name: VIRAT-DIVA 1 fps (official clip split)
+format: coco
+root: _derived/generality/virat_diva_1fps
+splits: {train: train/annotations.json, val: val/annotations.json}
+classes: [Person, Vehicle, Bike, Push_Pulled_Object, Prop, Door, Other]
+pairs: []
+box_edge_tolerance: 0.005
+require_label_file: false
+group: {source: filename, strip_regex: '_f\d+$'}
+leakage: {perceptual: copy+scene, cos: 0.98, phash: 0, scene_k: 60}
+min_support: {val: 150}
+background_tolerance_pp: 2.0

@@ -1,0 +1,98 @@
+{
+ "PPE-U v1.1": {
+  "images": 17951,
+  "summary": {
+   "PASS": 8,
+   "FAIL": 0,
+   "N/A": 0
+  },
+  "status": {
+   "1_class_ids": "PASS",
+   "2_boxes": "PASS",
+   "3_pair_consistency": "PASS",
+   "4_image_size": "PASS",
+   "5_leakage": "PASS",
+   "6_corrupt": "PASS",
+   "7_min_support": "PASS",
+   "8_background": "PASS"
+  },
+  "leakage": {
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "copy_level_cross_split_pairs": 0,
+   "scene_level_cross_split_pairs": 0
+  }
+ },
+ "PPE-U v1-fix": {
+  "images": 17951,
+  "summary": {
+   "PASS": 7,
+   "FAIL": 1,
+   "N/A": 0
+  },
+  "status": {
+   "1_class_ids": "PASS",
+   "2_boxes": "PASS",
+   "3_pair_consistency": "PASS",
+   "4_image_size": "PASS",
+   "5_leakage": "FAIL",
+   "6_corrupt": "PASS",
+   "7_min_support": "PASS",
+   "8_background": "PASS"
+  },
+  "leakage": {
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "copy_level_cross_split_pairs": 12582,
+   "scene_level_cross_split_pairs": 11978
+  }
+ },
+ "VKITTI2$^a$": {
+  "images": 2126,
+  "summary": {
+   "PASS": 3,
+   "FAIL": 4,
+   "N/A": 1
+  },
+  "status": {
+   "1_class_ids": "PASS",
+   "2_boxes": "FAIL",
+   "3_pair_consistency": "N/A",
+   "4_image_size": "PASS",
+   "5_leakage": "FAIL",
+   "6_corrupt": "PASS",
+   "7_min_support": "FAIL",
+   "8_background": "FAIL"
+  },
+  "leakage": {
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "copy_level_cross_split_pairs": 2221,
+   "scene_level_cross_split_pairs": 1961
+  }
+ },
+ "VIRAT-DIVA$^b$": {
+  "images": 1227,
+  "summary": {
+   "PASS": 3,
+   "FAIL": 2,
+   "N/A": 3
+  },
+  "status": {
+   "1_class_ids": "PASS",
+   "2_boxes": "PASS",
+   "3_pair_consistency": "N/A",
+   "4_image_size": "N/A",
+   "5_leakage": "FAIL",
+   "6_corrupt": "PASS",
+   "7_min_support": "FAIL",
+   "8_background": "N/A"
+  },
+  "leakage": {
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "copy_level_cross_split_pairs": 44109,
+   "scene_level_cross_split_pairs": 0
+  }
+ }
+}

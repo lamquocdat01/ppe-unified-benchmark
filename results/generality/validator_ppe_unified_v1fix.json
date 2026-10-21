@@ -1,0 +1,145 @@
+{
+ "schema": "validator/schema_ppe_unified_v1fix.yaml",
+ "dataset": "PPE-Unified v1-fix",
+ "images": 17951,
+ "images_per_split": {
+  "train": 12566,
+  "val": 3590,
+  "test": 1795
+ },
+ "checks": {
+  "1_class_ids": {
+   "status": "PASS",
+   "boxes": 51177,
+   "invalid_ids": 0,
+   "examples": [],
+   "declared_names_match_schema": true
+  },
+  "2_boxes": {
+   "status": "PASS",
+   "invalid_boxes": 0,
+   "examples": [],
+   "unparseable_lines": 0,
+   "images_without_label": 0,
+   "labels_without_image": 0,
+   "boxes_touching_edge_within_tolerance": 0,
+   "edge_tolerance": 0.005
+  },
+  "3_pair_consistency": {
+   "status": "PASS",
+   "pairs": [
+    [
+     "helmet",
+     "no_helmet"
+    ],
+    [
+     "vest",
+     "no_vest"
+    ],
+    [
+     "gloves",
+     "no_gloves"
+    ],
+    [
+     "goggles",
+     "no_goggles"
+    ],
+    [
+     "boots",
+     "no_boots"
+    ],
+    [
+     "mask",
+     "no_mask"
+    ]
+   ],
+   "label_map_problems": [],
+   "pair_members_absent_from_split": [],
+   "same_object_conflicts": 0,
+   "conflict_iou": 0.8,
+   "examples": []
+  },
+  "4_image_size": {
+   "status": "PASS",
+   "expected": [
+    640,
+    640
+   ],
+   "mismatched": 0
+  },
+  "5_leakage": {
+   "status": "FAIL",
+   "group_source": "manifest",
+   "groups": 17951,
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "perceptual_tier": "copy+scene",
+   "perceptual_config": {
+    "cos": 0.98,
+    "phash": 0,
+    "topk": 5,
+    "scene_k": 2
+   },
+   "copy_level_cross_split_pairs": 12582,
+   "scene_level_cross_split_pairs": 11978,
+   "embeddings_computed_not_cached": 0,
+   "copy_examples": [
+    "train/a_000318_jpg ~ val/a_006795_jpg",
+    "train/a_000426_jpg ~ val/b_ppe_0898_jpg",
+    "train/a_000926_jpg ~ val/a_004353_jpg",
+    "train/a_001496_jpg ~ val/b_ppe_0673_jpg",
+    "train/a_001810_jpg ~ val/a_002742_jpg",
+    "train/a_002187_jpg ~ val/a_006124_jpg",
+    "train/a_002763_jpg ~ val/a_004168_jpg",
+    "train/a_002844_jpg ~ val/a_004977_jpg",
+    "train/a_003844_jpg ~ val/b_ppe_0650_jpg",
+    "train/a_004124_jpg ~ test/b_ppe_0395_jpg"
+   ],
+   "scene_examples": [
+    "train/a_000003_jpg ~ val/a_000001_jpg",
+    "train/a_000003_jpg ~ val/a_000002_jpg",
+    "train/a_000003_jpg ~ val/a_000004_jpg",
+    "train/a_000006_jpg ~ val/a_000004_jpg",
+    "train/a_000006_jpg ~ val/a_000008_jpg",
+    "train/a_000009_jpg ~ val/a_000008_jpg",
+    "train/a_000009_jpg ~ val/a_000011_jpg",
+    "train/a_000012_jpg ~ val/a_000011_jpg",
+    "train/a_000013_jpg ~ val/a_000011_jpg",
+    "train/a_000013_jpg ~ val/a_000015_jpg"
+   ]
+  },
+  "6_corrupt": {
+   "status": "PASS",
+   "decoded": 17951,
+   "corrupt": 0,
+   "examples": []
+  },
+  "7_min_support": {
+   "status": "PASS",
+   "violations": [],
+   "exempt": [
+    "no_boots"
+   ],
+   "min_support": {
+    "val": 150,
+    "test": 100
+   }
+  },
+  "8_background": {
+   "status": "PASS",
+   "background_images": 587,
+   "per_split": {
+    "train": 411,
+    "val": 117,
+    "test": 59
+   },
+   "max_deviation_pp": 0.068,
+   "tolerance_pp": 2.0
+  }
+ },
+ "summary": {
+  "PASS": 7,
+  "FAIL": 1,
+  "N/A": 0
+ }
+}

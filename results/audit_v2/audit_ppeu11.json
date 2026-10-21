@@ -1,0 +1,363 @@
+{
+ "topk": 5,
+ "points": {
+  "t098": {
+   "cos": 0.98,
+   "ph": 0
+  },
+  "t095": {
+   "cos": 0.95,
+   "ph": 0
+  },
+  "t090": {
+   "cos": 0.9,
+   "ph": 0
+  }
+ },
+ "operating_point": "t098",
+ "scene_k": 2,
+ "within": {
+  "ppeu11": {
+   "dataset": "ppeu11",
+   "images": 17951,
+   "splits": {
+    "train": 12566,
+    "val": 3590,
+    "test": 1795
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 0,
+      "cos_tier": 0,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 0,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 0,
+      "union_all": 0,
+      "leaked_images_2a": 0,
+      "leaked_images_all": 0
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 15917,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1771,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 1407,
+       "cos_tier": 1407,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 1407,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 1407,
+       "union_all": 1407,
+       "leaked_images_2a": 70,
+       "leaked_images_all": 70
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 998,
+       "cos_tier": 998,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 998,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 998,
+       "union_all": 998,
+       "leaked_images_2a": 57,
+       "leaked_images_all": 57
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 186,
+       "cos_tier": 186,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 186,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 186,
+       "union_all": 186,
+       "leaked_images_2a": 53,
+       "leaked_images_all": 53
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 2591,
+      "cos_tier": 2591,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 2591,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 2591,
+      "union_all": 2591,
+      "leaked_images_2a": 180,
+      "leaked_images_all": 180
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 14186,
+      "spanning": 33,
+      "images_in_spanning": 1670,
+      "largest_spanning": 800
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1574,
+      "spanning": 22,
+      "images_in_spanning": 6026,
+      "largest_spanning": 1915
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 6406,
+       "cos_tier": 6406,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 6406,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 6406,
+       "union_all": 6406,
+       "leaked_images_2a": 319,
+       "leaked_images_all": 319
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 5504,
+       "cos_tier": 5504,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5504,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 5504,
+       "union_all": 5504,
+       "leaked_images_2a": 213,
+       "leaked_images_all": 213
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 1168,
+       "cos_tier": 1168,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 1168,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 1168,
+       "union_all": 1168,
+       "leaked_images_2a": 227,
+       "leaked_images_all": 227
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 13078,
+      "cos_tier": 13078,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 13078,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 13078,
+      "union_all": 13078,
+      "leaked_images_2a": 759,
+      "leaked_images_all": 759
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 9493,
+      "spanning": 106,
+      "images_in_spanning": 6573,
+      "largest_spanning": 1803
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1331,
+      "spanning": 54,
+      "images_in_spanning": 10716,
+      "largest_spanning": 2070
+     }
+    }
+   }
+  }
+ },
+ "cross": {
+  "ppeu11:train=sh17:val": {
+   "spec": "ppeu11:train=sh17:val",
+   "x_images": 12566,
+   "y_images": 1620,
+   "points": {
+    "t098": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t095": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t090": {
+     "exact": 0,
+     "copy_2a": 1,
+     "cos_tier": 1,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 1,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 1,
+     "union_all": 1,
+     "x_images_matched": 1,
+     "y_images_matched": 1
+    }
+   }
+  }
+ }
+}

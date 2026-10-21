@@ -1,0 +1,101 @@
+{
+ "schema": "validator/schema_virat.yaml",
+ "dataset": "VIRAT-DIVA 1 fps (official clip split)",
+ "images": 1227,
+ "images_per_split": {
+  "train": 761,
+  "val": 466
+ },
+ "checks": {
+  "1_class_ids": {
+   "status": "PASS",
+   "boxes": 21708,
+   "invalid_ids": 0,
+   "examples": [],
+   "declared_names_match_schema": "no data.yaml"
+  },
+  "2_boxes": {
+   "status": "PASS",
+   "invalid_boxes": 0,
+   "examples": [],
+   "unparseable_lines": 0,
+   "images_without_label": 0,
+   "labels_without_image": 0,
+   "boxes_touching_edge_within_tolerance": 0,
+   "edge_tolerance": 0.005
+  },
+  "3_pair_consistency": {
+   "status": "N/A",
+   "reason": "schema declares no compliance-violation pairs"
+  },
+  "4_image_size": {
+   "status": "N/A",
+   "reason": "schema declares no uniform size",
+   "distinct_sizes": 2,
+   "most_common": [
+    [
+     "((1280, 720), 924)",
+     "((1920, 1080), 303)"
+    ]
+   ]
+  },
+  "5_leakage": {
+   "status": "FAIL",
+   "group_source": "filename",
+   "groups": 8,
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "perceptual_tier": "copy+scene",
+   "perceptual_config": {
+    "cos": 0.98,
+    "phash": 0,
+    "topk": 5,
+    "scene_k": 60
+   },
+   "copy_level_cross_split_pairs": 44109,
+   "scene_level_cross_split_pairs": 0,
+   "embeddings_computed_not_cached": 1227,
+   "copy_examples": [
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000030",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000060",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000150",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000270",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000330",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000360",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000390",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000420",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000450",
+    "train/VIRAT_S_000200_03_000657_000899_f000000 ~ val/VIRAT_S_000200_00_000100_000171_f000480"
+   ],
+   "scene_examples": []
+  },
+  "6_corrupt": {
+   "status": "PASS",
+   "decoded": 1227,
+   "corrupt": 0,
+   "examples": []
+  },
+  "7_min_support": {
+   "status": "FAIL",
+   "violations": [
+    "Bike@val: 50 < 150",
+    "Push_Pulled_Object@val: 0 < 150",
+    "Prop@val: 57 < 150"
+   ],
+   "exempt": [],
+   "min_support": {
+    "val": 150
+   }
+  },
+  "8_background": {
+   "status": "N/A",
+   "reason": "no background images",
+   "background_images": 0
+  }
+ },
+ "summary": {
+  "PASS": 3,
+  "FAIL": 2,
+  "N/A": 3
+ }
+}

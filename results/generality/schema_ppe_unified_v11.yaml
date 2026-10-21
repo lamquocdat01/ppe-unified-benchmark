@@ -1,0 +1,24 @@
+# PPE-Unified v1.1 - near-duplicate-aware group re-split. Paths are relative to THS_DATASETS.
+name: PPE-Unified v1.1
+format: yolo
+root: PPE_SH17/PPE_Unified_v1.1
+splits: {train: train, val: val, test: test}
+target_ratio: {train: 0.70, val: 0.20, test: 0.10}
+classes: [helmet, no_helmet, vest, no_vest, gloves, no_gloves, goggles, no_goggles, boots, no_boots, mask, no_mask]
+pairs:
+  - [helmet, no_helmet]
+  - [vest, no_vest]
+  - [gloves, no_gloves]
+  - [goggles, no_goggles]
+  - [boots, no_boots]
+  - [mask, no_mask]
+pair_conflict_iou: 0.8
+image_size: [640, 640]
+box_edge_tolerance: 0.005
+require_label_file: true
+group: {source: manifest, manifest: manifest.csv, file_column: file, column: group_v11}
+leakage: {perceptual: copy+scene, cos: 0.98, phash: 0, scene_k: 2, feature_cache: _derived/ppe_unified/features}
+min_support: {val: 150, test: 100}
+min_support_overrides: {test: {no_vest: 100, mask: 110}}
+exempt_classes: [no_boots]
+background_tolerance_pp: 2.0

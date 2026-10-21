@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering\footnotesize
+\caption{Threshold sensitivity of the PPE-Unified v1.1 re-split. Groups = connected components of exact $\cup$ 2a($\theta,\tau$) $\cup$ 2b($k=2$); split by the group-aware stratified algorithm of v1 with background-aware counting (identical to v1 on singleton groups; seed 42, 70/20/10), on the corrected labels. Max.\ dev.\ = largest deviation of a class's box share from its target split share (v1: 0.07 pp). $\theta=0.98$ is the precision-conservative copy-level operating point; scene-level duplicates are handled by 2b, not by a threshold.}
+\label{tab:threshold_sensitivity}
+\begin{tabular}{lrrrrrl}
+\toprule
+Rule & $\theta$ & $\tau$ & Groups & Largest (\%) & Train/val/test & Max.\ dev.\ (pp) \\
+\midrule
+cross-source calibration, P$\ge$0.99 & 0.485 & 16 & 4 & 17{,}948 (99.98) & 0/17{,}950/1 & 80.0 (min-support FAIL) \\
+FPR $\le 10^{-7}$, exhaustive cross-source & 0.8465 & 9 & 1{,}128 & 2{,}778 (15.48) & 10{,}356/3{,}532/4{,}063 & 57.65 \\
+sensitivity & 0.95 & 4 & 1{,}499 & 1{,}915 (10.67) & 12{,}566/3{,}590/1{,}795 & 20.24 \\
+\textbf{operating point (v1.1)} & 0.98 & 0 & 1{,}770 & 1{,}910 (10.64) & 12{,}566/3{,}590/1{,}795 & 4.12 \\
+\bottomrule
+\end{tabular}
+\end{table}

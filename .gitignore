@@ -6,3 +6,11 @@ runs/
 datasets/
 *.zip
 .ipynb_checkpoints/
+
+# audit_v2: large derived artefacts and dataset-image previews (kept locally / in D:\Datasets\_derived)
+results/audit_v2/edges_cross*.csv
+results/audit_v2/*.npz
+results/audit_v2/*.npy
+results/audit_v2/*.png
+results/audit_v2/*.log
+results/audit_v2/validation_300/*.png

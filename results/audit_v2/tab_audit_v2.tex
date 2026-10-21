@@ -1,0 +1,46 @@
+\begin{table*}[t]
+\centering\footnotesize
+\caption{Two-level cross-split audit. Exact: same source ID or MD5. Copy level (2a): cosine $\ge\theta$ among FAISS top-5 neighbours or pHash $\le 0$ (flip-invariant); $\theta=0.98$ is the operating point, 0.95 and 0.90 are sensitivity. Scene level (2b): same file-name sequence, frame numbers within $\pm2$, no threshold. Pairs are counted across splits; +2a = 2a pairs not caught by the exact tier; groups = connected components of exact $\cup$ 2a $\cup$ 2b spanning more than one split (images).}
+\label{tab:audit_v2}
+\begin{tabular}{ll r rr rr rr rr}
+\toprule
+ & & & \multicolumn{2}{c}{$\theta=0.98$} & \multicolumn{2}{c}{$\theta=0.95$} & \multicolumn{2}{c}{$\theta=0.9$} & \multicolumn{2}{c}{2b scene} \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}
+Dataset & Split pair & Exact & 2a & +2a & 2a & +2a & 2a & +2a & 2b & 2b-only \\
+\midrule
+PPE-U v1 & train-val & 0 & 2{,}912 & 2{,}912 & 6{,}508 & 6{,}508 & 18{,}774 & 18{,}774 & 7{,}155 & 6{,}420 \\
+PPE-U v1 & train-test & 0 & 2{,}215 & 2{,}215 & 5{,}068 & 5{,}068 & 14{,}451 & 14{,}451 & 3{,}446 & 2{,}966 \\
+PPE-U v1 & val-test & 0 & 932 & 932 & 2{,}217 & 2{,}217 & 5{,}681 & 5{,}681 & 1{,}377 & 1{,}149 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 0 (0 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 666 (16{,}359) / 619 (16{,}553) / 523 (16{,}759)} \\
+\midrule
+PPE-U v1-fix & train-val & 0 & 2{,}912 & 2{,}912 & 6{,}508 & 6{,}508 & 18{,}774 & 18{,}774 & 7{,}155 & 6{,}420 \\
+PPE-U v1-fix & train-test & 0 & 2{,}215 & 2{,}215 & 5{,}068 & 5{,}068 & 14{,}451 & 14{,}451 & 3{,}446 & 2{,}966 \\
+PPE-U v1-fix & val-test & 0 & 932 & 932 & 2{,}217 & 2{,}217 & 5{,}681 & 5{,}681 & 1{,}377 & 1{,}149 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 0 (0 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 666 (16{,}359) / 619 (16{,}553) / 523 (16{,}759)} \\
+\midrule
+PPE-U v1.1 & train-val & 0 & 0 & 0 & 883 & 883 & 7{,}145 & 7{,}145 & 0 & 0 \\
+PPE-U v1.1 & train-test & 0 & 0 & 0 & 1{,}165 & 1{,}165 & 5{,}719 & 5{,}719 & 0 & 0 \\
+PPE-U v1.1 & val-test & 0 & 0 & 0 & 170 & 170 & 1{,}214 & 1{,}214 & 0 & 0 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 0 (0 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 0 (0) / 27 (6{,}437) / 53 (10{,}641)} \\
+\midrule
+SH17 & train-val & 0 & 0 & 0 & 9 & 9 & 127 & 127 & 1{,}660 & 1{,}626 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 0 (0 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 595 (3{,}195) / 596 (3{,}223) / 589 (3{,}401)} \\
+\midrule
+A & train-test & 0 & 43 & 43 & 70 & 70 & 109 & 109 & 3 & 3 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 0 (0 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 1 (7{,}035) / 1 (7{,}035) / 1 (7{,}035)} \\
+\midrule
+B & train-val & 2{,}154 & 1{,}712 & 704 & 2{,}952 & 1{,}874 & 6{,}120 & 4{,}975 & 8{,}420 & 4{,}952 \\
+B & train-test & 1{,}088 & 938 & 389 & 1{,}539 & 950 & 3{,}884 & 3{,}265 & 4{,}247 & 2{,}491 \\
+B & val-test & 331 & 269 & 117 & 437 & 273 & 1{,}170 & 990 & 1{,}226 & 719 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 573 (2{,}441 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 372 (4{,}719) / 353 (4{,}745) / 280 (4{,}811)} \\
+\midrule
+C & train-val & 1{,}491 & 7{,}207 & 7{,}158 & 13{,}094 & 13{,}010 & 50{,}182 & 49{,}994 & 25{,}011 & 20{,}671 \\
+C & train-test & 810 & 3{,}804 & 3{,}763 & 8{,}330 & 8{,}271 & 39{,}853 & 39{,}750 & 12{,}576 & 9{,}991 \\
+C & val-test & 64 & 5{,}440 & 5{,}383 & 7{,}899 & 7{,}842 & 11{,}670 & 11{,}611 & 1{,}155 & 442 \\
+\multicolumn{11}{r}{\scriptsize groups spanning splits, exact only: 831 (3{,}196 img); exact$\cup$2a$\cup$2b at $\theta$ = 0.98, 0.95, 0.9: 157 (29{,}749) / 137 (29{,}897) / 104 (30{,}118)} \\
+\midrule
+\multicolumn{2}{l}{PPE-U v1-train vs SH17-val} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -- & -- \\
+\multicolumn{2}{l}{PPE-U v1.1-train vs SH17-val} & 0 & 0 & 0 & 0 & 0 & 1 & 1 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}

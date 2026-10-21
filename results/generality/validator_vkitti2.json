@@ -1,0 +1,119 @@
+{
+ "schema": "validator/schema_vkitti2.yaml",
+ "dataset": "VKITTI2 clone cam0 (naive frame split)",
+ "images": 2126,
+ "images_per_split": {
+  "train": 1488,
+  "val": 425,
+  "test": 213
+ },
+ "checks": {
+  "1_class_ids": {
+   "status": "PASS",
+   "boxes": 27118,
+   "invalid_ids": 0,
+   "examples": [],
+   "declared_names_match_schema": true
+  },
+  "2_boxes": {
+   "status": "FAIL",
+   "invalid_boxes": 2,
+   "examples": [
+    "train/Scene06_clone_cam0_00068",
+    "train/Scene20_clone_cam0_00013"
+   ],
+   "unparseable_lines": 0,
+   "images_without_label": 0,
+   "labels_without_image": 0,
+   "boxes_touching_edge_within_tolerance": 0,
+   "edge_tolerance": 0.005
+  },
+  "3_pair_consistency": {
+   "status": "N/A",
+   "reason": "schema declares no compliance-violation pairs"
+  },
+  "4_image_size": {
+   "status": "PASS",
+   "expected": [
+    1242,
+    375
+   ],
+   "mismatched": 0
+  },
+  "5_leakage": {
+   "status": "FAIL",
+   "group_source": "none",
+   "groups": 2126,
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "perceptual_tier": "copy+scene",
+   "perceptual_config": {
+    "cos": 0.98,
+    "phash": 0,
+    "topk": 5,
+    "scene_k": 2
+   },
+   "copy_level_cross_split_pairs": 2221,
+   "scene_level_cross_split_pairs": 1961,
+   "embeddings_computed_not_cached": 2126,
+   "copy_examples": [
+    "train/Scene01_clone_cam0_00176 ~ test/Scene01_clone_cam0_00177",
+    "train/Scene01_clone_cam0_00192 ~ val/Scene01_clone_cam0_00191",
+    "train/Scene01_clone_cam0_00248 ~ val/Scene01_clone_cam0_00247",
+    "train/Scene01_clone_cam0_00249 ~ val/Scene01_clone_cam0_00247",
+    "train/Scene01_clone_cam0_00304 ~ val/Scene01_clone_cam0_00305",
+    "train/Scene01_clone_cam0_00382 ~ test/Scene01_clone_cam0_00383",
+    "train/Scene01_clone_cam0_00384 ~ test/Scene01_clone_cam0_00383",
+    "train/Scene01_clone_cam0_00387 ~ val/Scene01_clone_cam0_00388",
+    "train/Scene01_clone_cam0_00401 ~ val/Scene01_clone_cam0_00403",
+    "train/Scene01_clone_cam0_00402 ~ val/Scene01_clone_cam0_00403"
+   ],
+   "scene_examples": [
+    "train/Scene01_clone_cam0_00002 ~ val/Scene01_clone_cam0_00000",
+    "train/Scene01_clone_cam0_00002 ~ val/Scene01_clone_cam0_00003",
+    "train/Scene01_clone_cam0_00002 ~ val/Scene01_clone_cam0_00004",
+    "train/Scene01_clone_cam0_00002 ~ test/Scene01_clone_cam0_00001",
+    "train/Scene01_clone_cam0_00005 ~ val/Scene01_clone_cam0_00003",
+    "train/Scene01_clone_cam0_00005 ~ val/Scene01_clone_cam0_00004",
+    "train/Scene01_clone_cam0_00005 ~ val/Scene01_clone_cam0_00007",
+    "train/Scene01_clone_cam0_00005 ~ test/Scene01_clone_cam0_00006",
+    "train/Scene01_clone_cam0_00008 ~ val/Scene01_clone_cam0_00007",
+    "train/Scene01_clone_cam0_00008 ~ test/Scene01_clone_cam0_00006"
+   ]
+  },
+  "6_corrupt": {
+   "status": "PASS",
+   "decoded": 2126,
+   "corrupt": 0,
+   "examples": []
+  },
+  "7_min_support": {
+   "status": "FAIL",
+   "violations": [
+    "Truck@val: 88 < 150",
+    "Truck@test: 47 < 100"
+   ],
+   "exempt": [],
+   "min_support": {
+    "val": 150,
+    "test": 100
+   }
+  },
+  "8_background": {
+   "status": "FAIL",
+   "background_images": 60,
+   "per_split": {
+    "train": 39,
+    "val": 12,
+    "test": 9
+   },
+   "max_deviation_pp": 5.0,
+   "tolerance_pp": 2.0
+  }
+ },
+ "summary": {
+  "PASS": 3,
+  "FAIL": 4,
+  "N/A": 1
+ }
+}

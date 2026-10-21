@@ -1,0 +1,17 @@
+{
+ "a002686": "drop_line:4",
+ "sha256sums_pre_card": {
+  "ppeu_fix": [
+   35905,
+   "23c153835b2463e29b16cd8ee76b6b197adb7d7492872ae8fc3071a68dc650d6"
+  ],
+  "ppeu11": [
+   35905,
+   "32fac185de050e95d5c0b88539d644451c027bcb4460e1c909b3e577f2b5b4d0"
+  ]
+ },
+ "validator_exit": {
+  "v11": 0,
+  "v1fix": 1
+ }
+}

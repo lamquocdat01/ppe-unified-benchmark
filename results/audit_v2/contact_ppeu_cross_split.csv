@@ -1,0 +1,11 @@
+ph,dh,cos,in_knn,exact,split_pair,a,b,fam
+0,0,0.9999819,True,False,train-val,train/images/c_NVR-09_Trim_new_Trim-2307_jpg.jpg,val/images/c_NVR-09_Trim_new_Trim-2308_jpg.jpg,c_NVR-#_Trim_ntrain-val
+0,0,0.9981205,True,False,val-test,val/images/b_Photin0730_jpg.jpg,test/images/b_Photin0729_jpg.jpg,b_Photin#_jpg.val-test
+0,1,0.9949159,True,False,train-val,train/images/b_thumb0454_jpg.jpg,val/images/b_thumb0453_jpg.jpg,b_thumb#_jpg.jtrain-val
+8,6,0.99216247,True,False,train-test,train/images/c_frame1105--2-_jpg.jpg,test/images/c_frame1214_jpg.jpg,c_frame#--#-_jtrain-test
+0,0,0.9896722,True,False,val-test,val/images/c_helmet9991203_jpg.jpg,test/images/c_helmet9991192_jpg.jpg,c_helmet#_jpg.val-test
+6,3,0.9871336,True,False,train-val,train/images/b_Video4_8_jpg.jpg,val/images/b_Video4_0_jpg.jpg,b_Video#_#_jpgtrain-val
+0,2,0.9841328,True,False,val-test,val/images/c_NX_img_6_jpg.jpg,test/images/c_NX_img_18_jpg.jpg,c_NX_img_#_jpgval-test
+0,3,0.9822113,True,False,val-test,val/images/b_Video3_148_jpg.jpg,test/images/b_Video3_147_jpg.jpg,b_Video#_#_jpgval-test
+2,2,0.98061347,True,False,train-test,train/images/c_PP02img551_jpg.jpg,test/images/c_PP02img556_jpg.jpg,c_PP#img#_jpg.train-test
+2,0,0.9801568,True,False,train-test,train/images/c_helmet9991191_jpg.jpg,test/images/c_helmet999997_jpg.jpg,c_helmet#_jpg.train-test

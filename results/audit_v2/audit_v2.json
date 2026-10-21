@@ -1,0 +1,1961 @@
+{
+ "topk": 5,
+ "points": {
+  "t098": {
+   "cos": 0.98,
+   "ph": 0
+  },
+  "t095": {
+   "cos": 0.95,
+   "ph": 0
+  },
+  "t090": {
+   "cos": 0.9,
+   "ph": 0
+  }
+ },
+ "operating_point": "t098",
+ "scene_k": 2,
+ "within": {
+  "ppeu": {
+   "dataset": "ppeu",
+   "images": 17951,
+   "splits": {
+    "train": 12566,
+    "val": 3590,
+    "test": 1795
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 2912,
+       "cos_tier": 1776,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2912,
+       "scene_2b": 7155,
+       "scene_only": 6989,
+       "union_exact_2a": 2912,
+       "union_all": 9901,
+       "leaked_images_2a": 444,
+       "leaked_images_all": 3169
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 2215,
+       "cos_tier": 1570,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2215,
+       "scene_2b": 3446,
+       "scene_only": 3340,
+       "union_exact_2a": 2215,
+       "union_all": 5555,
+       "leaked_images_2a": 258,
+       "leaked_images_all": 1560
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 932,
+       "cos_tier": 719,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 932,
+       "scene_2b": 1377,
+       "scene_only": 1325,
+       "union_exact_2a": 932,
+       "union_all": 2257,
+       "leaked_images_2a": 198,
+       "leaked_images_all": 1051
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 6059,
+      "cos_tier": 4065,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 6059,
+      "scene_2b": 11978,
+      "scene_only": 11654,
+      "union_exact_2a": 6059,
+      "union_all": 17713,
+      "leaked_images_2a": 900,
+      "leaked_images_all": 5780
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 15912,
+      "spanning": 268,
+      "images_in_spanning": 1941,
+      "largest_spanning": 319
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1770,
+      "spanning": 666,
+      "images_in_spanning": 16359,
+      "largest_spanning": 1910
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 6508,
+       "cos_tier": 5558,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 6508,
+       "scene_2b": 7155,
+       "scene_only": 6867,
+       "union_exact_2a": 6508,
+       "union_all": 13375,
+       "leaked_images_2a": 783,
+       "leaked_images_all": 3218
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 5068,
+       "cos_tier": 4567,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5068,
+       "scene_2b": 3446,
+       "scene_only": 3255,
+       "union_exact_2a": 5068,
+       "union_all": 8323,
+       "leaked_images_2a": 457,
+       "leaked_images_all": 1595
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 2217,
+       "cos_tier": 2049,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2217,
+       "scene_2b": 1377,
+       "scene_only": 1290,
+       "union_exact_2a": 2217,
+       "union_all": 3507,
+       "leaked_images_2a": 387,
+       "leaked_images_all": 1130
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 13793,
+      "cos_tier": 12174,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 13793,
+      "scene_2b": 11978,
+      "scene_only": 11412,
+      "union_exact_2a": 13793,
+      "union_all": 25205,
+      "leaked_images_2a": 1627,
+      "leaked_images_all": 5943
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 14182,
+      "spanning": 257,
+      "images_in_spanning": 3648,
+      "largest_spanning": 800
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1573,
+      "spanning": 619,
+      "images_in_spanning": 16553,
+      "largest_spanning": 1915
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 18774,
+       "cos_tier": 17903,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 18774,
+       "scene_2b": 7155,
+       "scene_only": 6420,
+       "union_exact_2a": 18774,
+       "union_all": 25194,
+       "leaked_images_2a": 1604,
+       "leaked_images_all": 3270
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 14451,
+       "cos_tier": 14031,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 14451,
+       "scene_2b": 3446,
+       "scene_only": 2966,
+       "union_exact_2a": 14451,
+       "union_all": 17417,
+       "leaked_images_2a": 929,
+       "leaked_images_all": 1647
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 5681,
+       "cos_tier": 5538,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5681,
+       "scene_2b": 1377,
+       "scene_only": 1149,
+       "union_exact_2a": 5681,
+       "union_all": 6830,
+       "leaked_images_2a": 826,
+       "leaked_images_all": 1293
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 38906,
+      "cos_tier": 37472,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 38906,
+      "scene_2b": 11978,
+      "scene_only": 10535,
+      "union_exact_2a": 38906,
+      "union_all": 49441,
+      "leaked_images_2a": 3359,
+      "leaked_images_all": 6210
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 9493,
+      "spanning": 242,
+      "images_in_spanning": 8325,
+      "largest_spanning": 1803
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1330,
+      "spanning": 523,
+      "images_in_spanning": 16759,
+      "largest_spanning": 2070
+     }
+    }
+   }
+  },
+  "ppeu_fix": {
+   "dataset": "ppeu_fix",
+   "images": 17951,
+   "splits": {
+    "train": 12566,
+    "val": 3590,
+    "test": 1795
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 2912,
+       "cos_tier": 1776,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2912,
+       "scene_2b": 7155,
+       "scene_only": 6989,
+       "union_exact_2a": 2912,
+       "union_all": 9901,
+       "leaked_images_2a": 444,
+       "leaked_images_all": 3169
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 2215,
+       "cos_tier": 1570,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2215,
+       "scene_2b": 3446,
+       "scene_only": 3340,
+       "union_exact_2a": 2215,
+       "union_all": 5555,
+       "leaked_images_2a": 258,
+       "leaked_images_all": 1560
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 932,
+       "cos_tier": 719,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 932,
+       "scene_2b": 1377,
+       "scene_only": 1325,
+       "union_exact_2a": 932,
+       "union_all": 2257,
+       "leaked_images_2a": 198,
+       "leaked_images_all": 1051
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 6059,
+      "cos_tier": 4065,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 6059,
+      "scene_2b": 11978,
+      "scene_only": 11654,
+      "union_exact_2a": 6059,
+      "union_all": 17713,
+      "leaked_images_2a": 900,
+      "leaked_images_all": 5780
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 15912,
+      "spanning": 268,
+      "images_in_spanning": 1941,
+      "largest_spanning": 319
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1770,
+      "spanning": 666,
+      "images_in_spanning": 16359,
+      "largest_spanning": 1910
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 6508,
+       "cos_tier": 5558,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 6508,
+       "scene_2b": 7155,
+       "scene_only": 6867,
+       "union_exact_2a": 6508,
+       "union_all": 13375,
+       "leaked_images_2a": 783,
+       "leaked_images_all": 3218
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 5068,
+       "cos_tier": 4567,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5068,
+       "scene_2b": 3446,
+       "scene_only": 3255,
+       "union_exact_2a": 5068,
+       "union_all": 8323,
+       "leaked_images_2a": 457,
+       "leaked_images_all": 1595
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 2217,
+       "cos_tier": 2049,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 2217,
+       "scene_2b": 1377,
+       "scene_only": 1290,
+       "union_exact_2a": 2217,
+       "union_all": 3507,
+       "leaked_images_2a": 387,
+       "leaked_images_all": 1130
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 13793,
+      "cos_tier": 12174,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 13793,
+      "scene_2b": 11978,
+      "scene_only": 11412,
+      "union_exact_2a": 13793,
+      "union_all": 25205,
+      "leaked_images_2a": 1627,
+      "leaked_images_all": 5943
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 14182,
+      "spanning": 257,
+      "images_in_spanning": 3648,
+      "largest_spanning": 800
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1573,
+      "spanning": 619,
+      "images_in_spanning": 16553,
+      "largest_spanning": 1915
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 18774,
+       "cos_tier": 17903,
+       "phash_tier": 1669,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 18774,
+       "scene_2b": 7155,
+       "scene_only": 6420,
+       "union_exact_2a": 18774,
+       "union_all": 25194,
+       "leaked_images_2a": 1604,
+       "leaked_images_all": 3270
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 14451,
+       "cos_tier": 14031,
+       "phash_tier": 1085,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 14451,
+       "scene_2b": 3446,
+       "scene_only": 2966,
+       "union_exact_2a": 14451,
+       "union_all": 17417,
+       "leaked_images_2a": 929,
+       "leaked_images_all": 1647
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 5681,
+       "cos_tier": 5538,
+       "phash_tier": 400,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5681,
+       "scene_2b": 1377,
+       "scene_only": 1149,
+       "union_exact_2a": 5681,
+       "union_all": 6830,
+       "leaked_images_2a": 826,
+       "leaked_images_all": 1293
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 38906,
+      "cos_tier": 37472,
+      "phash_tier": 3154,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 38906,
+      "scene_2b": 11978,
+      "scene_only": 10535,
+      "union_exact_2a": 38906,
+      "union_all": 49441,
+      "leaked_images_2a": 3359,
+      "leaked_images_all": 6210
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 9493,
+      "spanning": 242,
+      "images_in_spanning": 8325,
+      "largest_spanning": 1803
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 807,
+      "images_in_spanning": 16076,
+      "largest_spanning": 1508
+     },
+     "groups_all": {
+      "groups": 1330,
+      "spanning": 523,
+      "images_in_spanning": 16759,
+      "largest_spanning": 2070
+     }
+    }
+   }
+  },
+  "ppeu11": {
+   "dataset": "ppeu11",
+   "images": 17951,
+   "splits": {
+    "train": 12566,
+    "val": 3590,
+    "test": 1795
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 0,
+       "union_all": 0,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 0
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 0,
+      "cos_tier": 0,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 0,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 0,
+      "union_all": 0,
+      "leaked_images_2a": 0,
+      "leaked_images_all": 0
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 15917,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1771,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 883,
+       "cos_tier": 883,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 883,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 883,
+       "union_all": 883,
+       "leaked_images_2a": 81,
+       "leaked_images_all": 81
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 1165,
+       "cos_tier": 1165,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 1165,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 1165,
+       "union_all": 1165,
+       "leaked_images_2a": 54,
+       "leaked_images_all": 54
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 170,
+       "cos_tier": 170,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 170,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 170,
+       "union_all": 170,
+       "leaked_images_2a": 52,
+       "leaked_images_all": 52
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 2218,
+      "cos_tier": 2218,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 2218,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 2218,
+      "union_all": 2218,
+      "leaked_images_2a": 187,
+      "leaked_images_all": 187
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 14185,
+      "spanning": 40,
+      "images_in_spanning": 1842,
+      "largest_spanning": 800
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1573,
+      "spanning": 27,
+      "images_in_spanning": 6437,
+      "largest_spanning": 1915
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 7145,
+       "cos_tier": 7145,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 7145,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 7145,
+       "union_all": 7145,
+       "leaked_images_2a": 432,
+       "leaked_images_all": 432
+      },
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 5719,
+       "cos_tier": 5719,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 5719,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 5719,
+       "union_all": 5719,
+       "leaked_images_2a": 210,
+       "leaked_images_all": 210
+      },
+      "val-test": {
+       "exact": 0,
+       "copy_2a": 1214,
+       "cos_tier": 1214,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 1214,
+       "scene_2b": 0,
+       "scene_only": 0,
+       "union_exact_2a": 1214,
+       "union_all": 1214,
+       "leaked_images_2a": 244,
+       "leaked_images_all": 244
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 14078,
+      "cos_tier": 14078,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 14078,
+      "scene_2b": 0,
+      "scene_only": 0,
+      "union_exact_2a": 14078,
+      "union_all": 14078,
+      "leaked_images_2a": 886,
+      "leaked_images_all": 886
+     },
+     "groups_exact": {
+      "groups": 17951,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 9493,
+      "spanning": 108,
+      "images_in_spanning": 6611,
+      "largest_spanning": 1803
+     },
+     "groups_exact_2b": {
+      "groups": 2084,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_all": {
+      "groups": 1331,
+      "spanning": 53,
+      "images_in_spanning": 10641,
+      "largest_spanning": 2070
+     }
+    }
+   }
+  },
+  "sh17": {
+   "dataset": "sh17",
+   "images": 8099,
+   "splits": {
+    "train": 6479,
+    "val": 1620
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 0,
+       "cos_tier": 0,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 0,
+       "scene_2b": 1660,
+       "scene_only": 1660,
+       "union_exact_2a": 0,
+       "union_all": 1660,
+       "leaked_images_2a": 0,
+       "leaked_images_all": 895
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 0,
+      "cos_tier": 0,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 0,
+      "scene_2b": 1660,
+      "scene_only": 1660,
+      "union_exact_2a": 0,
+      "union_all": 1660,
+      "leaked_images_2a": 0,
+      "leaked_images_all": 895
+     },
+     "groups_exact": {
+      "groups": 8099,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 8099,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2b": {
+      "groups": 4336,
+      "spanning": 595,
+      "images_in_spanning": 3195,
+      "largest_spanning": 36
+     },
+     "groups_all": {
+      "groups": 4336,
+      "spanning": 595,
+      "images_in_spanning": 3195,
+      "largest_spanning": 36
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 9,
+       "cos_tier": 9,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 9,
+       "scene_2b": 1660,
+       "scene_only": 1658,
+       "union_exact_2a": 9,
+       "union_all": 1667,
+       "leaked_images_2a": 9,
+       "leaked_images_all": 897
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 9,
+      "cos_tier": 9,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 9,
+      "scene_2b": 1660,
+      "scene_only": 1658,
+      "union_exact_2a": 9,
+      "union_all": 1667,
+      "leaked_images_2a": 9,
+      "leaked_images_all": 897
+     },
+     "groups_exact": {
+      "groups": 8099,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 8069,
+      "spanning": 9,
+      "images_in_spanning": 18,
+      "largest_spanning": 2
+     },
+     "groups_exact_2b": {
+      "groups": 4336,
+      "spanning": 595,
+      "images_in_spanning": 3195,
+      "largest_spanning": 36
+     },
+     "groups_all": {
+      "groups": 4322,
+      "spanning": 596,
+      "images_in_spanning": 3223,
+      "largest_spanning": 36
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 0,
+       "copy_2a": 127,
+       "cos_tier": 127,
+       "phash_tier": 0,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 127,
+       "scene_2b": 1660,
+       "scene_only": 1626,
+       "union_exact_2a": 127,
+       "union_all": 1753,
+       "leaked_images_2a": 93,
+       "leaked_images_all": 925
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 127,
+      "cos_tier": 127,
+      "phash_tier": 0,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 127,
+      "scene_2b": 1660,
+      "scene_only": 1626,
+      "union_exact_2a": 127,
+      "union_all": 1753,
+      "leaked_images_2a": 93,
+      "leaked_images_all": 925
+     },
+     "groups_exact": {
+      "groups": 8099,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 7769,
+      "spanning": 84,
+      "images_in_spanning": 232,
+      "largest_spanning": 12
+     },
+     "groups_exact_2b": {
+      "groups": 4336,
+      "spanning": 595,
+      "images_in_spanning": 3195,
+      "largest_spanning": 36
+     },
+     "groups_all": {
+      "groups": 4183,
+      "spanning": 589,
+      "images_in_spanning": 3401,
+      "largest_spanning": 36
+     }
+    }
+   }
+  },
+  "A": {
+   "dataset": "A",
+   "images": 7035,
+   "splits": {
+    "train": 5269,
+    "test": 1766
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 43,
+       "cos_tier": 40,
+       "phash_tier": 26,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 43,
+       "scene_2b": 3,
+       "scene_only": 3,
+       "union_exact_2a": 43,
+       "union_all": 46,
+       "leaked_images_2a": 38,
+       "leaked_images_all": 40
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 43,
+      "cos_tier": 40,
+      "phash_tier": 26,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 43,
+      "scene_2b": 3,
+      "scene_only": 3,
+      "union_exact_2a": 43,
+      "union_all": 46,
+      "leaked_images_2a": 38,
+      "leaked_images_all": 40
+     },
+     "groups_exact": {
+      "groups": 7035,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 6908,
+      "spanning": 38,
+      "images_in_spanning": 81,
+      "largest_spanning": 4
+     },
+     "groups_exact_2b": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     },
+     "groups_all": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 70,
+       "cos_tier": 68,
+       "phash_tier": 26,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 70,
+       "scene_2b": 3,
+       "scene_only": 3,
+       "union_exact_2a": 70,
+       "union_all": 73,
+       "leaked_images_2a": 63,
+       "leaked_images_all": 65
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 70,
+      "cos_tier": 68,
+      "phash_tier": 26,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 70,
+      "scene_2b": 3,
+      "scene_only": 3,
+      "union_exact_2a": 70,
+      "union_all": 73,
+      "leaked_images_2a": 63,
+      "leaked_images_all": 65
+     },
+     "groups_exact": {
+      "groups": 7035,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 6845,
+      "spanning": 62,
+      "images_in_spanning": 133,
+      "largest_spanning": 5
+     },
+     "groups_exact_2b": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     },
+     "groups_all": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-test": {
+       "exact": 0,
+       "copy_2a": 109,
+       "cos_tier": 109,
+       "phash_tier": 26,
+       "both_exact_2a": 0,
+       "exact_only": 0,
+       "copy_only": 109,
+       "scene_2b": 3,
+       "scene_only": 3,
+       "union_exact_2a": 109,
+       "union_all": 112,
+       "leaked_images_2a": 96,
+       "leaked_images_all": 98
+      }
+     },
+     "cross_split": {
+      "exact": 0,
+      "copy_2a": 109,
+      "cos_tier": 109,
+      "phash_tier": 26,
+      "both_exact_2a": 0,
+      "exact_only": 0,
+      "copy_only": 109,
+      "scene_2b": 3,
+      "scene_only": 3,
+      "union_exact_2a": 109,
+      "union_all": 112,
+      "leaked_images_2a": 96,
+      "leaked_images_all": 98
+     },
+     "groups_exact": {
+      "groups": 7035,
+      "spanning": 0,
+      "images_in_spanning": 0,
+      "largest_spanning": 0
+     },
+     "groups_exact_2a": {
+      "groups": 6762,
+      "spanning": 92,
+      "images_in_spanning": 206,
+      "largest_spanning": 6
+     },
+     "groups_exact_2b": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     },
+     "groups_all": {
+      "groups": 1,
+      "spanning": 1,
+      "images_in_spanning": 7035,
+      "largest_spanning": 7035
+     }
+    }
+   }
+  },
+  "B": {
+   "dataset": "B",
+   "images": 5140,
+   "splits": {
+    "train": 3597,
+    "val": 1026,
+    "test": 517
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 2154,
+       "copy_2a": 1712,
+       "cos_tier": 709,
+       "phash_tier": 1568,
+       "both_exact_2a": 1008,
+       "exact_only": 1146,
+       "copy_only": 704,
+       "scene_2b": 8420,
+       "scene_only": 6000,
+       "union_exact_2a": 2858,
+       "union_all": 8858,
+       "leaked_images_2a": 607,
+       "leaked_images_all": 968
+      },
+      "train-test": {
+       "exact": 1088,
+       "copy_2a": 938,
+       "cos_tier": 456,
+       "phash_tier": 837,
+       "both_exact_2a": 549,
+       "exact_only": 539,
+       "copy_only": 389,
+       "scene_2b": 4247,
+       "scene_only": 3016,
+       "union_exact_2a": 1477,
+       "union_all": 4493,
+       "leaked_images_2a": 300,
+       "leaked_images_all": 494
+      },
+      "val-test": {
+       "exact": 331,
+       "copy_2a": 269,
+       "cos_tier": 114,
+       "phash_tier": 248,
+       "both_exact_2a": 152,
+       "exact_only": 179,
+       "copy_only": 117,
+       "scene_2b": 1226,
+       "scene_only": 851,
+       "union_exact_2a": 448,
+       "union_all": 1299,
+       "leaked_images_2a": 197,
+       "leaked_images_all": 349
+      }
+     },
+     "cross_split": {
+      "exact": 3573,
+      "copy_2a": 2919,
+      "cos_tier": 1279,
+      "phash_tier": 2653,
+      "both_exact_2a": 1709,
+      "exact_only": 1864,
+      "copy_only": 1210,
+      "scene_2b": 13893,
+      "scene_only": 9867,
+      "union_exact_2a": 4783,
+      "union_all": 14650,
+      "leaked_images_2a": 1104,
+      "leaked_images_all": 1811
+     },
+     "groups_exact": {
+      "groups": 2670,
+      "spanning": 573,
+      "images_in_spanning": 2441,
+      "largest_spanning": 22
+     },
+     "groups_exact_2a": {
+      "groups": 2507,
+      "spanning": 483,
+      "images_in_spanning": 2639,
+      "largest_spanning": 562
+     },
+     "groups_exact_2b": {
+      "groups": 576,
+      "spanning": 389,
+      "images_in_spanning": 4696,
+      "largest_spanning": 512
+     },
+     "groups_all": {
+      "groups": 551,
+      "spanning": 372,
+      "images_in_spanning": 4719,
+      "largest_spanning": 905
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 2154,
+       "copy_2a": 2952,
+       "cos_tier": 2307,
+       "phash_tier": 1568,
+       "both_exact_2a": 1078,
+       "exact_only": 1076,
+       "copy_only": 1874,
+       "scene_2b": 8420,
+       "scene_only": 5559,
+       "union_exact_2a": 4028,
+       "union_all": 9587,
+       "leaked_images_2a": 625,
+       "leaked_images_all": 968
+      },
+      "train-test": {
+       "exact": 1088,
+       "copy_2a": 1539,
+       "cos_tier": 1222,
+       "phash_tier": 837,
+       "both_exact_2a": 589,
+       "exact_only": 499,
+       "copy_only": 950,
+       "scene_2b": 4247,
+       "scene_only": 2801,
+       "union_exact_2a": 2038,
+       "union_all": 4839,
+       "leaked_images_2a": 309,
+       "leaked_images_all": 494
+      },
+      "val-test": {
+       "exact": 331,
+       "copy_2a": 437,
+       "cos_tier": 343,
+       "phash_tier": 248,
+       "both_exact_2a": 164,
+       "exact_only": 167,
+       "copy_only": 273,
+       "scene_2b": 1226,
+       "scene_only": 790,
+       "union_exact_2a": 604,
+       "union_all": 1394,
+       "leaked_images_2a": 221,
+       "leaked_images_all": 353
+      }
+     },
+     "cross_split": {
+      "exact": 3573,
+      "copy_2a": 4928,
+      "cos_tier": 3872,
+      "phash_tier": 2653,
+      "both_exact_2a": 1831,
+      "exact_only": 1742,
+      "copy_only": 3097,
+      "scene_2b": 13893,
+      "scene_only": 9150,
+      "union_exact_2a": 6670,
+      "union_all": 15820,
+      "leaked_images_2a": 1155,
+      "leaked_images_all": 1815
+     },
+     "groups_exact": {
+      "groups": 2670,
+      "spanning": 573,
+      "images_in_spanning": 2441,
+      "largest_spanning": 22
+     },
+     "groups_exact_2a": {
+      "groups": 2276,
+      "spanning": 351,
+      "images_in_spanning": 2922,
+      "largest_spanning": 799
+     },
+     "groups_exact_2b": {
+      "groups": 576,
+      "spanning": 389,
+      "images_in_spanning": 4696,
+      "largest_spanning": 512
+     },
+     "groups_all": {
+      "groups": 524,
+      "spanning": 353,
+      "images_in_spanning": 4745,
+      "largest_spanning": 928
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 2154,
+       "copy_2a": 6120,
+       "cos_tier": 5712,
+       "phash_tier": 1568,
+       "both_exact_2a": 1145,
+       "exact_only": 1009,
+       "copy_only": 4975,
+       "scene_2b": 8420,
+       "scene_only": 4952,
+       "union_exact_2a": 7129,
+       "union_all": 12081,
+       "leaked_images_2a": 649,
+       "leaked_images_all": 970
+      },
+      "train-test": {
+       "exact": 1088,
+       "copy_2a": 3884,
+       "cos_tier": 3719,
+       "phash_tier": 837,
+       "both_exact_2a": 619,
+       "exact_only": 469,
+       "copy_only": 3265,
+       "scene_2b": 4247,
+       "scene_only": 2491,
+       "union_exact_2a": 4353,
+       "union_all": 6844,
+       "leaked_images_2a": 320,
+       "leaked_images_all": 494
+      },
+      "val-test": {
+       "exact": 331,
+       "copy_2a": 1170,
+       "cos_tier": 1139,
+       "phash_tier": 248,
+       "both_exact_2a": 180,
+       "exact_only": 151,
+       "copy_only": 990,
+       "scene_2b": 1226,
+       "scene_only": 719,
+       "union_exact_2a": 1321,
+       "union_all": 2040,
+       "leaked_images_2a": 264,
+       "leaked_images_all": 372
+      }
+     },
+     "cross_split": {
+      "exact": 3573,
+      "copy_2a": 11174,
+      "cos_tier": 10570,
+      "phash_tier": 2653,
+      "both_exact_2a": 1944,
+      "exact_only": 1629,
+      "copy_only": 9230,
+      "scene_2b": 13893,
+      "scene_only": 8162,
+      "union_exact_2a": 12803,
+      "union_all": 20965,
+      "leaked_images_2a": 1233,
+      "leaked_images_all": 1836
+     },
+     "groups_exact": {
+      "groups": 2670,
+      "spanning": 573,
+      "images_in_spanning": 2441,
+      "largest_spanning": 22
+     },
+     "groups_exact_2a": {
+      "groups": 2093,
+      "spanning": 240,
+      "images_in_spanning": 3051,
+      "largest_spanning": 877
+     },
+     "groups_exact_2b": {
+      "groups": 576,
+      "spanning": 389,
+      "images_in_spanning": 4696,
+      "largest_spanning": 512
+     },
+     "groups_all": {
+      "groups": 431,
+      "spanning": 280,
+      "images_in_spanning": 4811,
+      "largest_spanning": 1262
+     }
+    }
+   }
+  },
+  "C": {
+   "dataset": "C",
+   "images": 30911,
+   "splits": {
+    "train": 27048,
+    "val": 2575,
+    "test": 1288
+   },
+   "scene_k": 2,
+   "points": {
+    "t098": {
+     "thresholds": {
+      "cos": 0.98,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 1491,
+       "copy_2a": 7207,
+       "cos_tier": 1224,
+       "phash_tier": 6041,
+       "both_exact_2a": 49,
+       "exact_only": 1442,
+       "copy_only": 7158,
+       "scene_2b": 25011,
+       "scene_only": 23203,
+       "union_exact_2a": 8649,
+       "union_all": 31852,
+       "leaked_images_2a": 1201,
+       "leaked_images_all": 2493
+      },
+      "train-test": {
+       "exact": 810,
+       "copy_2a": 3804,
+       "cos_tier": 633,
+       "phash_tier": 3207,
+       "both_exact_2a": 41,
+       "exact_only": 769,
+       "copy_only": 3763,
+       "scene_2b": 12576,
+       "scene_only": 11605,
+       "union_exact_2a": 4573,
+       "union_all": 16178,
+       "leaked_images_2a": 625,
+       "leaked_images_all": 1249
+      },
+      "val-test": {
+       "exact": 64,
+       "copy_2a": 5440,
+       "cos_tier": 3185,
+       "phash_tier": 3407,
+       "both_exact_2a": 57,
+       "exact_only": 7,
+       "copy_only": 5383,
+       "scene_2b": 1155,
+       "scene_only": 700,
+       "union_exact_2a": 5447,
+       "union_all": 6147,
+       "leaked_images_2a": 590,
+       "leaked_images_all": 966
+      }
+     },
+     "cross_split": {
+      "exact": 2365,
+      "copy_2a": 16451,
+      "cos_tier": 5042,
+      "phash_tier": 12655,
+      "both_exact_2a": 147,
+      "exact_only": 2218,
+      "copy_only": 16304,
+      "scene_2b": 38742,
+      "scene_only": 35508,
+      "union_exact_2a": 18669,
+      "union_all": 54177,
+      "leaked_images_2a": 2416,
+      "leaked_images_all": 4708
+     },
+     "groups_exact": {
+      "groups": 11110,
+      "spanning": 831,
+      "images_in_spanning": 3196,
+      "largest_spanning": 4
+     },
+     "groups_exact_2a": {
+      "groups": 7311,
+      "spanning": 574,
+      "images_in_spanning": 11833,
+      "largest_spanning": 2351
+     },
+     "groups_exact_2b": {
+      "groups": 801,
+      "spanning": 237,
+      "images_in_spanning": 29154,
+      "largest_spanning": 4106
+     },
+     "groups_all": {
+      "groups": 495,
+      "spanning": 157,
+      "images_in_spanning": 29749,
+      "largest_spanning": 6314
+     }
+    },
+    "t095": {
+     "thresholds": {
+      "cos": 0.95,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 1491,
+       "copy_2a": 13094,
+       "cos_tier": 7516,
+       "phash_tier": 6041,
+       "both_exact_2a": 84,
+       "exact_only": 1407,
+       "copy_only": 13010,
+       "scene_2b": 25011,
+       "scene_only": 22858,
+       "union_exact_2a": 14501,
+       "union_all": 37359,
+       "leaked_images_2a": 1398,
+       "leaked_images_all": 2501
+      },
+      "train-test": {
+       "exact": 810,
+       "copy_2a": 8330,
+       "cos_tier": 5419,
+       "phash_tier": 3207,
+       "both_exact_2a": 59,
+       "exact_only": 751,
+       "copy_only": 8271,
+       "scene_2b": 12576,
+       "scene_only": 11374,
+       "union_exact_2a": 9081,
+       "union_all": 20455,
+       "leaked_images_2a": 731,
+       "leaked_images_all": 1256
+      },
+      "val-test": {
+       "exact": 64,
+       "copy_2a": 7899,
+       "cos_tier": 5925,
+       "phash_tier": 3407,
+       "both_exact_2a": 57,
+       "exact_only": 7,
+       "copy_only": 7842,
+       "scene_2b": 1155,
+       "scene_only": 604,
+       "union_exact_2a": 7906,
+       "union_all": 8510,
+       "leaked_images_2a": 730,
+       "leaked_images_all": 1030
+      }
+     },
+     "cross_split": {
+      "exact": 2365,
+      "copy_2a": 29323,
+      "cos_tier": 18860,
+      "phash_tier": 12655,
+      "both_exact_2a": 200,
+      "exact_only": 2165,
+      "copy_only": 29123,
+      "scene_2b": 38742,
+      "scene_only": 34836,
+      "union_exact_2a": 31488,
+      "union_all": 66324,
+      "leaked_images_2a": 2859,
+      "leaked_images_all": 4787
+     },
+     "groups_exact": {
+      "groups": 11110,
+      "spanning": 831,
+      "images_in_spanning": 3196,
+      "largest_spanning": 4
+     },
+     "groups_exact_2a": {
+      "groups": 6064,
+      "spanning": 488,
+      "images_in_spanning": 14871,
+      "largest_spanning": 4007
+     },
+     "groups_exact_2b": {
+      "groups": 801,
+      "spanning": 237,
+      "images_in_spanning": 29154,
+      "largest_spanning": 4106
+     },
+     "groups_all": {
+      "groups": 424,
+      "spanning": 137,
+      "images_in_spanning": 29897,
+      "largest_spanning": 6340
+     }
+    },
+    "t090": {
+     "thresholds": {
+      "cos": 0.9,
+      "ph": 0
+     },
+     "per_split_pair": {
+      "train-val": {
+       "exact": 1491,
+       "copy_2a": 50182,
+       "cos_tier": 45166,
+       "phash_tier": 6041,
+       "both_exact_2a": 188,
+       "exact_only": 1303,
+       "copy_only": 49994,
+       "scene_2b": 25011,
+       "scene_only": 20671,
+       "union_exact_2a": 51485,
+       "union_all": 72156,
+       "leaked_images_2a": 2160,
+       "leaked_images_all": 2525
+      },
+      "train-test": {
+       "exact": 810,
+       "copy_2a": 39853,
+       "cos_tier": 37451,
+       "phash_tier": 3207,
+       "both_exact_2a": 103,
+       "exact_only": 707,
+       "copy_only": 39750,
+       "scene_2b": 12576,
+       "scene_only": 9991,
+       "union_exact_2a": 40560,
+       "union_all": 50551,
+       "leaked_images_2a": 1090,
+       "leaked_images_all": 1267
+      },
+      "val-test": {
+       "exact": 64,
+       "copy_2a": 11670,
+       "cos_tier": 9724,
+       "phash_tier": 3407,
+       "both_exact_2a": 59,
+       "exact_only": 5,
+       "copy_only": 11611,
+       "scene_2b": 1155,
+       "scene_only": 442,
+       "union_exact_2a": 11675,
+       "union_all": 12117,
+       "leaked_images_2a": 1093,
+       "leaked_images_all": 1188
+      }
+     },
+     "cross_split": {
+      "exact": 2365,
+      "copy_2a": 101705,
+      "cos_tier": 92341,
+      "phash_tier": 12655,
+      "both_exact_2a": 350,
+      "exact_only": 2015,
+      "copy_only": 101355,
+      "scene_2b": 38742,
+      "scene_only": 31104,
+      "union_exact_2a": 103720,
+      "union_all": 134824,
+      "leaked_images_2a": 4343,
+      "leaked_images_all": 4980
+     },
+     "groups_exact": {
+      "groups": 11110,
+      "spanning": 831,
+      "images_in_spanning": 3196,
+      "largest_spanning": 4
+     },
+     "groups_exact_2a": {
+      "groups": 1664,
+      "spanning": 174,
+      "images_in_spanning": 26297,
+      "largest_spanning": 6320
+     },
+     "groups_exact_2b": {
+      "groups": 801,
+      "spanning": 237,
+      "images_in_spanning": 29154,
+      "largest_spanning": 4106
+     },
+     "groups_all": {
+      "groups": 301,
+      "spanning": 104,
+      "images_in_spanning": 30118,
+      "largest_spanning": 6340
+     }
+    }
+   }
+  }
+ },
+ "cross": {
+  "ppeu:train=sh17:val": {
+   "spec": "ppeu:train=sh17:val",
+   "x_images": 12566,
+   "y_images": 1620,
+   "points": {
+    "t098": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t095": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t090": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    }
+   }
+  },
+  "ppeu11:train=sh17:val": {
+   "spec": "ppeu11:train=sh17:val",
+   "x_images": 12566,
+   "y_images": 1620,
+   "points": {
+    "t098": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t095": {
+     "exact": 0,
+     "copy_2a": 0,
+     "cos_tier": 0,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 0,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 0,
+     "union_all": 0,
+     "x_images_matched": 0,
+     "y_images_matched": 0
+    },
+    "t090": {
+     "exact": 0,
+     "copy_2a": 1,
+     "cos_tier": 1,
+     "phash_tier": 0,
+     "both_exact_2a": 0,
+     "exact_only": 0,
+     "copy_only": 1,
+     "scene_2b": 0,
+     "scene_only": 0,
+     "union_exact_2a": 1,
+     "union_all": 1,
+     "x_images_matched": 1,
+     "y_images_matched": 1
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,13 @@
+[
+ {
+  "theta": 0.485,
+  "tau": 16,
+  "recall_cos_C": 1.0,
+  "recall_ph_C": 0.92,
+  "edges": 2993640,
+  "cross_split_edges_v1": 1300671,
+  "groups": 7,
+  "largest": 17945,
+  "largest_pct": 100.0,
+  "top3": [
+   

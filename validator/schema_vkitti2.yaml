@@ -1,0 +1,16 @@
+# Virtual KITTI 2 (clone, Camera_0, 5 scenes) - naive random frame split 70/20/10 (generality/prepare_vkitti2.py).
+# Non-PPE: no compliance-violation pairs, no group information (frames shuffled independently).
+name: VKITTI2 clone cam0 (naive frame split)
+format: yolo
+root: _derived/generality/vkitti2_clone_cam0
+splits: {train: train, val: val, test: test}
+target_ratio: {train: 0.70, val: 0.20, test: 0.10}
+classes: [Car, Van, Truck]
+pairs: []
+image_size: [1242, 375]
+box_edge_tolerance: 0.005
+require_label_file: true
+group: {source: none}
+leakage: {perceptual: copy+scene, cos: 0.98, phash: 0, scene_k: 2}
+min_support: {val: 150, test: 100}
+background_tolerance_pp: 2.0

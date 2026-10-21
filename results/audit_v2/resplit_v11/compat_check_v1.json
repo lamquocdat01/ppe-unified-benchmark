@@ -1,0 +1,10 @@
+{
+ "images": 17951,
+ "identical": 17951,
+ "identical_pct": 100.0,
+ "bg_balance_steps": 0,
+ "bg_dev_pp": 0.068,
+ "groups": 17951,
+ "max_group_size": 1,
+ "note": "extended (BG-EXT) algorithm on v1 input PPE_Unified_v1, groups = source_image_id (singletons); compared with published PPE_Unified_v1_resplit split"
+}
