@@ -1,0 +1,433 @@
+{
+ "dataset": "C",
+ "images": 30911,
+ "classes": [
+  "glove",
+  "goggles",
+  "helmet",
+  "mask",
+  "no_glove",
+  "no_goggles",
+  "no_helmet",
+  "no_mask"
+ ],
+ "clean2_key": {
+  "theta": 0.98,
+  "phash": 0,
+  "scene_k": 2
+ },
+ "protocol": "leave-one-sequence-out over the 4 largest clean2 groups; train = other 3 + all images outside the 4; no val split; E2 fixed epochs (15), last checkpoint; YOLO26s x seed 42",
+ "sequences": [
+  {
+   "fold": 0,
+   "group": "kp1000_jpg",
+   "images": 6314,
+   "image_pct": 20.43,
+   "families_top3": {
+    "kp": 6314
+   },
+   "n_families": 1,
+   "box_share_pct": {
+    "glove": 0.0,
+    "goggles": 45.0,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 0.0,
+    "no_goggles": 29.4,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   }
+  },
+  {
+   "fold": 1,
+   "group": "PP02img1000_jpg",
+   "images": 3648,
+   "image_pct": 11.8,
+   "families_top3": {
+    "PP02img": 3648
+   },
+   "n_families": 1,
+   "box_share_pct": {
+    "glove": 43.2,
+    "goggles": 0.0,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 60.2,
+    "no_goggles": 0.0,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   }
+  },
+  {
+   "fold": 2,
+   "group": "packing1000_jpg",
+   "images": 3060,
+   "image_pct": 9.9,
+   "families_top3": {
+    "packing": 3060
+   },
+   "n_families": 1,
+   "box_share_pct": {
+    "glove": 0.0,
+    "goggles": 10.9,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 0.0,
+    "no_goggles": 39.7,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   }
+  },
+  {
+   "fold": 3,
+   "group": "frame0--2-_jpg",
+   "images": 2731,
+   "image_pct": 8.84,
+   "families_top3": {
+    "frame": 2275,
+    "frame0--2-_jpg": 6,
+    "frame64--2-_jpg": 6
+   },
+   "n_families": 197,
+   "box_share_pct": {
+    "glove": 0.0,
+    "goggles": 8.8,
+    "helmet": 0.0,
+    "mask": 8.8,
+    "no_glove": 3.6,
+    "no_goggles": 8.0,
+    "no_helmet": 0.0,
+    "no_mask": 23.4
+   }
+  }
+ ],
+ "folds": [
+  {
+   "fold": 0,
+   "test_group": "kp1000_jpg",
+   "images": {
+    "train": 24597,
+    "test": 6314
+   },
+   "cross_split_pairs": {
+    "exact": 0,
+    "copy_cos": 0,
+    "copy_phash": 0,
+    "scene": 0,
+    "cos>=0.98": 0,
+    "cos>=0.95": 23,
+    "cos>=0.9": 592
+   },
+   "clean": true,
+   "boxes": {
+    "glove": {
+     "train": 11198,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "goggles": {
+     "train": 5507,
+     "test": 4499,
+     "eval": "ok"
+    },
+    "helmet": {
+     "train": 3741,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "mask": {
+     "train": 4933,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_glove": {
+     "train": 14712,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_goggles": {
+     "train": 6883,
+     "test": 2864,
+     "eval": "ok"
+    },
+    "no_helmet": {
+     "train": 3078,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_mask": {
+     "train": 3566,
+     "test": 0,
+     "eval": "N/A"
+    }
+   },
+   "na_classes": [
+    "glove",
+    "helmet",
+    "mask",
+    "no_glove",
+    "no_helmet",
+    "no_mask"
+   ],
+   "yolo26s_gpu_min_est": 161
+  },
+  {
+   "fold": 1,
+   "test_group": "PP02img1000_jpg",
+   "images": {
+    "train": 27263,
+    "test": 3648
+   },
+   "cross_split_pairs": {
+    "exact": 0,
+    "copy_cos": 0,
+    "copy_phash": 0,
+    "scene": 0,
+    "cos>=0.98": 0,
+    "cos>=0.95": 0,
+    "cos>=0.9": 0
+   },
+   "clean": true,
+   "boxes": {
+    "glove": {
+     "train": 6357,
+     "test": 4841,
+     "eval": "ok"
+    },
+    "goggles": {
+     "train": 10006,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "helmet": {
+     "train": 3741,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "mask": {
+     "train": 4933,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_glove": {
+     "train": 5850,
+     "test": 8862,
+     "eval": "ok"
+    },
+    "no_goggles": {
+     "train": 9747,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_helmet": {
+     "train": 3078,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_mask": {
+     "train": 3566,
+     "test": 0,
+     "eval": "N/A"
+    }
+   },
+   "na_classes": [
+    "goggles",
+    "helmet",
+    "mask",
+    "no_goggles",
+    "no_helmet",
+    "no_mask"
+   ],
+   "yolo26s_gpu_min_est": 179
+  },
+  {
+   "fold": 2,
+   "test_group": "packing1000_jpg",
+   "images": {
+    "train": 27851,
+    "test": 3060
+   },
+   "cross_split_pairs": {
+    "exact": 0,
+    "copy_cos": 0,
+    "copy_phash": 0,
+    "scene": 0,
+    "cos>=0.98": 0,
+    "cos>=0.95": 0,
+    "cos>=0.9": 669
+   },
+   "clean": true,
+   "boxes": {
+    "glove": {
+     "train": 11198,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "goggles": {
+     "train": 8920,
+     "test": 1086,
+     "eval": "ok"
+    },
+    "helmet": {
+     "train": 3741,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "mask": {
+     "train": 4933,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_glove": {
+     "train": 14712,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_goggles": {
+     "train": 5879,
+     "test": 3868,
+     "eval": "ok"
+    },
+    "no_helmet": {
+     "train": 3078,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_mask": {
+     "train": 3566,
+     "test": 0,
+     "eval": "N/A"
+    }
+   },
+   "na_classes": [
+    "glove",
+    "helmet",
+    "mask",
+    "no_glove",
+    "no_helmet",
+    "no_mask"
+   ],
+   "yolo26s_gpu_min_est": 183
+  },
+  {
+   "fold": 3,
+   "test_group": "frame0--2-_jpg",
+   "images": {
+    "train": 28180,
+    "test": 2731
+   },
+   "cross_split_pairs": {
+    "exact": 0,
+    "copy_cos": 0,
+    "copy_phash": 0,
+    "scene": 0,
+    "cos>=0.98": 0,
+    "cos>=0.95": 8863,
+    "cos>=0.9": 159301
+   },
+   "clean": true,
+   "boxes": {
+    "glove": {
+     "train": 11198,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "goggles": {
+     "train": 9127,
+     "test": 879,
+     "eval": "ok"
+    },
+    "helmet": {
+     "train": 3741,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "mask": {
+     "train": 4501,
+     "test": 432,
+     "eval": "ok"
+    },
+    "no_glove": {
+     "train": 14181,
+     "test": 531,
+     "eval": "ok"
+    },
+    "no_goggles": {
+     "train": 8963,
+     "test": 784,
+     "eval": "ok"
+    },
+    "no_helmet": {
+     "train": 3078,
+     "test": 0,
+     "eval": "N/A"
+    },
+    "no_mask": {
+     "train": 2731,
+     "test": 835,
+     "eval": "ok"
+    }
+   },
+   "na_classes": [
+    "glove",
+    "helmet",
+    "no_helmet"
+   ],
+   "yolo26s_gpu_min_est": 185
+  }
+ ],
+ "infeasible_balanced_split": {
+  "n_sequences": 4,
+  "sequences_image_pct": 50.96,
+  "outside_sequences_image_pct": 49.04,
+  "sequence_box_share_pct": {
+   "kp1000_jpg": {
+    "glove": 0.0,
+    "goggles": 45.0,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 0.0,
+    "no_goggles": 29.4,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   },
+   "PP02img1000_jpg": {
+    "glove": 43.2,
+    "goggles": 0.0,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 60.2,
+    "no_goggles": 0.0,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   },
+   "packing1000_jpg": {
+    "glove": 0.0,
+    "goggles": 10.9,
+    "helmet": 0.0,
+    "mask": 0.0,
+    "no_glove": 0.0,
+    "no_goggles": 39.7,
+    "no_helmet": 0.0,
+    "no_mask": 0.0
+   },
+   "frame0--2-_jpg": {
+    "glove": 0.0,
+    "goggles": 8.8,
+    "helmet": 0.0,
+    "mask": 8.8,
+    "no_glove": 3.6,
+    "no_goggles": 8.0,
+    "no_helmet": 0.0,
+    "no_mask": 23.4
+   }
+  },
+  "clean2_max_class_dev_pp": 25.69,
+  "clean2_worst_class": "glove@train",
+  "target_pp": 5.0
+ },
+ "gpu_estimate": {
+  "basis": "E2 YOLO26s C 142 min for 21641 train images on T4, scaled by train images (no per-epoch val: conservative)",
+  "yolo26s_total_h": 11.8
+ }
+}

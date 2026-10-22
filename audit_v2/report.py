@@ -261,6 +261,8 @@ def main():
     nums["errata_v4"] = errata_numbers()
     if "clean2" in nums:  # E9, written by audit_v2.clean2 --paper
         nums["errata_v4"]["E9_e2_clean_exact_residual"] = nums["clean2"]["e2_clean_exact_residual"]
+    if "clean2_C_loso" in nums:  # E9 (C), written by audit_v2.loso --paper
+        nums["errata_v4"]["E9_C_no_clean_balanced_split"] = nums["clean2_C_loso"]["infeasible_balanced_split"]
     v11 = json.loads((RESULTS / "resplit_v11" / "resplit_v11_final.json").read_text(encoding="utf-8"))
     v11.pop("class_ratio_pct", None)
     nums["audit_v2"] = {
