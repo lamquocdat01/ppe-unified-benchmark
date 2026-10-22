@@ -1,4 +1,5 @@
-"""Generate the T4(1) Kaggle notebooks: PPE-Unified v1-fix vs v1.1, YOLO26s + RT-DETR-L x 3 seeds (12 runs).
+"""Generate the T4(1) Kaggle notebooks: PPE-Unified v1-fix vs v1.1, YOLO26s + RT-DETR-L x 2 seeds (8 runs;
+3 seeds planned, cut to 2 on 22-10-2026 to fit T4(1) + T4(2)-B into one weekly Kaggle quota).
 
 Both variants share the same images and corrected labels (dataset ppe-unified-v1fix-v11, folders v1fix/ and
 v1.1/); only the split differs, so the gap measures split leakage alone.
@@ -10,18 +11,19 @@ Training settings are the E1 settings selected by HPO in notebooks 01/03 (see re
 One notebook per model so each fits Kaggle's 12-hour session; both resume from their own
 previous output (state.json + runs/*/last.pt).
 
-Usage: python kaggle/make_t4_notebooks.py <out_dir>
+Usage: python kaggle/make_t4_notebooks.py <out_dir>   (KAGGLE_USERNAME env fills kernel-metadata ids)
 """
 import json
+import os
 import sys
 from pathlib import Path
 
 CONFIG = '''# ==================== CONFIG (T4-1: PPE-Unified v1-fix vs v1.1) ====================
 MODEL      = "{model}"           # this notebook trains one model; the other notebook trains the other
-SEEDS      = [0, 1, 2]
+SEEDS      = [0, 1]
 VARIANTS   = ["v1fix", "v1.1"]
 QUICK_TEST = False                # True: 2 epochs on 10% of the data, pipeline smoke test only
-TIME_BUDGET_H = 11.0              # do not START a run after this many hours (Kaggle session limit is 12 h)
+TIME_BUDGET_H = 11.5              # do not START a run that would end after this (previous run as estimate; limit 12 h)
 RFS_T, REPEAT_CAP = 0.15, 4       # E1 repeat-factor oversampling, train split only
 HP = {{
     "yolo26s":  dict(weights="yolo26s.pt",  epochs=30, imgsz=640, batch=16, optimizer="auto",  lr0=0.01, patience=10),
@@ -120,12 +122,13 @@ TRAIN = '''from ultralytics import YOLO, RTDETR
 import gc
 Net = RTDETR if MODEL.startswith("rtdetr") else YOLO
 CLASSES = None
+prev_h = 0.0
 for variant in VARIANTS:
     dyaml = None
     for sd in SEEDS:
         key = f"t4_{MODEL}_{variant}_s{sd}"
         if done(key): print("skip:", STATE[key]); continue
-        if (time.time() - T_START) / 3600 > TIME_BUDGET_H:
+        if (time.time() - T_START) / 3600 + prev_h > TIME_BUDGET_H:
             print(f"time budget reached - stop; re-run this notebook with its output added as input to resume"); break
         dyaml = dyaml or prepare(variant)
         name = key; last = f"{WORK}/runs/{name}/weights/last.pt"; t0 = time.time()
@@ -147,7 +150,7 @@ for variant in VARIANTS:
                "P_test": round(t.box.mp, 4), "R_test": round(t.box.mr, 4),
                "ap50_test_per_class": {t.names[int(c)]: round(float(a), 4) for c, a in zip(t.box.ap_class_index, t.box.ap50)},
                "train_min": round((time.time() - t0) / 60, 1)}
-        mark(key, row); print(row)
+        mark(key, row); print(row); prev_h = (time.time() - t0) / 3600
         del m; gc.collect(); torch.cuda.empty_cache()
 '''
 
@@ -171,7 +174,7 @@ print("output:", sorted(os.listdir(WORK)))
 
 
 def notebook(model):
-    cells = [("markdown", f"# T4-1 — PPE-Unified v1 vs v1.1 — {model} × seeds 0,1,2\n"
+    cells = [("markdown", f"# T4-1 — PPE-Unified v1 vs v1.1 — {model} × seeds 0,1\n"
                           "E1 hyper-parameters (HPO-selected). Add the dataset ppe-unified-v1fix-v11 as input; to resume, add this "
                           "notebook's previous output as input and run all again."),
              ("code", CONFIG.format(model=model)), ("code", SETUP), ("code", DATA), ("code", TRAIN), ("code", SUMMARY)]
@@ -184,14 +187,15 @@ def notebook(model):
 
 def main():
     out = Path(sys.argv[1])
+    user = os.environ.get("KAGGLE_USERNAME", "<KAGGLE_USERNAME>")
     for model, slug in (("yolo26s", "t4-ppeu-v1fix-vs-v11-yolo26s"), ("rtdetr-l", "t4-ppeu-v1fix-vs-v11-rtdetr-l")):
         d = out / slug
         d.mkdir(parents=True, exist_ok=True)
         (d / f"{slug}.ipynb").write_text(json.dumps(notebook(model), indent=1), encoding="utf-8")
         (d / "kernel-metadata.json").write_text(json.dumps({
-            "id": f"<KAGGLE_USERNAME>/{slug}", "title": slug, "code_file": f"{slug}.ipynb", "language": "python",
+            "id": f"{user}/{slug}", "title": slug, "code_file": f"{slug}.ipynb", "language": "python",
             "kernel_type": "notebook", "is_private": True, "enable_gpu": True, "enable_internet": True,
-            "dataset_sources": ["<KAGGLE_USERNAME>/ppe-unified-v1fix-v11"],
+            "dataset_sources": [f"{user}/ppe-unified-v1fix-v11"],
             "competition_sources": [], "kernel_sources": []}, indent=1), encoding="utf-8")
     print("written", out)
 

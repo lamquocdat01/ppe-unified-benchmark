@@ -11,13 +11,17 @@ Training settings are E2's, unchanged (notebooks/E2_LeakyVsClean_YOLO26s.ipynb, 
   YOLO26s  : 15 ep, imgsz 640, batch 16, default optimizer
   RT-DETR-L: 15 ep, imgsz 640, batch 8, AdamW, lr0 1e-4
   no repeat-factor oversampling (E2 had none).
-Images are downloaded from Roboflow inside the notebook (as in E2; key from Kaggle Secrets, ROBOFLOW_API_KEY);
-the splits come from the small input dataset ppe-e2-clean2-manifests (file, md5, split per arm; C: one column per
+Images: the Roboflow export as used in E2, taken from src_<d>/ inside the input dataset when present (B is
+shipped there, CC BY 4.0, same files/MD5 as E2's download), otherwise downloaded from Roboflow inside the notebook
+(Kaggle secret ROBOFLOW_API_KEY); the splits come from the small input dataset ppe-e2-clean2-manifests (file, md5, split per arm; C: one column per
 LOSO fold). Files are matched by name, then by MD5; the notebook stops if any image is unmatched.
 
-Usage: python kaggle/make_t4_2_notebooks.py <out_dir> [<manifest_dir>]
+Usage: python kaggle/make_t4_2_notebooks.py <out_dir> [<manifest_dir> [<src name>...]]
+  e.g. ... <manifest_dir> B   hard-links the local B export to <manifest_dir>/src_B (KAGGLE_USERNAME env fills ids)
 """
 import json
+import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -58,9 +62,11 @@ SETUP = '''%pip install -q ultralytics roboflow
 import torch
 assert torch.cuda.is_available(), "Enable a GPU accelerator (T4 x2)!"
 print("GPU:", torch.cuda.get_device_name(0))
-from kaggle_secrets import UserSecretsClient
-ROBOFLOW_API_KEY = UserSecretsClient().get_secret("ROBOFLOW_API_KEY")
-assert ROBOFLOW_API_KEY, "Add the Kaggle secret ROBOFLOW_API_KEY (Add-ons > Secrets)"
+try:  # only needed when the export is not shipped in the input dataset (src_<d>/)
+    from kaggle_secrets import UserSecretsClient
+    ROBOFLOW_API_KEY = UserSecretsClient().get_secret("ROBOFLOW_API_KEY")
+except Exception:
+    ROBOFLOW_API_KEY = None
 '''
 
 DATA = '''import yaml, pandas as pd
@@ -74,11 +80,19 @@ for d in {d for d, _ in RUNS}:
     MAN[d] = pd.read_csv(hits[0])
 
 def download(d):
+    shipped = glob.glob(f"/kaggle/input/**/src_{d}/data.yaml", recursive=True)
+    if shipped:
+        print(f"{d}: export from input dataset", os.path.dirname(shipped[0])); return os.path.dirname(shipped[0])
     out = f"{WORK}/raw_{d}"
     if not os.path.exists(f"{out}/data.yaml"):
+        assert ROBOFLOW_API_KEY, f"src_{d}/ not in the input dataset: add the Kaggle secret ROBOFLOW_API_KEY"
         ws, proj, ver = SOURCES[d]
         Roboflow(api_key=ROBOFLOW_API_KEY).workspace(ws).project(proj).version(ver).download("yolov8", location=out)
     return out
+
+def put(src, dst):
+    try: os.link(src, dst)                  # same filesystem (Roboflow download in /kaggle/working)
+    except OSError: shutil.copy(src, dst)   # read-only /kaggle/input
 
 def md5(p):
     h = hashlib.md5()
@@ -108,9 +122,9 @@ def prepare(d, arm):
     for sp in splits:
         os.makedirs(f"{dst}/{sp}/images"); os.makedirs(f"{dst}/{sp}/labels")
     for p, sp in split_of.items():
-        os.link(p, f"{dst}/{sp}/images/{os.path.basename(p)}")
+        put(p, f"{dst}/{sp}/images/{os.path.basename(p)}")
         lp = p.replace(f"{os.sep}images{os.sep}", f"{os.sep}labels{os.sep}").rsplit(".", 1)[0] + ".txt"
-        if os.path.exists(lp): os.link(lp, f"{dst}/{sp}/labels/{os.path.basename(lp)}")
+        if os.path.exists(lp): put(lp, f"{dst}/{sp}/labels/{os.path.basename(lp)}")
     names = yaml.safe_load(open(f"{raw}/data.yaml"))["names"]
     # LOSO folds have no validation split: "val" points at the held-out sequence and is used only for the final
     # evaluation of the last checkpoint (train(val=False)), never for checkpoint selection.
@@ -197,15 +211,16 @@ def notebook(part, model, seeds, runs):
 
 def main():
     out = Path(sys.argv[1])
+    user = os.environ.get("KAGGLE_USERNAME", "<KAGGLE_USERNAME>")
     for part, model, seeds, runs in PLAN:
         slug = f"t4-2{part.lower()}-e2-{model}"
         d = out / slug
         d.mkdir(parents=True, exist_ok=True)
         (d / f"{slug}.ipynb").write_text(json.dumps(notebook(part, model, seeds, runs), indent=1), encoding="utf-8")
         (d / "kernel-metadata.json").write_text(json.dumps({
-            "id": f"<KAGGLE_USERNAME>/{slug}", "title": slug, "code_file": f"{slug}.ipynb", "language": "python",
+            "id": f"{user}/{slug}", "title": slug, "code_file": f"{slug}.ipynb", "language": "python",
             "kernel_type": "notebook", "is_private": True, "enable_gpu": True, "enable_internet": True,
-            "dataset_sources": ["<KAGGLE_USERNAME>/ppe-e2-clean2-manifests"],
+            "dataset_sources": [f"{user}/ppe-e2-clean2-manifests"],
             "competition_sources": [], "kernel_sources": []}, indent=1), encoding="utf-8")
     if len(sys.argv) > 2:
         # manifest dataset: only the columns the notebooks need
@@ -214,8 +229,14 @@ def main():
         for n, cols in MAN_COLS.items():
             m = pd.read_csv(src / MAN_SRC[n])
             m[["file", "md5"] + cols].to_csv(mdir / f"manifest_{n}.csv", index=False)
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from audit_v2.registry import DATASETS_ROOT, REGISTRY  # noqa: E402 - only for shipping exports
+        for n in sys.argv[3:]:
+            dst = mdir / f"src_{n}"
+            if not dst.exists():
+                shutil.copytree(DATASETS_ROOT / REGISTRY[n][0], dst, copy_function=os.link)
         (mdir / "dataset-metadata.json").write_text(json.dumps({
-            "title": "ppe-e2-clean2-manifests", "id": "<KAGGLE_USERNAME>/ppe-e2-clean2-manifests",
+            "title": "ppe-e2-clean2-manifests", "id": f"{user}/ppe-e2-clean2-manifests",
             "licenses": [{"name": "CC-BY-4.0"}]}, indent=1), encoding="utf-8")
     print("written", out)
 
