@@ -1,0 +1,11 @@
+dataset,arm,groups,largest_group,train,valid,test,max_class_dev_pp,worst_class,cos>=0.98,cos>=0.95,cos>=0.9,exact,phash0,scene_k2
+B,original,2670,22,3597,1026,517,5.75,no-helmet@train,1279,4116,17359,3573,2653,13893
+B,clean_exact,2670,22,3598,1028,514,8.96,no-boots@valid,439,3265,18471,0,1056,11344
+B,clean_exact_balanced,2670,22,3598,1028,514,0.37,helmet@train,271,2837,15993,0,1089,9830
+B,clean2,551,905,3598,1028,514,3.62,no-boots@train,0,143,4227,0,0,0
+B,clean2_e2,551,905,3604,1023,513,20.8,no-boots@train,0,60,2160,0,0,0
+C,original,11110,6,27048,2575,1288,19.01,helmet@train,16946,113774,787030,2365,12655,38742
+C,clean_exact,11110,6,21641,6181,3089,4.93,mask@valid,17203,138815,1452896,0,14028,74902
+C,clean_exact_balanced,11110,6,21638,6182,3091,0.89,goggles@train,21566,164473,1627899,0,14928,68784
+C,clean2,495,6314,21638,6182,3091,25.69,glove@train,0,9060,174020,0,0,0
+C,clean2_e2,495,6314,21793,9101,17,50.67,no_glove@valid,0,4573,75803,0,0,0

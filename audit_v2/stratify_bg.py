@@ -318,12 +318,15 @@ def bg_balance(assign, groups, n_classes, totals, img_quota, req, rng, n_bg, by_
     return assign, steps
 
 
-def split(groups, boxes_per_file, class_names, seed=None):
-    """Full extended algorithm: greedy -> repair -> background balancing. Deterministic (seed 42)."""
+def split(groups, boxes_per_file, class_names, seed=None, req=None):
+    """Full extended algorithm: greedy -> repair -> background balancing. Deterministic (seed 42).
+
+    req: {cid: (min_test, min_val)}; default is the PPE-Unified table (sr.min_req_table). Other datasets
+    pass their own ({} = no absolute floor, only the ratio penalty)."""
     import random
     add_bg(groups, boxes_per_file)
     nc = len(class_names)
-    req = sr.min_req_table(class_names)
+    req = sr.min_req_table(class_names) if req is None else req
     n_img = sum(g["n_img"] for g in groups.values())
     quota = {"train": int(round(n_img * TARGET_RATIO["train"])), "val": int(round(n_img * TARGET_RATIO["val"]))}
     quota["test"] = n_img - quota["train"] - quota["val"]

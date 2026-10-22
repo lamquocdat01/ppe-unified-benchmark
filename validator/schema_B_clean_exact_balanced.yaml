@@ -1,0 +1,21 @@
+# E2 source B (Roboflow testcasque/ppe-detection-qlq3d v1) - clean-exact-balanced (E2 source-stem groups, class-balanced control, audit_v2.clean2). Paths relative to THS_DATASETS.
+# min_support: none (PPE-Unified floors are infeasible for B: no-boots has 163 boxes in total).
+name: B clean_exact_balanced
+format: yolo
+root: _derived/ppe_unified/clean_exact_balanced/B
+splits: {train: train, val: valid, test: test}
+target_ratio: {train: 0.70, val: 0.20, test: 0.10}
+classes: [boots, gloves, goggles, helmet, no-boots, no-gloves, no-goggles, no-helmet, no-vest, vest]
+pairs:
+  - [helmet, no-helmet]
+  - [vest, no-vest]
+  - [gloves, no-gloves]
+  - [goggles, no-goggles]
+  - [boots, no-boots]
+pair_conflict_iou: 0.8
+image_size: [640, 640]
+box_edge_tolerance: 0.005
+require_label_file: true
+group: {source: manifest, manifest: manifest.csv, file_column: file, column: group}
+leakage: {perceptual: copy+scene, cos: 0.98, phash: 0, scene_k: 2, feature_cache: _derived/ppe_unified/features}
+background_tolerance_pp: 2.0

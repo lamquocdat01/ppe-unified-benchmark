@@ -1,0 +1,128 @@
+{
+ "schema": "validator/schema_B_clean_exact_balanced.yaml",
+ "dataset": "B clean_exact_balanced",
+ "images": 5140,
+ "images_per_split": {
+  "train": 3598,
+  "val": 1028,
+  "test": 514
+ },
+ "checks": {
+  "1_class_ids": {
+   "status": "PASS",
+   "boxes": 21585,
+   "invalid_ids": 0,
+   "examples": [],
+   "declared_names_match_schema": true
+  },
+  "2_boxes": {
+   "status": "PASS",
+   "invalid_boxes": 0,
+   "examples": [],
+   "unparseable_lines": 0,
+   "images_without_label": 0,
+   "labels_without_image": 0,
+   "boxes_touching_edge_within_tolerance": 0,
+   "edge_tolerance": 0.005
+  },
+  "3_pair_consistency": {
+   "status": "PASS",
+   "pairs": [
+    [
+     "helmet",
+     "no-helmet"
+    ],
+    [
+     "vest",
+     "no-vest"
+    ],
+    [
+     "gloves",
+     "no-gloves"
+    ],
+    [
+     "goggles",
+     "no-goggles"
+    ],
+    [
+     "boots",
+     "no-boots"
+    ]
+   ],
+   "label_map_problems": [],
+   "pair_members_absent_from_split": [],
+   "same_object_conflicts": 0,
+   "conflict_iou": 0.8,
+   "examples": []
+  },
+  "4_image_size": {
+   "status": "PASS",
+   "expected": [
+    640,
+    640
+   ],
+   "mismatched": 0
+  },
+  "5_leakage": {
+   "status": "FAIL",
+   "group_source": "manifest",
+   "groups": 2670,
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "perceptual_tier": "copy+scene",
+   "perceptual_config": {
+    "cos": 0.98,
+    "phash": 0,
+    "topk": 5,
+    "scene_k": 2
+   },
+   "copy_level_cross_split_pairs": 1269,
+   "scene_level_cross_split_pairs": 9830,
+   "embeddings_computed_not_cached": 79,
+   "copy_examples": [
+    "train/AightOne0569_jpg.rf.a8e8d22853a06f2bb63039c7bc1ba574 ~ val/AightOne0572_jpg.rf.a3869df390605cf97236b4e3410ab70d",
+    "train/AightOne0569_jpg.rf.a8e8d22853a06f2bb63039c7bc1ba574 ~ val/AightOne0572_jpg.rf.c11bc2b9ddd6c135790b9f2725b5838c",
+    "train/AightOne0569_jpg.rf.a8e8d22853a06f2bb63039c7bc1ba574 ~ val/AightOne0572_jpg.rf.eae7ee9bc1ba87b4da1264018ee73889",
+    "train/AightOne0569_jpg.rf.e3065329602ec48488e4438f71123ad9 ~ val/AightOne0572_jpg.rf.a3869df390605cf97236b4e3410ab70d",
+    "train/AightOne0569_jpg.rf.e3065329602ec48488e4438f71123ad9 ~ val/AightOne0572_jpg.rf.c11bc2b9ddd6c135790b9f2725b5838c",
+    "train/AightOne0569_jpg.rf.e3065329602ec48488e4438f71123ad9 ~ val/AightOne0572_jpg.rf.eae7ee9bc1ba87b4da1264018ee73889",
+    "train/Aitin2737_jpg.rf.314c665de00093ecf87d50774f74d7ac ~ test/Aitin2742_jpg.rf.cdb741809cb3970694ea576ebcf97095",
+    "train/Aitin2737_jpg.rf.314c665de00093ecf87d50774f74d7ac ~ test/Aitin2742_jpg.rf.fa45a9beff7774be6ef226d1b33e0794",
+    "train/Aitin2737_jpg.rf.d33078ba524f2ec875213a13995703c7 ~ test/Aitin2742_jpg.rf.89377374b69eef6c77aac7723ff370e5",
+    "train/Aitin2737_jpg.rf.d33078ba524f2ec875213a13995703c7 ~ test/Aitin2742_jpg.rf.c02c19546c9f15f2c5786814d478cd66"
+   ],
+   "scene_examples": [
+    "train/00016_jpg.rf.7a041b1c80cefb6296bdb8a361a35181 ~ val/00014_jpg.rf.3c5cdb505af9d80d4ecde07ceedcef69",
+    "train/00016_jpg.rf.7a041b1c80cefb6296bdb8a361a35181 ~ val/00014_jpg.rf.99ea4477e22e5dc76e7c36aab5162896",
+    "train/00016_jpg.rf.7a041b1c80cefb6296bdb8a361a35181 ~ val/00014_jpg.rf.b615026b81a835cb3ae201e1b00155ac",
+    "train/00016_jpg.rf.7a041b1c80cefb6296bdb8a361a35181 ~ val/00014_jpg.rf.c1e77a78e1c33ad9a9404be1cb1d61d4",
+    "train/00016_jpg.rf.c0b88204e98c28504cb3b2e2450a1472 ~ val/00014_jpg.rf.3c5cdb505af9d80d4ecde07ceedcef69",
+    "train/00016_jpg.rf.c0b88204e98c28504cb3b2e2450a1472 ~ val/00014_jpg.rf.99ea4477e22e5dc76e7c36aab5162896",
+    "train/00016_jpg.rf.c0b88204e98c28504cb3b2e2450a1472 ~ val/00014_jpg.rf.b615026b81a835cb3ae201e1b00155ac",
+    "train/00016_jpg.rf.c0b88204e98c28504cb3b2e2450a1472 ~ val/00014_jpg.rf.c1e77a78e1c33ad9a9404be1cb1d61d4",
+    "train/00052_jpg.rf.9edead23d5e508223d53dbd2e3da60cf ~ val/51_JPG_jpg.rf.90748fff64c9adc429376927a55ecec5",
+    "train/00052_jpg.rf.9edead23d5e508223d53dbd2e3da60cf ~ val/51_JPG_jpg.rf.93ab5dda0454c9a875bb50bd3bc74b71"
+   ]
+  },
+  "6_corrupt": {
+   "status": "PASS",
+   "decoded": 5140,
+   "corrupt": 0,
+   "examples": []
+  },
+  "7_min_support": {
+   "status": "N/A",
+   "reason": "schema declares no minimum support"
+  },
+  "8_background": {
+   "status": "N/A",
+   "reason": "no background images",
+   "background_images": 0
+  }
+ },
+ "summary": {
+  "PASS": 5,
+  "FAIL": 1,
+  "N/A": 2
+ }
+}

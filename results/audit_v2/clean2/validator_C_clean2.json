@@ -1,0 +1,110 @@
+{
+ "schema": "validator/schema_C_clean2.yaml",
+ "dataset": "C clean2",
+ "images": 30911,
+ "images_per_split": {
+  "train": 21638,
+  "val": 6182,
+  "test": 3091
+ },
+ "checks": {
+  "1_class_ids": {
+   "status": "PASS",
+   "boxes": 60981,
+   "invalid_ids": 0,
+   "examples": [],
+   "declared_names_match_schema": true
+  },
+  "2_boxes": {
+   "status": "PASS",
+   "invalid_boxes": 0,
+   "examples": [],
+   "unparseable_lines": 0,
+   "images_without_label": 0,
+   "labels_without_image": 0,
+   "boxes_touching_edge_within_tolerance": 0,
+   "edge_tolerance": 0.005
+  },
+  "3_pair_consistency": {
+   "status": "FAIL",
+   "pairs": [
+    [
+     "helmet",
+     "no_helmet"
+    ],
+    [
+     "glove",
+     "no_glove"
+    ],
+    [
+     "goggles",
+     "no_goggles"
+    ],
+    [
+     "mask",
+     "no_mask"
+    ]
+   ],
+   "label_map_problems": [],
+   "pair_members_absent_from_split": [
+    "helmet@test"
+   ],
+   "same_object_conflicts": 0,
+   "conflict_iou": 0.8,
+   "examples": []
+  },
+  "4_image_size": {
+   "status": "PASS",
+   "expected": [
+    416,
+    416
+   ],
+   "mismatched": 0
+  },
+  "5_leakage": {
+   "status": "PASS",
+   "group_source": "manifest",
+   "groups": 495,
+   "groups_in_multiple_splits": 0,
+   "md5_in_multiple_splits": 0,
+   "perceptual_tier": "copy+scene",
+   "perceptual_config": {
+    "cos": 0.98,
+    "phash": 0,
+    "topk": 5,
+    "scene_k": 2
+   },
+   "copy_level_cross_split_pairs": 0,
+   "scene_level_cross_split_pairs": 0,
+   "embeddings_computed_not_cached": 0,
+   "copy_examples": [],
+   "scene_examples": []
+  },
+  "6_corrupt": {
+   "status": "PASS",
+   "decoded": 30911,
+   "corrupt": 0,
+   "examples": []
+  },
+  "7_min_support": {
+   "status": "N/A",
+   "reason": "schema declares no minimum support"
+  },
+  "8_background": {
+   "status": "PASS",
+   "background_images": 1666,
+   "per_split": {
+    "train": 1153,
+    "val": 361,
+    "test": 152
+   },
+   "max_deviation_pp": 1.669,
+   "tolerance_pp": 2.0
+  }
+ },
+ "summary": {
+  "PASS": 6,
+  "FAIL": 1,
+  "N/A": 1
+ }
+}

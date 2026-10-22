@@ -14,3 +14,5 @@ results/audit_v2/*.npy
 results/audit_v2/*.png
 results/audit_v2/*.log
 results/audit_v2/validation_300/*.png
+results/audit_v2/clean2/manifest_*.csv
+results/audit_v2/clean2/*.log

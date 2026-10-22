@@ -1,0 +1,20 @@
+# E2 source C (Roboflow mohamed-traore-2ekkp/ppe-detection-l80fg v5) - clean2 (exact U 2a U 2b groups, class-balanced, audit_v2.clean2). Paths relative to THS_DATASETS.
+# min_support: none (same rule as B; the comparison is class-ratio balance, not PPE-Unified floors).
+name: C clean2
+format: yolo
+root: _derived/ppe_unified/clean2/C
+splits: {train: train, val: valid, test: test}
+target_ratio: {train: 0.70, val: 0.20, test: 0.10}
+classes: [glove, goggles, helmet, mask, no_glove, no_goggles, no_helmet, no_mask]
+pairs:
+  - [helmet, no_helmet]
+  - [glove, no_glove]
+  - [goggles, no_goggles]
+  - [mask, no_mask]
+pair_conflict_iou: 0.8
+image_size: [416, 416]
+box_edge_tolerance: 0.005
+require_label_file: true
+group: {source: manifest, manifest: manifest.csv, file_column: file, column: group}
+leakage: {perceptual: copy+scene, cos: 0.98, phash: 0, scene_k: 2, feature_cache: _derived/ppe_unified/features}
+background_tolerance_pp: 2.0

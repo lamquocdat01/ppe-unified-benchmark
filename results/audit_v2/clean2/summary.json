@@ -1,0 +1,845 @@
+{
+ "procedure": {
+  "e2": "E2 cell 6 (sorted keys, Random(42).shuffle, 70/20/10 by image count)",
+  "balanced": "audit_v2.stratify_bg.split, seed 42, 70/20/10, req={}"
+ },
+ "clean2_key": {
+  "theta": 0.98,
+  "phash": 0,
+  "scene_k": 2
+ },
+ "datasets": {
+  "B": {
+   "dataset": "B",
+   "root": "PPE_SH17/PPE detection.v1i.yolov8.zip",
+   "classes": [
+    "boots",
+    "gloves",
+    "goggles",
+    "helmet",
+    "no-boots",
+    "no-gloves",
+    "no-goggles",
+    "no-helmet",
+    "no-vest",
+    "vest"
+   ],
+   "images": 5140,
+   "edges": {
+    "exact": 7869,
+    "copy_cos": 3117,
+    "copy_phash": 5976,
+    "scene": 29485,
+    "cos>=0.98": 3117,
+    "cos>=0.95": 9208,
+    "cos>=0.9": 39019
+   },
+   "arms": {
+    "original": {
+     "groups": 2670,
+     "largest_group": 22,
+     "images": {
+      "train": 3597,
+      "valid": 1026,
+      "test": 517
+     },
+     "image_pct": {
+      "train": 69.98,
+      "valid": 19.96,
+      "test": 10.06
+     },
+     "max_class_dev_pp": 5.75,
+     "worst_class": "no-helmet@train",
+     "class_pct": {
+      "boots": {
+       "train": 70.8,
+       "valid": 20.2,
+       "test": 9.0
+      },
+      "gloves": {
+       "train": 68.0,
+       "valid": 23.2,
+       "test": 8.8
+      },
+      "goggles": {
+       "train": 71.1,
+       "valid": 19.2,
+       "test": 9.7
+      },
+      "helmet": {
+       "train": 69.5,
+       "valid": 20.1,
+       "test": 10.3
+      },
+      "no-boots": {
+       "train": 66.3,
+       "valid": 22.1,
+       "test": 11.7
+      },
+      "no-gloves": {
+       "train": 75.4,
+       "valid": 15.3,
+       "test": 9.3
+      },
+      "no-goggles": {
+       "train": 71.2,
+       "valid": 18.4,
+       "test": 10.4
+      },
+      "no-helmet": {
+       "train": 75.8,
+       "valid": 17.2,
+       "test": 7.0
+      },
+      "no-vest": {
+       "train": 71.6,
+       "valid": 18.6,
+       "test": 9.9
+      },
+      "vest": {
+       "train": 70.6,
+       "valid": 19.8,
+       "test": 9.6
+      }
+     },
+     "background": {
+      "train": 0,
+      "valid": 0,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 3573,
+      "copy_cos": 1279,
+      "copy_phash": 2653,
+      "scene": 13893,
+      "cos>=0.98": 1279,
+      "cos>=0.95": 4116,
+      "cos>=0.9": 17359
+     }
+    },
+    "clean_exact": {
+     "groups": 2670,
+     "largest_group": 22,
+     "images": {
+      "train": 3598,
+      "valid": 1028,
+      "test": 514
+     },
+     "image_pct": {
+      "train": 70.0,
+      "valid": 20.0,
+      "test": 10.0
+     },
+     "max_class_dev_pp": 8.96,
+     "worst_class": "no-boots@valid",
+     "class_pct": {
+      "boots": {
+       "train": 69.9,
+       "valid": 17.8,
+       "test": 12.3
+      },
+      "gloves": {
+       "train": 70.0,
+       "valid": 18.1,
+       "test": 11.9
+      },
+      "goggles": {
+       "train": 68.7,
+       "valid": 24.7,
+       "test": 6.6
+      },
+      "helmet": {
+       "train": 71.3,
+       "valid": 19.2,
+       "test": 9.5
+      },
+      "no-boots": {
+       "train": 77.9,
+       "valid": 11.0,
+       "test": 11.0
+      },
+      "no-gloves": {
+       "train": 73.7,
+       "valid": 18.3,
+       "test": 8.1
+      },
+      "no-goggles": {
+       "train": 68.9,
+       "valid": 23.4,
+       "test": 7.7
+      },
+      "no-helmet": {
+       "train": 74.6,
+       "valid": 15.1,
+       "test": 10.4
+      },
+      "no-vest": {
+       "train": 72.9,
+       "valid": 20.0,
+       "test": 7.1
+      },
+      "vest": {
+       "train": 69.7,
+       "valid": 19.4,
+       "test": 10.9
+      }
+     },
+     "background": {
+      "train": 0,
+      "valid": 0,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 439,
+      "copy_phash": 1056,
+      "scene": 11344,
+      "cos>=0.98": 439,
+      "cos>=0.95": 3265,
+      "cos>=0.9": 18471
+     }
+    },
+    "clean_exact_balanced": {
+     "groups": 2670,
+     "largest_group": 22,
+     "images": {
+      "train": 3598,
+      "valid": 1028,
+      "test": 514
+     },
+     "image_pct": {
+      "train": 70.0,
+      "valid": 20.0,
+      "test": 10.0
+     },
+     "max_class_dev_pp": 0.37,
+     "worst_class": "helmet@train",
+     "class_pct": {
+      "boots": {
+       "train": 70.1,
+       "valid": 20.0,
+       "test": 9.9
+      },
+      "gloves": {
+       "train": 70.0,
+       "valid": 20.0,
+       "test": 9.9
+      },
+      "goggles": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      },
+      "helmet": {
+       "train": 70.4,
+       "valid": 19.8,
+       "test": 9.8
+      },
+      "no-boots": {
+       "train": 69.9,
+       "valid": 20.2,
+       "test": 9.8
+      },
+      "no-gloves": {
+       "train": 70.1,
+       "valid": 20.1,
+       "test": 9.9
+      },
+      "no-goggles": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      },
+      "no-helmet": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      },
+      "no-vest": {
+       "train": 70.0,
+       "valid": 20.0,
+       "test": 10.0
+      },
+      "vest": {
+       "train": 70.0,
+       "valid": 20.0,
+       "test": 10.0
+      }
+     },
+     "background": {
+      "train": 0,
+      "valid": 0,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 271,
+      "copy_phash": 1089,
+      "scene": 9830,
+      "cos>=0.98": 271,
+      "cos>=0.95": 2837,
+      "cos>=0.9": 15993
+     }
+    },
+    "clean2": {
+     "groups": 551,
+     "largest_group": 905,
+     "images": {
+      "train": 3598,
+      "valid": 1028,
+      "test": 514
+     },
+     "image_pct": {
+      "train": 70.0,
+      "valid": 20.0,
+      "test": 10.0
+     },
+     "max_class_dev_pp": 3.62,
+     "worst_class": "no-boots@train",
+     "class_pct": {
+      "boots": {
+       "train": 71.5,
+       "valid": 19.3,
+       "test": 9.2
+      },
+      "gloves": {
+       "train": 70.0,
+       "valid": 19.9,
+       "test": 10.1
+      },
+      "goggles": {
+       "train": 70.4,
+       "valid": 19.9,
+       "test": 9.7
+      },
+      "helmet": {
+       "train": 69.3,
+       "valid": 20.3,
+       "test": 10.4
+      },
+      "no-boots": {
+       "train": 73.6,
+       "valid": 18.4,
+       "test": 8.0
+      },
+      "no-gloves": {
+       "train": 70.1,
+       "valid": 20.1,
+       "test": 9.9
+      },
+      "no-goggles": {
+       "train": 70.5,
+       "valid": 19.8,
+       "test": 9.7
+      },
+      "no-helmet": {
+       "train": 70.2,
+       "valid": 19.9,
+       "test": 9.9
+      },
+      "no-vest": {
+       "train": 70.0,
+       "valid": 19.7,
+       "test": 10.4
+      },
+      "vest": {
+       "train": 69.6,
+       "valid": 20.1,
+       "test": 10.3
+      }
+     },
+     "background": {
+      "train": 0,
+      "valid": 0,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 0,
+      "copy_phash": 0,
+      "scene": 0,
+      "cos>=0.98": 0,
+      "cos>=0.95": 143,
+      "cos>=0.9": 4227
+     }
+    },
+    "clean2_e2": {
+     "groups": 551,
+     "largest_group": 905,
+     "images": {
+      "train": 3604,
+      "valid": 1023,
+      "test": 513
+     },
+     "image_pct": {
+      "train": 70.12,
+      "valid": 19.9,
+      "test": 9.98
+     },
+     "max_class_dev_pp": 20.8,
+     "worst_class": "no-boots@train",
+     "class_pct": {
+      "boots": {
+       "train": 82.2,
+       "valid": 13.8,
+       "test": 4.0
+      },
+      "gloves": {
+       "train": 80.4,
+       "valid": 14.9,
+       "test": 4.6
+      },
+      "goggles": {
+       "train": 56.1,
+       "valid": 38.3,
+       "test": 5.6
+      },
+      "helmet": {
+       "train": 63.8,
+       "valid": 21.8,
+       "test": 14.4
+      },
+      "no-boots": {
+       "train": 90.8,
+       "valid": 7.4,
+       "test": 1.8
+      },
+      "no-gloves": {
+       "train": 71.3,
+       "valid": 18.3,
+       "test": 10.5
+      },
+      "no-goggles": {
+       "train": 59.5,
+       "valid": 26.0,
+       "test": 14.5
+      },
+      "no-helmet": {
+       "train": 63.9,
+       "valid": 17.7,
+       "test": 18.4
+      },
+      "no-vest": {
+       "train": 53.0,
+       "valid": 19.7,
+       "test": 27.2
+      },
+      "vest": {
+       "train": 65.5,
+       "valid": 22.0,
+       "test": 12.5
+      }
+     },
+     "background": {
+      "train": 0,
+      "valid": 0,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 0,
+      "copy_phash": 0,
+      "scene": 0,
+      "cos>=0.98": 0,
+      "cos>=0.95": 60,
+      "cos>=0.9": 2160
+     }
+    }
+   },
+   "materialized": {
+    "clean2": "_derived\\ppe_unified\\clean2\\B",
+    "clean_exact_balanced": "_derived\\ppe_unified\\clean_exact_balanced\\B"
+   }
+  },
+  "C": {
+   "dataset": "C",
+   "root": "PPE_SH17/ppe-detection-l80fg-v5",
+   "classes": [
+    "glove",
+    "goggles",
+    "helmet",
+    "mask",
+    "no_glove",
+    "no_goggles",
+    "no_helmet",
+    "no_mask"
+   ],
+   "images": 30911,
+   "edges": {
+    "exact": 37071,
+    "copy_cos": 35659,
+    "copy_phash": 29166,
+    "scene": 196829,
+    "cos>=0.98": 35659,
+    "cos>=0.95": 283961,
+    "cos>=0.9": 2981166
+   },
+   "arms": {
+    "original": {
+     "groups": 11110,
+     "largest_group": 6,
+     "images": {
+      "train": 27048,
+      "valid": 2575,
+      "test": 1288
+     },
+     "image_pct": {
+      "train": 87.5,
+      "valid": 8.33,
+      "test": 4.17
+     },
+     "max_class_dev_pp": 19.01,
+     "worst_class": "helmet@train",
+     "class_pct": {
+      "glove": {
+       "train": 87.7,
+       "valid": 8.4,
+       "test": 3.9
+      },
+      "goggles": {
+       "train": 87.3,
+       "valid": 8.5,
+       "test": 4.2
+      },
+      "helmet": {
+       "train": 89.0,
+       "valid": 7.7,
+       "test": 3.3
+      },
+      "mask": {
+       "train": 88.4,
+       "valid": 8.4,
+       "test": 3.2
+      },
+      "no_glove": {
+       "train": 87.8,
+       "valid": 8.3,
+       "test": 3.9
+      },
+      "no_goggles": {
+       "train": 87.2,
+       "valid": 8.2,
+       "test": 4.6
+      },
+      "no_helmet": {
+       "train": 87.0,
+       "valid": 9.3,
+       "test": 3.7
+      },
+      "no_mask": {
+       "train": 86.6,
+       "valid": 8.8,
+       "test": 4.6
+      }
+     },
+     "background": {
+      "train": 1458,
+      "valid": 134,
+      "test": 74
+     },
+     "cross_split_pairs": {
+      "exact": 2365,
+      "copy_cos": 16946,
+      "copy_phash": 12655,
+      "scene": 38742,
+      "cos>=0.98": 16946,
+      "cos>=0.95": 113774,
+      "cos>=0.9": 787030
+     }
+    },
+    "clean_exact": {
+     "groups": 11110,
+     "largest_group": 6,
+     "images": {
+      "train": 21641,
+      "valid": 6181,
+      "test": 3089
+     },
+     "image_pct": {
+      "train": 70.01,
+      "valid": 20.0,
+      "test": 9.99
+     },
+     "max_class_dev_pp": 4.93,
+     "worst_class": "mask@valid",
+     "class_pct": {
+      "glove": {
+       "train": 71.1,
+       "valid": 20.4,
+       "test": 8.5
+      },
+      "goggles": {
+       "train": 70.2,
+       "valid": 20.0,
+       "test": 9.8
+      },
+      "helmet": {
+       "train": 68.7,
+       "valid": 20.4,
+       "test": 10.9
+      },
+      "mask": {
+       "train": 65.6,
+       "valid": 24.9,
+       "test": 9.5
+      },
+      "no_glove": {
+       "train": 70.1,
+       "valid": 20.9,
+       "test": 9.0
+      },
+      "no_goggles": {
+       "train": 69.8,
+       "valid": 20.8,
+       "test": 9.5
+      },
+      "no_helmet": {
+       "train": 66.8,
+       "valid": 21.9,
+       "test": 11.3
+      },
+      "no_mask": {
+       "train": 67.0,
+       "valid": 21.3,
+       "test": 11.7
+      }
+     },
+     "background": {
+      "train": 1153,
+      "valid": 311,
+      "test": 202
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 17203,
+      "copy_phash": 14028,
+      "scene": 74902,
+      "cos>=0.98": 17203,
+      "cos>=0.95": 138815,
+      "cos>=0.9": 1452896
+     }
+    },
+    "clean_exact_balanced": {
+     "groups": 11110,
+     "largest_group": 6,
+     "images": {
+      "train": 21638,
+      "valid": 6182,
+      "test": 3091
+     },
+     "image_pct": {
+      "train": 70.0,
+      "valid": 20.0,
+      "test": 10.0
+     },
+     "max_class_dev_pp": 0.89,
+     "worst_class": "goggles@train",
+     "class_pct": {
+      "glove": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      },
+      "goggles": {
+       "train": 70.9,
+       "valid": 19.6,
+       "test": 9.5
+      },
+      "helmet": {
+       "train": 70.1,
+       "valid": 20.0,
+       "test": 9.9
+      },
+      "mask": {
+       "train": 70.4,
+       "valid": 19.8,
+       "test": 9.8
+      },
+      "no_glove": {
+       "train": 70.0,
+       "valid": 20.0,
+       "test": 10.0
+      },
+      "no_goggles": {
+       "train": 70.6,
+       "valid": 19.7,
+       "test": 9.7
+      },
+      "no_helmet": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      },
+      "no_mask": {
+       "train": 70.1,
+       "valid": 19.9,
+       "test": 10.0
+      }
+     },
+     "background": {
+      "train": 1197,
+      "valid": 319,
+      "test": 150
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 21566,
+      "copy_phash": 14928,
+      "scene": 68784,
+      "cos>=0.98": 21566,
+      "cos>=0.95": 164473,
+      "cos>=0.9": 1627899
+     }
+    },
+    "clean2": {
+     "groups": 495,
+     "largest_group": 6314,
+     "images": {
+      "train": 21638,
+      "valid": 6182,
+      "test": 3091
+     },
+     "image_pct": {
+      "train": 70.0,
+      "valid": 20.0,
+      "test": 10.0
+     },
+     "max_class_dev_pp": 25.69,
+     "worst_class": "glove@train",
+     "class_pct": {
+      "glove": {
+       "train": 44.3,
+       "valid": 33.0,
+       "test": 22.7
+      },
+      "goggles": {
+       "train": 67.6,
+       "valid": 28.7,
+       "test": 3.8
+      },
+      "helmet": {
+       "train": 58.8,
+       "valid": 41.2,
+       "test": 0.0
+      },
+      "mask": {
+       "train": 69.3,
+       "valid": 21.5,
+       "test": 9.1
+      },
+      "no_glove": {
+       "train": 65.7,
+       "valid": 13.3,
+       "test": 20.9
+      },
+      "no_goggles": {
+       "train": 80.2,
+       "valid": 15.9,
+       "test": 3.9
+      },
+      "no_helmet": {
+       "train": 69.7,
+       "valid": 20.6,
+       "test": 9.7
+      },
+      "no_mask": {
+       "train": 70.1,
+       "valid": 20.0,
+       "test": 9.8
+      }
+     },
+     "background": {
+      "train": 1153,
+      "valid": 361,
+      "test": 152
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 0,
+      "copy_phash": 0,
+      "scene": 0,
+      "cos>=0.98": 0,
+      "cos>=0.95": 9060,
+      "cos>=0.9": 174020
+     }
+    },
+    "clean2_e2": {
+     "groups": 495,
+     "largest_group": 6314,
+     "images": {
+      "train": 21793,
+      "valid": 9101,
+      "test": 17
+     },
+     "image_pct": {
+      "train": 70.5,
+      "valid": 29.44,
+      "test": 0.05
+     },
+     "max_class_dev_pp": 50.67,
+     "worst_class": "no_glove@valid",
+     "class_pct": {
+      "glove": {
+       "train": 48.6,
+       "valid": 51.4,
+       "test": 0.0
+      },
+      "goggles": {
+       "train": 94.2,
+       "valid": 5.8,
+       "test": 0.0
+      },
+      "helmet": {
+       "train": 71.3,
+       "valid": 28.7,
+       "test": 0.0
+      },
+      "mask": {
+       "train": 55.6,
+       "valid": 44.2,
+       "test": 0.2
+      },
+      "no_glove": {
+       "train": 29.3,
+       "valid": 70.7,
+       "test": 0.0
+      },
+      "no_goggles": {
+       "train": 92.8,
+       "valid": 7.2,
+       "test": 0.0
+      },
+      "no_helmet": {
+       "train": 61.2,
+       "valid": 38.8,
+       "test": 0.0
+      },
+      "no_mask": {
+       "train": 55.8,
+       "valid": 44.1,
+       "test": 0.1
+      }
+     },
+     "background": {
+      "train": 1276,
+      "valid": 390,
+      "test": 0
+     },
+     "cross_split_pairs": {
+      "exact": 0,
+      "copy_cos": 0,
+      "copy_phash": 0,
+      "scene": 0,
+      "cos>=0.98": 0,
+      "cos>=0.95": 4573,
+      "cos>=0.9": 75803
+     }
+    }
+   },
+   "materialized": {
+    "clean2": "_derived\\ppe_unified\\clean2\\C",
+    "clean_exact_balanced": "_derived\\ppe_unified\\clean_exact_balanced\\C"
+   }
+  }
+ }
+}
