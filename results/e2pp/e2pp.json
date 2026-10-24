@@ -1,0 +1,625 @@
+{
+ "protocol": "Test split = PPE-Unified v1-fix test (v1 split, corrected labels). Every test image is assigned by its canonical\nv1.1 group (group_v11 = connected component of exact U 2a U 2b at the operating point, 1,770 groups):\n  leaked = its group also has images in v1-fix train or val;  clean = all other test images.\nWith --edges, a second split of the test set: copy-leaked = the image itself has an exact or copy-level (2a)\nedge to a train/val image (audit_v2 edge list, FAISS top-5); not copy-leaked = the rest. Group leakage chains\nwhole video sequences through 2b and covers most of the v1 test split, so the direct split is the sharper test.\nEach model is validated once on the test split by Ultralytics itself (conf 0.001, IoU 0.7, 640 px); a recording\nvalidator keeps every image's matched predictions, so 'full' is exactly model.val and the subsets reuse the\nsame matches (ap_per_class). A leaked/clean pair is compared on the classes with >= --min-gt boxes in both\nsubsets. 95 % CIs: 1,000 bootstrap resamples over images, per subset, redrawn when a resample lacks a class of the\ncompared set (count recorded); the leaked-minus-clean difference resamples both subsets independently. Stops if free RAM < --min-free-gb.",
+ "n_boot": 1000,
+ "min_gt_per_class": 10,
+ "subsets": {
+  "full": {
+   "images": 1795,
+   "boxes": 5114,
+   "boxes_per_class": [
+    1649,
+    827,
+    290,
+    112,
+    501,
+    616,
+    368,
+    386,
+    111,
+    4,
+    118,
+    132
+   ]
+  },
+  "leaked": {
+   "images": 1677,
+   "boxes": 4832,
+   "boxes_per_class": [
+    1579,
+    801,
+    253,
+    103,
+    486,
+    613,
+    344,
+    372,
+    104,
+    0,
+    66,
+    111
+   ]
+  },
+  "clean": {
+   "images": 118,
+   "boxes": 282,
+   "boxes_per_class": [
+    70,
+    26,
+    37,
+    9,
+    15,
+    3,
+    24,
+    14,
+    7,
+    4,
+    52,
+    21
+   ]
+  },
+  "direct_leaked": {
+   "images": 289,
+   "boxes": 462,
+   "boxes_per_class": [
+    37,
+    96,
+    22,
+    2,
+    23,
+    38,
+    75,
+    62,
+    31,
+    0,
+    32,
+    44
+   ]
+  },
+  "direct_clean": {
+   "images": 1506,
+   "boxes": 4652,
+   "boxes_per_class": [
+    1612,
+    731,
+    268,
+    110,
+    478,
+    578,
+    293,
+    324,
+    80,
+    4,
+    86,
+    88
+   ]
+  }
+ },
+ "models": {
+  "yolo26s_s0": {
+   "ultralytics_val_full": {
+    "mAP50": 0.7948,
+    "mAP50_95": 0.5029
+   },
+   "full": {
+    "mAP50": 0.7948,
+    "mAP50_95": 0.5029,
+    "ci95_mAP50": [
+     0.7801,
+     0.8099
+    ],
+    "ci95_mAP50_95": [
+     0.4915,
+     0.5176
+    ],
+    "classes": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "redrawn": 48
+   },
+   "leaked": {
+    "mAP50": 0.9127,
+    "mAP50_95": 0.5875,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.9013,
+     0.9251
+    ],
+    "ci95_mAP50_95": [
+     0.5743,
+     0.6028
+    ]
+   },
+   "clean": {
+    "mAP50": 0.8577,
+    "mAP50_95": 0.562,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8103,
+     0.9076
+    ],
+    "ci95_mAP50_95": [
+     0.5178,
+     0.6179
+    ]
+   },
+   "leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "mAP50": 0.055,
+    "mAP50_95": 0.0255,
+    "ci95_mAP50": [
+     0.0046,
+     0.1051
+    ],
+    "ci95_mAP50_95": [
+     -0.0292,
+     0.075
+    ]
+   },
+   "direct_leaked": {
+    "mAP50": 0.8863,
+    "mAP50_95": 0.5803,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8503,
+     0.9205
+    ],
+    "ci95_mAP50_95": [
+     0.548,
+     0.6206
+    ]
+   },
+   "direct_clean": {
+    "mAP50": 0.8933,
+    "mAP50_95": 0.5767,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8766,
+     0.9091
+    ],
+    "ci95_mAP50_95": [
+     0.5625,
+     0.5936
+    ]
+   },
+   "direct_leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "mAP50": -0.007,
+    "mAP50_95": 0.0036,
+    "ci95_mAP50": [
+     -0.0445,
+     0.0321
+    ],
+    "ci95_mAP50_95": [
+     -0.0325,
+     0.0454
+    ]
+   }
+  },
+  "yolo26s_s1": {
+   "ultralytics_val_full": {
+    "mAP50": 0.8003,
+    "mAP50_95": 0.5074
+   },
+   "full": {
+    "mAP50": 0.8003,
+    "mAP50_95": 0.5074,
+    "ci95_mAP50": [
+     0.7864,
+     0.8185
+    ],
+    "ci95_mAP50_95": [
+     0.497,
+     0.5222
+    ],
+    "classes": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "redrawn": 54
+   },
+   "leaked": {
+    "mAP50": 0.915,
+    "mAP50_95": 0.5904,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.9028,
+     0.9266
+    ],
+    "ci95_mAP50_95": [
+     0.5784,
+     0.6053
+    ]
+   },
+   "clean": {
+    "mAP50": 0.8328,
+    "mAP50_95": 0.5441,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.7827,
+     0.8894
+    ],
+    "ci95_mAP50_95": [
+     0.5062,
+     0.5951
+    ]
+   },
+   "leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "mAP50": 0.0822,
+    "mAP50_95": 0.0463,
+    "ci95_mAP50": [
+     0.0238,
+     0.1354
+    ],
+    "ci95_mAP50_95": [
+     -0.0026,
+     0.0873
+    ]
+   },
+   "direct_leaked": {
+    "mAP50": 0.8843,
+    "mAP50_95": 0.5887,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8463,
+     0.919
+    ],
+    "ci95_mAP50_95": [
+     0.5539,
+     0.6298
+    ]
+   },
+   "direct_clean": {
+    "mAP50": 0.9011,
+    "mAP50_95": 0.5813,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8857,
+     0.9152
+    ],
+    "ci95_mAP50_95": [
+     0.5683,
+     0.5972
+    ]
+   },
+   "direct_leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "mAP50": -0.0168,
+    "mAP50_95": 0.0074,
+    "ci95_mAP50": [
+     -0.0595,
+     0.0212
+    ],
+    "ci95_mAP50_95": [
+     -0.036,
+     0.0488
+    ]
+   }
+  },
+  "rtdetr-l_s0": {
+   "ultralytics_val_full": {
+    "mAP50": 0.7809,
+    "mAP50_95": 0.4789
+   },
+   "full": {
+    "mAP50": 0.7809,
+    "mAP50_95": 0.4789,
+    "ci95_mAP50": [
+     0.7646,
+     0.8324
+    ],
+    "ci95_mAP50_95": [
+     0.4681,
+     0.5088
+    ],
+    "classes": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "redrawn": 51
+   },
+   "leaked": {
+    "mAP50": 0.9023,
+    "mAP50_95": 0.5621,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8906,
+     0.9151
+    ],
+    "ci95_mAP50_95": [
+     0.5491,
+     0.5785
+    ]
+   },
+   "clean": {
+    "mAP50": 0.7996,
+    "mAP50_95": 0.5025,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.7466,
+     0.863
+    ],
+    "ci95_mAP50_95": [
+     0.4577,
+     0.562
+    ]
+   },
+   "leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     6,
+     7,
+     10,
+     11
+    ],
+    "mAP50": 0.1027,
+    "mAP50_95": 0.0596,
+    "ci95_mAP50": [
+     0.0391,
+     0.158
+    ],
+    "ci95_mAP50_95": [
+     0.0014,
+     0.1076
+    ]
+   },
+   "direct_leaked": {
+    "mAP50": 0.8739,
+    "mAP50_95": 0.5624,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8326,
+     0.9149
+    ],
+    "ci95_mAP50_95": [
+     0.5266,
+     0.6062
+    ]
+   },
+   "direct_clean": {
+    "mAP50": 0.8752,
+    "mAP50_95": 0.5491,
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "redrawn": 0,
+    "ci95_mAP50": [
+     0.8589,
+     0.8938
+    ],
+    "ci95_mAP50_95": [
+     0.5337,
+     0.5674
+    ]
+   },
+   "direct_leaked_minus_clean": {
+    "classes": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     10,
+     11
+    ],
+    "mAP50": -0.0013,
+    "mAP50_95": 0.0133,
+    "ci95_mAP50": [
+     -0.0446,
+     0.044
+    ],
+    "ci95_mAP50_95": [
+     -0.0261,
+     0.0594
+    ]
+   }
+  }
+ },
+ "skipped": {}
+}
