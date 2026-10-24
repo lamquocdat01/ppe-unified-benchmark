@@ -1,0 +1,2 @@
+model,variant,seed,epochs_cfg,mAP50_val,mAP50_95_val,mAP50_test,mAP50_95_test,P_test,R_test,train_min
+rtdetr-l,v1fix,0,30,0.8148,0.5103,0.7901,0.4814,0.7586,0.7563,501.3

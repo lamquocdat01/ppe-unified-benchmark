@@ -1,0 +1,5 @@
+model,dataset,arm,seed,epochs,mAP50_val,mAP50_test,mAP50_95_test,min
+yolo26s,B,clean2,42,15,0.5119,0.5198,0.3005,17.5
+yolo26s,B,clean2,0,15,0.5089,0.5154,0.2966,16.7
+yolo26s,B,clean_exact_balanced,42,15,0.5647,0.5285,0.3067,16.9
+yolo26s,B,clean_exact_balanced,0,15,0.5755,0.5256,0.3031,16.7

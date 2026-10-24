@@ -1,0 +1,784 @@
+@comment{% ============================================================
+% References for the PPE-Unified manuscript.
+% All entries verified against CrossRef/arXiv/PMLR (Aug 2026).
+% ============================================================
+
+% ---------- Construction-safety PPE detection ----------}
+
+@comment{% ---------- Data leakage / benchmark hygiene ----------}
+
+@comment{% ---------- Benchmarks / imbalance ----------}
+
+@comment{% ---------- Detectors ----------}
+
+@comment{% VERIFY: cite the exact Ultralytics/YOLO26 reference or software DOI available at submission time}
+
+@comment{% ---------- Backbones / classifiers ----------}
+
+@comment{% ---------- Recurrent networks ----------}
+
+@comment{% ---------- Optimisation ----------}
+
+@comment{% ========== VERIFIED ADDITIONS (CrossRef/arXiv/PMLR, Aug 2026) ==========
+
+% ---------- Construction safety / PPE detection ----------}
+
+@comment{% ---------- Data leakage / dataset quality / distribution shift ----------}
+
+@comment{% ---------- Architectures / training / evaluation ----------}
+
+@article{fang2018hardhat,
+  author = {Fang, Qi and Li, Heng and Luo, Xiaochun and Ding, Lieyun and Luo, Hanbin and Rose, Timothy M. and An, Wangpeng},
+  doi = {10.1016/j.autcon.2017.09.018},
+  journal = {Automation in Construction},
+  pages = {1--9},
+  title = {Detecting non-hardhat-use by a deep learning method from far-field surveillance videos},
+  volume = {85},
+  year = {2018}
+}
+
+@article{wu2019gdut,
+  author = {Wu, Jixiu and Cai, Nian and Chen, Wenjie and Wang, Huiheng and Wang, Guotian},
+  doi = {10.1016/j.autcon.2019.102894},
+  journal = {Automation in Construction},
+  pages = {102894},
+  title = {Automatic detection of hardhats worn by construction personnel: A deep learning approach and benchmark dataset},
+  volume = {106},
+  year = {2019}
+}
+
+@article{nath2020ppe,
+  author = {Nath, Nipun D. and Behzadan, Amir H. and Paal, Stephanie G.},
+  doi = {10.1016/j.autcon.2020.103085},
+  journal = {Automation in Construction},
+  pages = {103085},
+  title = {Deep learning for site safety: Real-time detection of personal protective equipment},
+  volume = {112},
+  year = {2020}
+}
+
+@article{otgonbold2022shel5k,
+  author = {Otgonbold, Munkh-Erdene and Gochoo, Munkhjargal and Alnajjar, Fady and Ali, Luqman and Tan, Tan-Hsu and Hsieh, Jun-Wei and Chen, Ping-Yang},
+  doi = {10.3390/s22062315},
+  journal = {Sensors},
+  number = {6},
+  pages = {2315},
+  title = {{SHEL5K}: An extended dataset and benchmarking for safety helmet detection},
+  volume = {22},
+  year = {2022}
+}
+
+@article{wang2021chv,
+  author = {Wang, Zijian and Wu, Yimin and Yang, Lichao and Thirunavukarasu, Arjun and Evison, Colin and Zhao, Yifan},
+  doi = {10.3390/s21103478},
+  journal = {Sensors},
+  number = {10},
+  pages = {3478},
+  title = {Fast personal protective equipment detection for real construction sites using deep learning approaches},
+  volume = {21},
+  year = {2021}
+}
+
+@misc{ahmad2024sh17,
+  archiveprefix = {arXiv},
+  author = {Ahmad, Hafiz Mughees and Rahimi, Afshin},
+  doi = {10.48550/arXiv.2407.04590},
+  eprint = {2407.04590},
+  note = {arXiv:2407.04590},
+  primaryclass = {cs.CV},
+  title = {{SH17}: A dataset for human safety and personal protective equipment detection in manufacturing industry},
+  year = {2024}
+}
+
+@article{kapoor2023leakage,
+  author = {Kapoor, Sayash and Narayanan, Arvind},
+  doi = {10.1016/j.patter.2023.100804},
+  journal = {Patterns},
+  number = {9},
+  pages = {100804},
+  title = {Leakage and the reproducibility crisis in machine-learning-based science},
+  volume = {4},
+  year = {2023}
+}
+
+@inproceedings{lin2014coco,
+  author = {Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Hays, James and Perona, Pietro and Ramanan, Deva and Doll{\'a}r, Piotr and Zitnick, C. Lawrence},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  doi = {10.1007/978-3-319-10602-1_48},
+  pages = {740--755},
+  title = {Microsoft {COCO}: Common objects in context},
+  year = {2014}
+}
+
+@inproceedings{gupta2019lvis,
+  author = {Gupta, Agrim and Doll{\'a}r, Piotr and Girshick, Ross},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2019.00550},
+  pages = {5356--5364},
+  title = {{LVIS}: A dataset for large vocabulary instance segmentation},
+  year = {2019}
+}
+
+@article{buda2018imbalance,
+  author = {Buda, Mateusz and Maki, Atsuto and Mazurowski, Maciej A.},
+  doi = {10.1016/j.neunet.2018.07.011},
+  journal = {Neural Networks},
+  pages = {249--259},
+  title = {A systematic study of the class imbalance problem in convolutional neural networks},
+  volume = {106},
+  year = {2018}
+}
+
+@article{oksuz2020imbalance,
+  author = {Oksuz, Kemal and Cam, Baris Can and Kalkan, Sinan and Akbas, Emre},
+  doi = {10.1109/TPAMI.2020.2981890},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  number = {10},
+  pages = {3388--3415},
+  title = {Imbalance problems in object detection: A review},
+  volume = {43},
+  year = {2021}
+}
+
+@inproceedings{deng2009imagenet,
+  author = {Deng, Jia and Dong, Wei and Socher, Richard and Li, Li-Jia and Li, Kai and Fei-Fei, Li},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2009.5206848},
+  pages = {248--255},
+  title = {{ImageNet}: A large-scale hierarchical image database},
+  year = {2009}
+}
+
+@inproceedings{ren2015faster,
+  author = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  title = {Faster {R-CNN}: Towards real-time object detection with region proposal networks},
+  url = {https://proceedings.neurips.cc/paper/2015/hash/14bfa6bb14875e45bba028a21ed38046-Abstract.html},
+  volume = {28},
+  year = {2015}
+}
+
+@inproceedings{redmon2016yolo,
+  author = {Redmon, Joseph and Divvala, Santosh and Girshick, Ross and Farhadi, Ali},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2016.91},
+  pages = {779--788},
+  title = {You only look once: Unified, real-time object detection},
+  year = {2016}
+}
+
+@misc{ultralytics_yolo26,
+  author = {Jocher, Glenn and et al.},
+  howpublished = {\url{https://github.com/ultralytics/ultralytics}},
+  note = {Software, version 8.4},
+  title = {Ultralytics {YOLO26}},
+  url = {https://docs.ultralytics.com/models/yolo26/},
+  year = {2026}
+}
+
+@inproceedings{carion2020detr,
+  author = {Carion, Nicolas and Massa, Francisco and Synnaeve, Gabriel and Usunier, Nicolas and Kirillov, Alexander and Zagoruyko, Sergey},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  doi = {10.1007/978-3-030-58452-8_13},
+  pages = {213--229},
+  title = {End-to-end object detection with transformers},
+  year = {2020}
+}
+
+@inproceedings{zhao2024rtdetr,
+  author = {Zhao, Yian and Lv, Wenyu and Xu, Shangliang and Wei, Jinman and Wang, Guanzhong and Dang, Qingqing and Liu, Yi and Chen, Jie},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR52733.2024.01605},
+  pages = {16965--16974},
+  title = {{DETRs} beat {YOLOs} on real-time object detection},
+  year = {2024}
+}
+
+@inproceedings{simonyan2015vgg,
+  author = {Simonyan, Karen and Zisserman, Andrew},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  doi = {10.48550/arXiv.1409.1556},
+  title = {Very deep convolutional networks for large-scale image recognition},
+  year = {2015}
+}
+
+@inproceedings{he2016resnet,
+  author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2016.90},
+  pages = {770--778},
+  title = {Deep residual learning for image recognition},
+  year = {2016}
+}
+
+@inproceedings{dosovitskiy2021vit,
+  author = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  title = {An image is worth $16\times16$ words: Transformers for image recognition at scale},
+  url = {https://arxiv.org/abs/2010.11929},
+  year = {2021}
+}
+
+@article{hochreiter1997lstm,
+  author = {Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
+  doi = {10.1162/neco.1997.9.8.1735},
+  journal = {Neural Computation},
+  number = {8},
+  pages = {1735--1780},
+  title = {Long short-term memory},
+  volume = {9},
+  year = {1997}
+}
+
+@inproceedings{cho2014gru,
+  author = {Cho, Kyunghyun and van Merri{\"e}nboer, Bart and Gulcehre, Caglar and Bahdanau, Dzmitry and Bougares, Fethi and Schwenk, Holger and Bengio, Yoshua},
+  booktitle = {Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  doi = {10.3115/v1/D14-1179},
+  pages = {1724--1734},
+  title = {Learning phrase representations using {RNN} encoder--decoder for statistical machine translation},
+  year = {2014}
+}
+
+@inproceedings{kingma2015adam,
+  author = {Kingma, Diederik P. and Ba, Jimmy},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  doi = {10.48550/arXiv.1412.6980},
+  title = {Adam: A method for stochastic optimization},
+  year = {2015}
+}
+
+@inproceedings{loshchilov2019adamw,
+  author = {Loshchilov, Ilya and Hutter, Frank},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  title = {Decoupled weight decay regularization},
+  url = {https://arxiv.org/abs/1711.05101},
+  year = {2019}
+}
+
+@article{seo2015vision,
+  author = {Seo, JoonOh and Han, SangUk and Lee, SangHyun and Kim, Hyoungkwan},
+  doi = {10.1016/j.aei.2015.02.001},
+  journal = {Advanced Engineering Informatics},
+  number = {2},
+  pages = {239--251},
+  title = {Computer vision techniques for construction safety and health monitoring},
+  volume = {29},
+  year = {2015}
+}
+
+@article{fang2020review,
+  author = {Fang, Weili and Love, Peter E. D. and Luo, Hanbin and Ding, Lieyun},
+  doi = {10.1016/j.aei.2019.100980},
+  journal = {Advanced Engineering Informatics},
+  pages = {100980},
+  title = {Computer vision for behaviour-based safety in construction: A review and future directions},
+  volume = {43},
+  year = {2020}
+}
+
+@article{delhi2020ppe,
+  author = {Delhi, Venkata Santosh Kumar and Sankarlal, R. and Thomas, Albert},
+  doi = {10.3389/fbuil.2020.00136},
+  journal = {Frontiers in Built Environment},
+  pages = {136},
+  title = {Detection of Personal Protective Equipment ({PPE}) Compliance on Construction Site Using Computer Vision Based Deep Learning Techniques},
+  volume = {6},
+  year = {2020}
+}
+
+@article{xiong2021pose,
+  author = {Xiong, Ruoxin and Tang, Pingbo},
+  doi = {10.1016/j.autcon.2021.103828},
+  journal = {Automation in Construction},
+  pages = {103828},
+  title = {Pose guided anchoring for detecting proper use of personal protective equipment},
+  volume = {130},
+  year = {2021}
+}
+
+@article{mneymneh2019vision,
+  author = {Mneymneh, Bahaa Eddine and Abbas, Mohamad and Khoury, Hiam},
+  doi = {10.1061/(ASCE)CP.1943-5487.0000813},
+  journal = {Journal of Computing in Civil Engineering},
+  number = {2},
+  pages = {04018066},
+  title = {Vision-Based Framework for Intelligent Monitoring of Hardhat Wearing on Construction Sites},
+  volume = {33},
+  year = {2019}
+}
+
+@article{park2015hardhat,
+  author = {Park, Man-Woo and Elsafty, Nehad and Zhu, Zhenhua},
+  doi = {10.1061/(ASCE)CO.1943-7862.0000974},
+  journal = {Journal of Construction Engineering and Management},
+  number = {9},
+  pages = {04015024},
+  title = {Hardhat-Wearing Detection for Enhancing On-Site Safety of Construction Workers},
+  volume = {141},
+  year = {2015}
+}
+
+@article{chen2020vision,
+  author = {Chen, Shi and Demachi, Kazuyuki},
+  doi = {10.3390/app10155129},
+  journal = {Applied Sciences},
+  number = {15},
+  pages = {5129},
+  title = {A Vision-Based Approach for Ensuring Proper Use of Personal Protective Equipment ({PPE}) in Decommissioning of {Fukushima Daiichi} Nuclear Power Station},
+  volume = {10},
+  year = {2020}
+}
+
+@article{ferdous2022ppe,
+  author = {Ferdous, Md. and Ahsan, Sk. Md. Masudul},
+  doi = {10.7717/peerj-cs.999},
+  journal = {PeerJ Computer Science},
+  pages = {e999},
+  title = {{PPE} detector: a {YOLO}-based architecture to detect personal protective equipment ({PPE}) for construction sites},
+  volume = {8},
+  year = {2022}
+}
+
+@article{hayat2022helmet,
+  author = {Hayat, Ahatsham and Morgado-Dias, Fernando},
+  doi = {10.3390/app12168268},
+  journal = {Applied Sciences},
+  number = {16},
+  pages = {8268},
+  title = {Deep Learning-Based Automatic Safety Helmet Detection System for Construction Safety},
+  volume = {12},
+  year = {2022}
+}
+
+@article{duan2022soda,
+  author = {Duan, Rui and Deng, Hui and Tian, Mao and Deng, Yichuan and Lin, Jiarui},
+  doi = {10.1016/j.autcon.2022.104499},
+  journal = {Automation in Construction},
+  pages = {104499},
+  title = {{SODA}: A large-scale open site object detection dataset for deep learning in construction},
+  volume = {142},
+  year = {2022}
+}
+
+@article{vukicevic2024review,
+  author = {Vukicevic, Arso M. and Petrovic, Milos and Milosevic, Pavle and Peulic, Aleksandar and Jovanovic, Kosta and Novakovic, Aleksandar},
+  doi = {10.1007/s10462-024-10978-x},
+  journal = {Artificial Intelligence Review},
+  number = {12},
+  pages = {319},
+  title = {A systematic review of computer vision-based personal protective equipment compliance in industry practice: advancements, challenges and future directions},
+  volume = {57},
+  year = {2024}
+}
+
+@article{kim2025edge,
+  author = {Kim, Doil and Xiong, Shuping},
+  doi = {10.1061/jcemd4.coeng-14985},
+  journal = {Journal of Construction Engineering and Management},
+  number = {1},
+  pages = {04024187},
+  title = {Enhancing Worker Safety: Real-Time Automated Detection of Personal Protective Equipment to Prevent Falls from Heights at Construction Sites Using Improved {YOLOv8} and Edge Devices},
+  volume = {151},
+  year = {2025}
+}
+
+@article{winge2018accident,
+  author = {Winge, Stig and Albrechtsen, Eirik},
+  doi = {10.1016/j.ssci.2018.02.006},
+  journal = {Safety Science},
+  pages = {158--166},
+  title = {Accident types and barrier failures in the construction industry},
+  volume = {105},
+  year = {2018}
+}
+
+@article{tang2020hoi,
+  author = {Tang, Shuai and Roberts, Dominic and Golparvar-Fard, Mani},
+  doi = {10.1016/j.autcon.2020.103356},
+  journal = {Automation in Construction},
+  pages = {103356},
+  title = {Human-object interaction recognition for automatic construction site safety inspection},
+  volume = {120},
+  year = {2020}
+}
+
+@article{gil2024zeroshot,
+  author = {Gil, Daeyoung and Lee, Ghang},
+  doi = {10.1016/j.autcon.2024.105470},
+  journal = {Automation in Construction},
+  pages = {105470},
+  title = {Zero-shot monitoring of construction workers' personal protective equipment based on image captioning},
+  volume = {164},
+  year = {2024}
+}
+
+@article{kaufman2012leakage,
+  author = {Kaufman, Shachar and Rosset, Saharon and Perlich, Claudia and Stitelman, Ori},
+  doi = {10.1145/2382577.2382579},
+  journal = {ACM Transactions on Knowledge Discovery from Data},
+  number = {4},
+  pages = {1--21},
+  title = {Leakage in Data Mining: Formulation, Detection, and Avoidance},
+  volume = {6},
+  year = {2012}
+}
+
+@inproceedings{northcutt2021labelerrors,
+  author = {Northcutt, Curtis G. and Athalye, Anish and Mueller, Jonas},
+  booktitle = {Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks},
+  doi = {10.48550/arXiv.2103.14749},
+  title = {Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks},
+  year = {2021}
+}
+
+@article{barz2020train,
+  author = {Barz, Bj{\"o}rn and Denzler, Joachim},
+  doi = {10.3390/jimaging6060041},
+  journal = {Journal of Imaging},
+  number = {6},
+  pages = {41},
+  title = {Do We Train on Test Data? Purging {CIFAR} of Near-Duplicates},
+  volume = {6},
+  year = {2020}
+}
+
+@inproceedings{torralba2011unbiased,
+  author = {Torralba, Antonio and Efros, Alexei A.},
+  booktitle = {2011 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2011.5995347},
+  pages = {1521--1528},
+  title = {Unbiased Look at Dataset Bias},
+  year = {2011}
+}
+
+@inproceedings{recht2019imagenet,
+  author = {Recht, Benjamin and Roelofs, Rebecca and Schmidt, Ludwig and Shankar, Vaishaal},
+  booktitle = {Proceedings of the 36th International Conference on Machine Learning},
+  pages = {5389--5400},
+  series = {Proceedings of Machine Learning Research},
+  title = {Do {ImageNet} Classifiers Generalize to {ImageNet}?},
+  url = {https://proceedings.mlr.press/v97/recht19a.html},
+  volume = {97},
+  year = {2019}
+}
+
+@article{gebru2021datasheets,
+  author = {Gebru, Timnit and Morgenstern, Jamie and Vecchione, Briana and Vaughan, Jennifer Wortman and Wallach, Hanna and Daum{\'e} III, Hal and Crawford, Kate},
+  doi = {10.1145/3458723},
+  journal = {Communications of the ACM},
+  number = {12},
+  pages = {86--92},
+  title = {Datasheets for Datasets},
+  volume = {64},
+  year = {2021}
+}
+
+@article{zech2018variable,
+  author = {Zech, John R. and Badgeley, Marcus A. and Liu, Manway and Costa, Anthony B. and Titano, Joseph J. and Oermann, Eric Karl},
+  doi = {10.1371/journal.pmed.1002683},
+  journal = {PLOS Medicine},
+  number = {11},
+  pages = {e1002683},
+  title = {Variable Generalization Performance of a Deep Learning Model to Detect Pneumonia in Chest Radiographs: A Cross-Sectional Study},
+  volume = {15},
+  year = {2018}
+}
+
+@article{roberts2021common,
+  author = {Roberts, Michael and Driggs, Derek and Thorpe, Matthew and Gilbey, Julian and Yeung, Michael and Ursprung, Stephan and Avil{\'e}s-Rivero, Angelica I. and Etmann, Christian and McCague, Cathal and Beer, Lucian and Weir-McCall, Jonathan R. and Teng, Zhongzhao and Gkrania-Klotsas, Effrossyni and others},
+  doi = {10.1038/s42256-021-00307-0},
+  journal = {Nature Machine Intelligence},
+  number = {3},
+  pages = {199--217},
+  title = {Common Pitfalls and Recommendations for Using Machine Learning to Detect and Prognosticate for {COVID-19} Using Chest Radiographs and {CT} Scans},
+  volume = {3},
+  year = {2021}
+}
+
+@inproceedings{bussola2021ai,
+  author = {Bussola, Nicole and Marcolini, Alessia and Maggio, Valerio and Jurman, Giuseppe and Furlanello, Cesare},
+  booktitle = {Pattern Recognition. ICPR International Workshops and Challenges},
+  doi = {10.1007/978-3-030-68763-2_13},
+  pages = {167--182},
+  publisher = {Springer},
+  series = {Lecture Notes in Computer Science},
+  title = {{AI} Slipping on Tiles: Data Leakage in Digital Pathology},
+  volume = {12661},
+  year = {2021}
+}
+
+@article{yagis2021effect,
+  author = {Yagis, Ekin and Atnafu, Selamawet Workalemahu and Garc{\'i}a Seco de Herrera, Alba and Marzi, Chiara and Scheda, Riccardo and Giannelli, Marco and Tessa, Carlo and Citi, Luca and Diciotti, Stefano},
+  doi = {10.1038/s41598-021-01681-w},
+  journal = {Scientific Reports},
+  pages = {22544},
+  title = {Effect of Data Leakage in Brain {MRI} Classification Using {2D} Convolutional Neural Networks},
+  volume = {11},
+  year = {2021}
+}
+
+@article{paullada2021data,
+  author = {Paullada, Amandalynne and Raji, Inioluwa Deborah and Bender, Emily M. and Denton, Emily and Hanna, Alex},
+  doi = {10.1016/j.patter.2021.100336},
+  journal = {Patterns},
+  number = {11},
+  pages = {100336},
+  title = {Data and Its (Dis)contents: A Survey of Dataset Development and Use in Machine Learning Research},
+  volume = {2},
+  year = {2021}
+}
+
+@inproceedings{koh2021wilds,
+  author = {Koh, Pang Wei and Sagawa, Shiori and Marklund, Henrik and Xie, Sang Michael and Zhang, Marvin and Balsubramani, Akshay and Hu, Weihua and Yasunaga, Michihiro and Phillips, Richard Lanas and Gao, Irena and others},
+  booktitle = {Proceedings of the 38th International Conference on Machine Learning},
+  pages = {5637--5664},
+  series = {Proceedings of Machine Learning Research},
+  title = {{WILDS}: A Benchmark of in-the-Wild Distribution Shifts},
+  url = {https://proceedings.mlr.press/v139/koh21a.html},
+  volume = {139},
+  year = {2021}
+}
+
+@article{geirhos2020shortcut,
+  author = {Geirhos, Robert and Jacobsen, J{\"o}rn-Henrik and Michaelis, Claudio and Zemel, Richard and Brendel, Wieland and Bethge, Matthias and Wichmann, Felix A.},
+  doi = {10.1038/s42256-020-00257-z},
+  journal = {Nature Machine Intelligence},
+  number = {11},
+  pages = {665--673},
+  title = {Shortcut Learning in Deep Neural Networks},
+  volume = {2},
+  year = {2020}
+}
+
+@inproceedings{lin2017focal,
+  author = {Lin, Tsung-Yi and Goyal, Priya and Girshick, Ross and He, Kaiming and Doll{\'a}r, Piotr},
+  booktitle = {2017 IEEE International Conference on Computer Vision (ICCV)},
+  doi = {10.1109/ICCV.2017.324},
+  pages = {2999--3007},
+  title = {Focal Loss for Dense Object Detection},
+  year = {2017}
+}
+
+@article{everingham2010voc,
+  author = {Everingham, Mark and Van Gool, Luc and Williams, Christopher K. I. and Winn, John and Zisserman, Andrew},
+  doi = {10.1007/s11263-009-0275-4},
+  journal = {International Journal of Computer Vision},
+  number = {2},
+  pages = {303--338},
+  title = {The {PASCAL} Visual Object Classes ({VOC}) Challenge},
+  volume = {88},
+  year = {2010}
+}
+
+@article{padilla2021metrics,
+  author = {Padilla, Rafael and Passos, Wesley L. and Dias, Thadeu L. B. and Netto, Sergio L. and da Silva, Eduardo A. B.},
+  doi = {10.3390/electronics10030279},
+  journal = {Electronics},
+  number = {3},
+  pages = {279},
+  title = {A Comparative Analysis of Object Detection Metrics with a Companion Open-Source Toolkit},
+  volume = {10},
+  year = {2021}
+}
+
+@article{shorten2019augmentation,
+  author = {Shorten, Connor and Khoshgoftaar, Taghi M.},
+  doi = {10.1186/s40537-019-0197-0},
+  journal = {Journal of Big Data},
+  number = {1},
+  pages = {60},
+  title = {A Survey on Image Data Augmentation for Deep Learning},
+  volume = {6},
+  year = {2019}
+}
+
+@article{terven2023yolo,
+  author = {Terven, Juan and C{\'o}rdova-Esparza, Diana-Margarita and Romero-Gonz{\'a}lez, Julio-Alejandro},
+  doi = {10.3390/make5040083},
+  journal = {Machine Learning and Knowledge Extraction},
+  number = {4},
+  pages = {1680--1716},
+  title = {A Comprehensive Review of {YOLO} Architectures in Computer Vision: From {YOLOv1} to {YOLOv8} and {YOLO-NAS}},
+  volume = {5},
+  year = {2023}
+}
+
+@inproceedings{zhu2021deformable,
+  author = {Zhu, Xizhou and Su, Weijie and Lu, Lewei and Li, Bin and Wang, Xiaogang and Dai, Jifeng},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  doi = {10.48550/arXiv.2010.04159},
+  title = {Deformable {DETR}: Deformable Transformers for End-to-End Object Detection},
+  year = {2021}
+}
+
+@inproceedings{touvron2021deit,
+  author = {Touvron, Hugo and Cord, Matthieu and Douze, Matthijs and Massa, Francisco and Sablayrolles, Alexandre and J{\'e}gou, Herv{\'e}},
+  booktitle = {Proceedings of the 38th International Conference on Machine Learning},
+  pages = {10347--10357},
+  publisher = {PMLR},
+  series = {Proceedings of Machine Learning Research},
+  title = {Training Data-Efficient Image Transformers \& Distillation Through Attention},
+  url = {https://proceedings.mlr.press/v139/touvron21a.html},
+  volume = {139},
+  year = {2021}
+}
+
+@article{schuster1997bidirectional,
+  author = {Schuster, Mike and Paliwal, Kuldip K.},
+  doi = {10.1109/78.650093},
+  journal = {IEEE Transactions on Signal Processing},
+  number = {11},
+  pages = {2673--2681},
+  title = {Bidirectional Recurrent Neural Networks},
+  volume = {45},
+  year = {1997}
+}
+
+@inproceedings{cui2019classbalanced,
+  author = {Cui, Yin and Jia, Menglin and Lin, Tsung-Yi and Song, Yang and Belongie, Serge},
+  booktitle = {2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR.2019.00949},
+  pages = {9260--9269},
+  title = {Class-Balanced Loss Based on Effective Number of Samples},
+  year = {2019}
+}
+
+@misc{bochkovskiy2020yolov4,
+  archiveprefix = {arXiv},
+  author = {Bochkovskiy, Alexey and Wang, Chien-Yao and Liao, Hong-Yuan Mark},
+  doi = {10.48550/arXiv.2004.10934},
+  eprint = {2004.10934},
+  primaryclass = {cs.CV},
+  title = {{YOLOv4}: Optimal Speed and Accuracy of Object Detection},
+  year = {2020}
+}
+
+@inproceedings{wang2023yolov7,
+  author = {Wang, Chien-Yao and Bochkovskiy, Alexey and Liao, Hong-Yuan Mark},
+  booktitle = {2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR52729.2023.00721},
+  pages = {7464--7475},
+  title = {{YOLOv7}: Trainable Bag-of-Freebies Sets New State-of-the-Art for Real-Time Object Detectors},
+  year = {2023}
+}
+
+@article{cheng2023small,
+  author = {Cheng, Gong and Yuan, Xiang and Yao, Xiwen and Yan, Kebing and Zeng, Qinghua and Xie, Xingxing and Han, Junwei},
+  doi = {10.1109/TPAMI.2023.3290594},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  number = {11},
+  pages = {13467--13488},
+  title = {Towards Large-Scale Small Object Detection: Survey and Benchmarks},
+  volume = {45},
+  year = {2023}
+}
+
+@inproceedings{zhou2022multidataset,
+  author = {Zhou, Xingyi and Koltun, Vladlen and Kr{\"a}henb{\"u}hl, Philipp},
+  booktitle = {2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  doi = {10.1109/CVPR52688.2022.00742},
+  pages = {7561--7570},
+  title = {Simple Multi-dataset Detection},
+  year = {2022}
+}
+
+@article{steiner2022vit,
+  author = {Steiner, Andreas and Kolesnikov, Alexander and Zhai, Xiaohua and Wightman, Ross and Uszkoreit, Jakob and Beyer, Lucas},
+  doi = {10.48550/arXiv.2106.10270},
+  journal = {Transactions on Machine Learning Research},
+  title = {How to Train Your {ViT}? Data, Augmentation, and Regularization in Vision Transformers},
+  year = {2022}
+}
+
+@article{barz2020cifair,
+  author = {Barz, Björn and Denzler, Joachim},
+  doi = {10.3390/jimaging6060041},
+  journal = {Journal of Imaging},
+  number = {6},
+  pages = {41},
+  title = {{Do We Train on Test Data? Purging CIFAR of Near-Duplicates}},
+  volume = {6},
+  year = {2020}
+}
+
+@misc{oquab2024dinov2,
+  author = {Oquab, Maxime and Darcet, Timothée and Moutakanni, Théo and Vo, Huy and Szafraniec, Marc and Khalidov, Vasil and Fernandez, Pierre and Haziza, Daniel and Massa, Francisco and El-Nouby, Alaaeldin and Assran, Mahmoud and Ballas, Nicolas and Galuba, Wojciech and Howes, Russell and Huang, Po-Yao and Li, Shang-Wen and Misra, Ishan and Rabbat, Michael and Sharma, Vasu and Synnaeve, Gabriel and Xu, Hu and Jegou, Hervé and Mairal, Julien and Labatut, Patrick and Joulin, Armand and Bojanowski, Piotr},
+  doi = {10.48550/arXiv.2304.07193},
+  howpublished = {arXiv preprint arXiv:2304.07193},
+  title = {{DINOv2: Learning Robust Visual Features without Supervision}},
+  year = {2023}
+}
+
+@misc{radford2021clip,
+  author = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and Krueger, Gretchen and Sutskever, Ilya},
+  doi = {10.48550/arXiv.2103.00020},
+  howpublished = {arXiv preprint arXiv:2103.00020},
+  title = {{Learning Transferable Visual Models From Natural Language Supervision}},
+  year = {2021}
+}
+
+@misc{schuhmann2022laion,
+  author = {Schuhmann, Christoph and Beaumont, Romain and Vencu, Richard and Gordon, Cade and Wightman, Ross and Cherti, Mehdi and Coombes, Theo and Katta, Aarush and Mullis, Clayton and Wortsman, Mitchell and Schramowski, Patrick and Kundurthy, Srivatsa and Crowson, Katherine and Schmidt, Ludwig and Kaczmarczyk, Robert and Jitsev, Jenia},
+  doi = {10.48550/arXiv.2210.08402},
+  howpublished = {arXiv preprint arXiv:2210.08402},
+  title = {{LAION-5B: An open large-scale dataset for training next generation image-text models}},
+  year = {2022}
+}
+
+@article{farid2021perceptual,
+  author = {Farid, Hany},
+  doi = {10.54501/jots.v1i1.24},
+  journal = {Journal of Online Trust and Safety},
+  number = {1},
+  title = {{An Overview of Perceptual Hashing}},
+  volume = {1},
+  year = {2021}
+}
+
+@misc{dlede2024leakage,
+  author = {Babu, Md Abu Ahammed and Pandey, Sushant Kumar and Durisic, Darko and Koppisetty, Ashok Chaitanya and Staron, Miroslaw},
+  doi = {10.48550/arXiv.2410.23312},
+  howpublished = {arXiv preprint arXiv:2410.23312},
+  title = {{Improving Image Data Leakage Detection in Automotive Software}},
+  year = {2024}
+}
+
+@article{bouke2023leakage,
+  author = {Bouke, Mohamed Aly and Abdullah, Azizol},
+  doi = {10.1016/j.eswa.2023.120715},
+  journal = {Expert Systems with Applications},
+  pages = {120715},
+  title = {{An empirical study of pattern leakage impact during data preprocessing on machine learning-based intrusion detection models reliability}},
+  volume = {230},
+  year = {2023}
+}
+
+@article{le2027behavioural,
+  author = {Le, Nguyen and Lam, Tri and Duong, Huu-Phuoc},
+  doi = {10.1016/j.eswa.2026.134262},
+  journal = {Expert Systems with Applications},
+  pages = {134262},
+  title = {{Behavioural leakage and the illusion of actionability: A deployment-honest evaluation framework for educational early warning systems}},
+  volume = {333},
+  year = {2027}
+}
+
+@article{kim2023unknownbench,
+  author = {Kim, Jihyo and Koo, Jiin and Hwang, Sangheum},
+  doi = {10.1016/j.eswa.2023.120461},
+  journal = {Expert Systems with Applications},
+  pages = {120461},
+  title = {{A unified benchmark for the unknown detection capability of deep neural networks}},
+  volume = {229},
+  year = {2023}
+}
+
+@article{pisu2024ppe,
+  author = {Pisu, Alessia and Elia, Nicola and Pompianu, Livio and Barchi, Francesco and Acquaviva, Andrea and Carta, Salvatore},
+  doi = {10.1016/j.eswa.2023.122285},
+  journal = {Expert Systems with Applications},
+  pages = {122285},
+  title = {{Enhancing workplace safety: A flexible approach for personal protective equipment monitoring}},
+  volume = {238},
+  year = {2024}
+}

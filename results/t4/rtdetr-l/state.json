@@ -1,0 +1,29 @@
+{
+ "t4_rtdetr-l_v1fix_s0": {
+  "model": "rtdetr-l",
+  "variant": "v1fix",
+  "seed": 0,
+  "epochs_cfg": 30,
+  "mAP50_val": 0.8148,
+  "mAP50_95_val": 0.5103,
+  "mAP50_test": 0.7901,
+  "mAP50_95_test": 0.4814,
+  "P_test": 0.7586,
+  "R_test": 0.7563,
+  "ap50_test_per_class": {
+   "helmet": 0.9336,
+   "no_helmet": 0.934,
+   "vest": 0.9245,
+   "no_vest": 0.5,
+   "gloves": 0.791,
+   "no_gloves": 0.8324,
+   "goggles": 0.9286,
+   "no_goggles": 0.8305,
+   "boots": 0.8727,
+   "no_boots": 0.0339,
+   "mask": 0.929,
+   "no_mask": 0.9714
+  },
+  "train_min": 501.3
+ }
+}
