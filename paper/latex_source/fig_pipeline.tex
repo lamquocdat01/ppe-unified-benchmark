@@ -1,0 +1,32 @@
+% Fig. pipeline (P6, 2026-11-01): rebuilt in TikZ; numbers from numbers.tex (errata E1: export sizes).
+\documentclass[border=4pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.92]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\input{numbers}
+\begin{document}
+\begin{tikzpicture}[
+  node distance=5.5mm,
+  src/.style={draw, rounded corners=2pt, fill=orange!18, align=center, minimum width=27mm, minimum height=9mm, font=\small},
+  stg/.style={draw, rounded corners=2pt, fill=blue!9, align=center, text width=104mm, minimum height=8mm, font=\small},
+  val/.style={stg, fill=red!12},
+  res/.style={draw, rounded corners=2pt, fill=green!15, align=center, minimum width=60mm, minimum height=10mm, font=\small},
+  arr/.style={-{Stealth[length=2.2mm]}, thick}]
+\node[stg] (s1) {\textbf{1. Leakage audit} --- tier 1: source ID + MD5; tier 2a: DINOv2 cosine + pHash; tier 2b: adjacent video frames};
+\node[src, above=8mm of s1] (B) {Source B\\ {\footnotesize\nimgB{} img}};
+\node[src, left=10mm of B] (A) {Source A\\ {\footnotesize\nimgA{} img}};
+\node[src, right=10mm of B] (C) {Source C\\ {\footnotesize\nimgC{} img}};
+\node[stg, below=of s1] (s2) {\textbf{2. Taxonomy unification} --- 12 classes = 6 compliance--violation pairs};
+\node[stg, below=of s2] (s3) {\textbf{3. De-duplication and sampling} --- cross-source MD5; helmet-only sub-sampling; background images $\le$ 10\%};
+\node[stg, below=of s3] (s4) {\textbf{4. Resolution normalisation} --- letterbox + Lanczos $\to 640\times640$};
+\node[stg, below=of s4] (s5) {\textbf{5. Near-duplicate-aware group split} --- groups = exact $\cup$ 2a $\cup$ 2b;\\ 70/20/10, deterministic (seed 42)};
+\node[val, below=of s5] (s6) {\textbf{6. Schema-driven 8-point validation} --- machine-checkable assertions};
+\node[res, below=7mm of s6] (o) {\textbf{PPE-Unified v1.1}\\ {\footnotesize\nimgV{} images $\cdot$ \nvelBoxes{} boxes $\cdot$ \nvelGroups{} groups $\cdot$ CC BY 4.0}};
+\foreach \s in {A,B,C} \draw[arr] (\s) -- (\s |- s1.north);
+\draw[arr] (s1) -- (s2); \draw[arr] (s2) -- (s3); \draw[arr] (s3) -- (s4);
+\draw[arr] (s4) -- (s5); \draw[arr] (s5) -- (s6); \draw[arr] (s6) -- (o);
+\draw[-{Stealth[length=2.2mm]}, thick, dashed, red!80!black] (s6.east) -- ++(6mm,0) |- node[pos=0.25, right, align=left, font=\footnotesize, text=black!60] {fail $\to$\\ fix \&\\ re-run} (s5.east);
+\end{tikzpicture}
+\end{document}

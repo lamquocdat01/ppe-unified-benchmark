@@ -1,0 +1,1136 @@
+%% ============================================================
+%% Manuscript for Expert Systems with Applications (Elsevier).
+%% v5.0 (24-10-2026) -- rewritten from v4.0 (EAAI) around the two-tier
+%% leakage audit. Every number in the body is a macro from numbers.tex,
+%% generated from generated/numbers.json by scripts/make_numbers_tex.py
+%% (repository ppe-unified-benchmark). \TBD{...} (bold red) would mark
+%% missing values; none remain (P6, 01-11-2026: TBD_LIST_v5 = 0).
+%% P6 (01-11-2026): build main_anon.tex for the anonymised manuscript.
+%% ============================================================
+\documentclass[review,12pt]{elsarticle}
+
+\usepackage{lineno}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{./}{generated/}}
+
+% Shrink any tabular wider than the text block (generated tables are
+% sized for a two-column page; review mode is single-column).
+\newsavebox{\widetabbox}
+\let\origtabular\tabular
+\let\endorigtabular\endtabular
+\renewenvironment{tabular}
+  {\begin{lrbox}{\widetabbox}\origtabular}
+  {\endorigtabular\end{lrbox}%
+   \ifdim\wd\widetabbox>\linewidth
+     \resizebox{\linewidth}{!}{\usebox{\widetabbox}}%
+   \else\usebox{\widetabbox}\fi}
+\input{numbers}
+
+% Near-full-page tables carry [t] only: let them fill the top area.
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+
+% Generated tables use table*[t]; in single-column review mode a
+% near-full-page one must also be allowed on a float page.
+\newcommand{\inputfloat}[2]{{\renewenvironment{table*}[1][]
+  {\begin{table}[#1]}{\end{table}}#2}}
+
+\journal{Expert Systems with Applications}
+
+% Remove the title-page "Preprint submitted to ..." footer, which
+% collides with the corresponding-author footnote in this class version.
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty \let\@evenhead\@empty
+  \let\@oddfoot\@empty \let\@evenfoot\@empty}
+\makeatother
+
+\begin{document}
+\linenumbers
+
+\begin{frontmatter}
+
+\title{How leaky are public PPE detection benchmarks? A two-tier audit,
+a verified multi-source benchmark, and a schema-driven validation
+protocol}
+
+%% ------- AUTHORS: omitted when built as main_anon.tex (\def\ANON{1}) -------
+\ifdefined\ANON
+\else
+\author[fsb]{Dat Lam Quoc\corref{cor1}}
+\ead{lamquocdat@gmail.com}
+\cortext[cor1]{Corresponding author.}
+\affiliation[fsb]{organization={FPT School of Business and Technology (FSB), FPT University},
+            city={Ho Chi Minh City},
+            country={Vietnam}}
+\fi
+
+\begin{abstract}
+How far can the public benchmarks used to compare personal protective
+equipment (PPE) detectors be trusted? We audit five datasets with a
+two-tier procedure: tier~1 matches identifiers and MD5 hashes;
+tier~2a matches copy-level near-duplicates (DINOv2 and perceptual hash;
+held-out precision $\nholdP$), and tier~2b links
+adjacent video frames. Two public datasets leak at tier~1, and
+tier~2a adds $\nextraCopyB$ and $\nextraCopyC$ cross-split pairs that
+hashing cannot see. Our earlier release, PPE-Unified v1, passed
+tier~1 yet holds $\ncopyV$ copy-level and $\nsceneV$ sequence-level
+cross-split pairs. Holding model and test split fixed, the v1 detectors
+score $\neppGrpDeltaMin$ to $\neppGrpDeltaMax$ mAP@50 points higher on
+test images that share a scene with the training data than on
+scene-disjoint images (95\% intervals exclude zero), whereas direct
+copies add no measurable effect at this sample size. Leakage in these benchmarks is predominantly a scene-level, not a
+copy-level, phenomenon: identifier, hash and perceptual audits are
+necessary but insufficient without sequence-aware grouping. The
+earlier ``clean'' re-splits still leak, so the published $\neTwoMin$ to
+$\neTwoMax$ point inflation is a lower bound; on source B, a split
+clean at every tier raises it from $\neTwoYoloBInfl$ to
+$\ntTwoBInflYolo$ points (YOLO26s), and source C admits no clean
+class-balanced split. We release PPE-Unified v1.1, re-split into
+$\nvelGroups$ near-duplicate groups, and a schema-driven validator that
+runs unchanged on non-PPE datasets. Across scene-aware comparisons,
+including v1 versus v1.1 retraining, leaky exceeds clean evaluation by
+\ninflRange{} mAP@50 points. Data, code and notebooks are public.
+\end{abstract}
+
+\begin{highlights}
+\item Two-tier audit finds cross-split near-duplicates that hash checks miss
+\item Copy-level tier calibrated on augmentation groups (precision \nholdP)
+\item Our own hash-clean v1 benchmark still leaked near-duplicates across splits
+\item PPE-Unified v1.1: \nimgV{} images, zero cross-split pairs at every tier
+\item One schema-driven validator runs unchanged on PPE and non-PPE datasets
+\end{highlights}
+
+\begin{keyword}
+data leakage \sep near-duplicate detection \sep benchmark validation
+\sep personal protective equipment \sep object detection \sep
+construction safety
+\end{keyword}
+
+\end{frontmatter}
+
+%% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+How far can the public benchmarks on which personal protective
+equipment (PPE) detectors are compared be trusted? The question
+matters because the detectors are meant for safety enforcement.
+Failure to wear PPE remains a leading contributing factor in
+occupational fatalities on construction sites and factory floors
+\citep{winge2018accident}, and computer-vision systems that verify
+helmet, vest, glove or mask compliance from CCTV streams promise
+continuous, low-cost monitoring \citep{seo2015vision,fang2020review}.
+A substantial literature develops deep detectors for the task
+\citep{fang2018hardhat,nath2020ppe,wu2019gdut,delhi2020ppe,
+vukicevic2024review,pisu2024ppe}, and almost all of it reports
+accuracy on a handful of public datasets.
+
+Those datasets are fragile in a specific way. Many are hosted on
+platforms that augment images at export time, so rotated, cropped or
+recoloured copies of one photograph can land in both the training and
+the test split. Others are cut from video, so consecutive frames that
+are nearly identical are split independently. A detector evaluated on
+such a split partly recognises its own training images. This is a form
+of data leakage \citep{kaufman2012leakage}, a principal driver of
+irreproducible results in machine-learning-based science
+\citep{kapoor2023leakage}. Leakage through shared identifiers or
+identical bytes can be detected by hashing. Leakage through
+\emph{transformed} copies and adjacent frames cannot, and it has not
+been measured for PPE detection.
+
+This paper measures it, and applies the measurement to our own
+benchmark as well as to the public sources. Our contributions are:
+\begin{enumerate}
+\item A \textbf{two-tier leakage audit} with an exact tier (source
+identifier, MD5) and a perceptual tier split into copy level (2a;
+DINOv2 cosine or perceptual hash) and sequence level (2b; file-name
+frame adjacency). The copy-level threshold is \textbf{calibrated} on
+augmentation groups recovered from export file names, which serve as
+labelled positives (Section~\ref{sec:audit}).
+\item An \textbf{audit of five datasets}: three public PPE sources
+(A, B, C), the SH17 benchmark \citep{ahmad2024sh17} and our own
+PPE-Unified v1. Both leaky sources leak at the exact tier and
+substantially more at the copy level; A and PPE-Unified v1, which pass
+the exact tier, leak at the copy level; SH17 has no copy-level pairs at
+the operating point (Section~\ref{sec:audit-results}).
+\item \textbf{PPE-Unified v1.1}, a re-split of the same corrected
+image pool into near-duplicate groups with zero cross-split pairs at
+every tier, together with a public \textbf{errata} for v1 and for the
+earlier version of this study (Sections~\ref{sec:errata}
+and~\ref{sec:dataset}).
+\item \textbf{Scene-level versus copy-level leakage, separated by a
+same-model evaluation.} On one fixed test split, the same v1 detectors
+score $\neppGrpDeltaMin$ to $\neppGrpDeltaMax$ mAP@50 points higher on
+test images that share a scene with the training data than on
+scene-disjoint images (three detectors, 95\% intervals exclude zero),
+whereas direct exact or near copies add no measurable effect at this
+sample size (Section~\ref{sec:e2pp}). Leakage in PPE benchmarks is
+therefore predominantly a scene-level phenomenon, and identifier, hash
+and perceptual audits are necessary but insufficient without
+sequence-aware grouping. Inflation is also measured on controlled
+splits: v1 versus v1.1 of our benchmark and four split arms of
+source B; for source C we show that no clean class-balanced split
+exists and define leave-one-sequence-out folds (Sections~\ref{sec:experiments}
+and~\ref{sec:results}). Because the earlier ``clean'' arms still leak,
+the earlier inflation figures are lower bounds; on B, the arm that is
+clean at every tier raises the inflation of the original split from
+$\neTwoYoloBInfl$ to $\ntTwoBInflYolo$ mAP@50 points for YOLO26s.
+\item A \textbf{schema-driven eight-point validation protocol}: one
+validator, configured only by a schema file, that runs unchanged on PPE
+data and on two non-PPE datasets, Virtual KITTI~2 and VIRAT
+(Section~\ref{sec:validation}).
+\end{enumerate}
+
+From the standpoint of intelligent-system engineering, the contribution
+is not another detector but a verifiable evaluation substrate: an audit
+that turns ``the split is clean'' into a measured, thresholded and
+re-runnable statement, and a validator that can sit in a data pipeline
+as a release gate. Both transfer to any domain in which detectors are
+trained on aggregated public imagery and deployed under safety
+constraints. All artefacts are public (see Data and code availability).
+
+%% ============================================================
+\section{Related work}
+\label{sec:related}
+
+\subsection{PPE detection on construction sites}
+Vision-based safety monitoring has been an active research direction
+in construction informatics for over a decade
+\citep{seo2015vision,fang2020review}. Early work detected hardhat
+wearing with hand-crafted features and shallow classifiers
+\citep{park2015hardhat}, moved to cascaded pipelines on fixed cameras
+\citep{mneymneh2019vision}, and then to end-to-end deep detectors on
+far-field surveillance video \citep{fang2018hardhat}. Later work
+addressed \emph{proper use} via pose-guided anchoring
+\citep{xiong2021pose}, geometric person--equipment relationships
+\citep{chen2020vision} and human--object interaction recognition
+\citep{tang2020hoi}, and recent directions include edge deployment
+\citep{kim2025edge}, flexible multi-equipment monitoring
+\citep{pisu2024ppe} and zero-shot monitoring with vision--language
+models \citep{gil2024zeroshot}; a systematic review
+\citep{vukicevic2024review} catalogues over a hundred such systems.
+
+Progress is anchored by public datasets: GDUT-HWD \citep{wu2019gdut},
+Pictor-v3 \citep{nath2020ppe}, SHEL5K \citep{otgonbold2022shel5k},
+CHV \citep{wang2021chv}, CHVG \citep{ferdous2022ppe}, SODA
+\citep{duan2022soda} and SH17 \citep{ahmad2024sh17}, with helmet-only
+pipelines refined on them \citep{hayat2022helmet}. Results remain
+reported on small, mutually incompatible datasets, a fragmentation
+that surveys repeatedly flag \citep{fang2020review,vukicevic2024review}.
+
+\subsection{Detection architectures}
+Modern detectors divide into two-stage region-based models such as
+Faster R-CNN \citep{ren2015faster}; one-stage dense detectors, from
+YOLO \citep{redmon2016yolo} through YOLOv4/v7
+\citep{bochkovskiy2020yolov4,wang2023yolov7} to the NMS-free
+Ultralytics generation \citep{ultralytics_yolo26}
+(review: \citep{terven2023yolo}), with focal loss addressing
+foreground--background imbalance \citep{lin2017focal}; and
+set-prediction Transformers from DETR \citep{carion2020detr} and
+deformable attention \citep{zhu2021deformable} to the real-time
+RT-DETR \citep{zhao2024rtdetr}. Our crop classifiers use VGG16
+\citep{simonyan2015vgg}, ResNet50 \citep{he2016resnet} and the Vision
+Transformer \citep{dosovitskiy2021vit,touvron2021deit,steiner2022vit};
+recurrent networks \citep{hochreiter1997lstm,cho2014gru,
+schuster1997bidirectional} are evaluated as sequence classifiers over
+image rows. Evaluation follows the interpolated-precision mAP protocol
+\citep{everingham2010voc,padilla2021metrics}.
+
+\subsection{Data leakage, near-duplicates and benchmark hygiene}
+Leakage was formalised for data mining by \citet{kaufman2012leakage};
+\citet{kapoor2023leakage} taxonomise its modern variants across 17
+scientific fields. Its consequences are best documented in medical
+imaging, where patient-level leakage and site confounders have produced
+optimistic results that fail external validation
+\citep{zech2018variable,roberts2021common,bussola2021ai,
+yagis2021effect}. Expert-systems research has measured the same effect
+in other domains: pattern leakage during preprocessing inflates
+intrusion-detection results \citep{bouke2023leakage}, and behavioural
+leakage makes early-warning systems look more actionable than they are
+\citep{le2027behavioural}. Unified benchmarks with fixed protocols are
+the usual remedy \citep{kim2023unknownbench}.
+
+In computer vision, \citet{barz2020train} showed that CIFAR test sets
+contain near-duplicates of training images and that purging them
+changes model rankings. Near-duplicate search uses two families of
+signals: perceptual hashes, robust to resampling and mild photometric
+change \citep{farid2021perceptual}, and self-supervised or
+contrastive embeddings such as DINOv2 \citep{oquab2024dinov2} and CLIP
+\citep{radford2021clip}, which also tolerate crops and recolouring.
+Web-scale corpora are de-duplicated with such embeddings
+\citep{schuhmann2022laion}, and embedding-based leakage detection has
+been proposed for automotive image data \citep{dlede2024leakage}.
+These methods target copies. Leakage through a shared acquisition
+sequence rather than a copy is documented for volumetric medical
+images, where slices of one scan assigned independently to training and
+test inflate accuracy \citep{yagis2021effect,tampu2022inflation}; the
+two channels have not been separated in object-detection benchmarks.
+Related hygiene problems include test-set label errors
+\citep{northcutt2021labelerrors}, dataset bias
+\citep{torralba2011unbiased}, adaptive overfitting
+\citep{recht2019imagenet} and shortcut learning
+\citep{geirhos2020shortcut}; de-duplication is a standard step in
+large benchmarks \citep{lin2014coco,gupta2019lvis}, cross-dataset
+evaluation is increasingly expected \citep{koh2021wilds,
+zhou2022multidataset}, and documentation of provenance is an emerging
+norm \citep{gebru2021datasheets,paullada2021data}. The pattern we
+audit, platform-side augmentation \citep{shorten2019augmentation}
+applied before splitting, together with video frames split
+independently, has not been measured in the construction-safety
+literature.
+
+\subsection{Research gap}
+\label{sec:gap}
+Five gaps remain at the intersection of these strands.
+\begin{description}
+\item[G1.] \textbf{No unified violation-pair benchmark.} Existing PPE
+datasets are single-source and taxonomically incompatible
+\citep{wu2019gdut,otgonbold2022shel5k,wang2021chv,ferdous2022ppe}.
+\item[G2$'$.] \textbf{Protocols are not shown to be dataset-agnostic.}
+Documentation frameworks
+\citep{gebru2021datasheets,paullada2021data} prescribe \emph{what} to
+report, not machine-checkable verification, and no protocol has been
+shown to run on other taxonomies and data without code changes.
+\item[G3$'$.] \textbf{PPE leakage has been measured only where it is
+traceable.} Identifier and hash checks miss transformed copies and
+adjacent frames; near-duplicate methods exist
+\citep{barz2020train,oquab2024dinov2,farid2021perceptual}, but no PPE
+study has calibrated a perceptual tier on labelled positives and
+reported its precision and recall. Nor has any study separated
+copy-level from scene-level leakage in PPE benchmarks: copy detection
+\citep{barz2020train} and sequence-level leakage
+\citep{yagis2021effect,tampu2022inflation} are studied apart, so it is
+unknown which channel inflates PPE scores.
+\item[G4.] \textbf{Architecture comparisons are confounded and
+in-distribution only} \citep{vukicevic2024review,koh2021wilds}.
+\item[G5.] \textbf{Audits do not reach the curated benchmarks built
+from leaky sources.} A merged benchmark that removes identifier-level
+duplicates can still inherit perceptual leakage from its sources; no
+audit has checked such a benchmark, or the ``clean'' re-splits used to
+measure inflation, at the perceptual tier.
+\end{description}
+Section~\ref{sec:audit} addresses G3$'$ and G5, with the copy-level
+versus scene-level separation in Section~\ref{sec:e2pp},
+Section~\ref{sec:dataset} G1 and G2$'$, and
+Sections~\ref{sec:experiments}--\ref{sec:results} G4 and the size of
+the effect.
+
+%% ============================================================
+\section{Two-tier leakage audit}
+\label{sec:audit}
+
+\subsection{Leakage mechanisms and tiers}
+\label{sec:tiers}
+Dataset-hosting platforms apply augmentation (rotation, crop, hue,
+blur) at export time. Applied \emph{before} the split, it distributes
+variants of one photograph across splits; the variants share a
+source-image identifier in their file names
+(\texttt{<stem>\_jpg.rf.<hash>.jpg}; Fig.~\ref{fig:leakage}). A second
+mechanism is video: consecutive frames carry different stems but are
+nearly identical. We therefore audit at three levels.
+
+\begin{description}
+\item[Tier 1 (exact).] Two images are linked if they share a source
+identifier or an MD5 content hash.
+\item[Tier 2a (copy level).] Two images are linked if the cosine
+similarity of their DINOv2 ViT-S/14 embeddings \citep{oquab2024dinov2}
+is at least $\theta$, or if their flip-invariant 64-bit perceptual
+hashes \citep{farid2021perceptual} differ in at most $\tau$ bits. The
+audit searches the $\nopTopk$ nearest embedding neighbours with FAISS;
+the validator of Section~\ref{sec:validation} searches exhaustively.
+\item[Tier 2b (sequence level).] Two images are linked if their file
+names belong to the same numbered sequence and their frame indices
+differ by at most $k=\nopK$. This tier has no threshold to calibrate:
+it encodes temporal adjacency, which embeddings capture only partly.
+\end{description}
+A pair counts as leakage if its two images lie in different splits.
+Groups are the connected components of the union of the links; a
+split has no cross-split pair at these tiers exactly when it assigns
+every group to one split.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.85\linewidth]{fig_leakage.pdf}
+\caption{Leakage mechanism on dataset-export platforms: augmentation
+applied \emph{before} the train/validation/test split distributes
+variants of the same source photograph across splits; the shared
+\texttt{.rf.<hash>} filename stem makes this form of leakage traceable
+at tier~1.}
+\label{fig:leakage}
+\end{figure}
+
+\subsection{Calibration of the copy-level tier}
+\label{sec:calibration}
+Augmentation groups recovered from export names are labelled positives
+for tier~2a: $\ncalPosC$ within-group pairs from source C and
+$\ncalPosB$ from source B. Source B's names turned out to be an
+unreliable identity key: $\ncalDropGroupsB$ of its groups
+($\ncalDropImgB$ images) contain pairs with cosine below 0.5, i.e.\
+different photographs under one stem, so these groups were removed
+from the positive set. We ran two calibrations
+(Figs.~\ref{fig:cosdist} and~\ref{fig:calibration}).
+
+\emph{Cross-source calibration.} Negatives are $\ncalNegPairs$ random
+pairs drawn from different sources. At precision $\ge0.99$ this gives
+$\theta=\ncalCrossTheta$ (calibration precision $\ncalCrossP$) and
+$\tau=\ncalCrossTau$. The threshold does not transfer: on held-out B
+the cosine rule reaches only $\ncalCrossHoldP$ precision, and applied
+to PPE-Unified it merges the corpus into $\ntsLitGroups$ groups, the
+largest holding $\ntsLitLargestPct$\% of the images
+(Table~\ref{tab:threshold_sensitivity}). Cross-source negatives are too
+easy: two construction photographs from one source are more alike than
+two photographs from different sources.
+
+\emph{Within-set held-out calibration.} Negatives are drawn from the
+same source as the positives (held-out B). At $\theta=\nopTheta$ the
+copy rule reaches precision $\nholdP$ ($\nholdTP$ true and $\nholdFP$
+false links) at recall $\nholdR$. We take $\theta=\nopTheta$ with
+$\tau=\nopTau$ as the operating point: it is precision-conservative,
+so every reported 2a pair is very likely a real copy, and its recall
+of $\nholdR$ means that tier~2a counts are lower bounds. Lower
+thresholds (0.95, 0.90) are reported as sensitivity, not as findings.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{fig_cos_distribution.pdf}
+\caption{DINOv2 cosine similarity of positive pairs (same augmentation
+group) and random cross-source negatives in sources C and B; the
+dash-dotted line is the cross-source threshold at precision 0.99.}
+\label{fig:cosdist}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{fig_calibration.pdf}
+\caption{Precision and recall of the copy-level tier: (a) cosine and
+(b) flip-invariant pHash against cross-source negatives; (c) cosine on
+held-out B against same-set negatives, with the operating point
+$\theta=0.98$.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{Threshold sensitivity}
+\label{sec:sensitivity}
+Table~\ref{tab:threshold_sensitivity} applies four candidate rules to
+the re-split of PPE-Unified (Section~\ref{sec:split}). Besides the
+cross-source rule, an exhaustive cross-source search at false-positive
+rate $\le10^{-7}$ gives $\theta=\ntsFprTheta$, $\tau=\ntsFprTau$; it
+yields $\ntsFprGroups$ groups that no longer admit a 70/20/10 split
+(largest class deviation $\ntsFprDev$ percentage points). At
+$\theta=0.95$ the split is feasible but deviates by $\ntsNFDev$ points.
+Only the operating point keeps the deviation at $\nvelDev$ points.
+Sequence-level duplicates do not enter this trade-off: lowering
+$\theta$ far enough to catch adjacent frames would merge unrelated
+images of the same site, which is why tier~2b uses adjacency rather
+than a similarity threshold.
+
+\input{generated/tab_threshold_sensitivity.tex}
+
+\subsection{Audit results}
+\label{sec:audit-results}
+Table~\ref{tab:audit_v2} reports the audit. Source A has
+$\nimgA$ images, B $\nimgB$ (in $\ngroupsB$ identifier groups,
+multiplicity up to $\nmultMaxB\times$) and C $\nimgC$ (in $\ngroupsC$
+groups, up to $\nmultMaxC\times$); SH17 has $\nimgSH$.
+
+\emph{Exact tier.} B and C leak: $\nmultiB$ and $\nmultiC$ identifier
+groups lie in more than one split, including $\nvtB$ and $\nvtC$
+between validation and test. B additionally has $\nmdfiveCrossB$
+byte-identical MD5 groups across splits. A, SH17 and PPE-Unified v1
+pass.
+
+\emph{Copy level.} At $\theta=\nopTheta$ tier~2a adds $\nextraCopyB$
+cross-split pairs in B (+$\nextraCopyPctB$\% over the exact tier) and
+$\nextraCopyC$ in C ($\nextraCopyXC\times$ the exact count), consistent with video
+frames that carry distinct stems. A, clean at tier~1, has
+$\ncopyA$ copy-level pairs ($\nleakImgCopyA$ images). PPE-Unified v1,
+also clean at tier~1, has $\ncopyV$ pairs; $\nspanGroupsCopyV$ groups
+($\nspanImgCopyV$ images) of exact $\cup$ 2a span splits. SH17 has no
+copy-level pair at the operating point and $\ncopySHNF$ at
+$\theta=0.95$.
+
+\emph{Sequence level.} Tier~2b links $\nsceneV$ cross-split pairs in
+PPE-Unified v1, $\nsceneB$ in B and $\nsceneC$ in C. Together with
+tier~2a, $\nspanGroupsV$ groups ($\nspanImgV$ images) of PPE-Unified v1
+span splits. SH17's official split has $\nsceneSH$ sequence-level
+pairs; because tier~2b is a file-name rule without calibrated
+precision, we report this count without classifying SH17 as leaky. For
+A, sequential numeric file names chain every image into one 2b
+component, so only A's pair counts are meaningful.
+
+\emph{Across datasets.} The PPE-Unified v1 training split and the SH17
+validation split, used for zero-shot evaluation in
+Section~\ref{sec:e3}, share $\ncrossVSH$ pairs at every tier and
+threshold, so that evaluation is not contaminated; the v1.1 training
+split shares $\ncrossVelSHNinety$ copy-level pair with SH17, at
+$\theta=0.90$ only.
+
+\inputfloat{p}{\renewcommand{\arraystretch}{0.92}\input{generated/tab_audit_v2.tex}}
+
+\subsection{Errata to PPE-Unified v1 and to the earlier study}
+\label{sec:errata}
+The audit changes statements made in the earlier version of this
+study and in the v1 release; we list them here.
+(i) \emph{PPE-Unified v1 is not leak-free.} It passes the exact tier
+but holds $\ncopyV$ copy-level and $\nsceneV$ sequence-level
+cross-split pairs (above), inherited from source C's video frames.
+Baseline scores measured on v1 (E1, Section~\ref{sec:e1}) are
+therefore reported as published reference values, and v1.1 replaces
+v1 (Section~\ref{sec:dataset}).
+(ii) \emph{Source statistics.} The earlier audit table reported
+$\nvFourImgB$ images for B and $\nvFourImgC$ for C; the exports hold $\nimgB$ and
+$\nimgC$ images ($\ngroupsC$ is C's number of identifier groups), and
+A holds $\nimgA$. Augmentation multiplicities are up to
+$\nmultMaxB\times$ for B and $\nmultMaxC\times$ for C, not
+${\sim}3\times$ and $3$--$16\times$.
+(iii) \emph{Validation--test overlap} ($\nvtB$ groups in B, $\nvtC$ in
+C) was not counted, nor were B's $\nmdfiveCrossB$ cross-split MD5
+groups.
+(iv) \emph{The clean arms of the leaky-versus-clean experiment still
+leak.} They were grouped by identifier only and keep $\narmBExCos$
+(B) and $\narmCExCos$ (C) cross-split pairs with cosine
+$\ge\nopTheta$; the C arm keeps more than C's original split
+($\narmCOrigCos$), because shuffling identifier groups scatters video
+frames over all three splits. The inflation measured against these
+arms ($\neTwoMin$ to $\neTwoMax$ mAP@50 points) is therefore a lower
+bound.
+(v) The validator released with v1 implemented two of its eight
+checks more weakly than described (pair consistency and full decoding);
+it has been brought up to the description
+(Section~\ref{sec:validation}), which exposed $\nlabelFixes$ label
+errors that are corrected in v1.1.
+
+%% ============================================================
+\section{The PPE-Unified v1.1 benchmark}
+\label{sec:dataset}
+
+\subsection{Sources, taxonomy and construction}
+PPE-Unified merges three sources released under CC~BY~4.0: a
+helmet-focused collection (A), a five-pair compliance dataset (B) and
+a ten-class PPE dataset (C). Labels are mapped to twelve classes forming
+six compliance--violation pairs (\emph{helmet}\slash\emph{no\_helmet},
+\emph{vest}\slash\emph{no\_vest}, \emph{gloves}\slash\emph{no\_gloves},
+\emph{goggles}\slash\emph{no\_goggles}, \emph{boots}\slash\emph{no\_boots},
+\emph{mask}\slash\emph{no\_mask}); naming variants are resolved
+(\emph{head}$\to$\emph{no\_helmet}) and out-of-scope classes dropped.
+SH17 is held out, both because its licence forbids redistribution and
+to keep an out-of-distribution test set. The scripted pipeline
+(Fig.~\ref{fig:pipeline}) groups variants by source identifier,
+removes cross-source MD5 duplicates, re-maps classes, sub-samples
+over-represented helmet-only imagery, caps background images at 10\%,
+letterboxes all images to $640\times640$, splits, and validates. The
+corpus has $\nimgV$ images and $\nvelBoxes$ boxes after the label
+corrections.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.7\linewidth]{fig_pipeline.pdf}
+\caption{The PPE-Unified v1.1 construction pipeline (image counts of
+the source exports). Every stage is scripted; the last stage re-runs
+the eight-point validation after any change, and a failure blocks
+release. v1 differed in step~5, which grouped by source identifier
+only.}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Near-duplicate-aware group split}
+\label{sec:split}
+v1 grouped images by source identifier only ($\nvOneGroups$ groups,
+all singletons after de-duplication). v1.1 groups them by the
+connected components of exact $\cup$ 2a $\cup$ 2b at the operating
+point ($\nvelEdgesCos$ cosine, $\nvelEdgesPh$ pHash and
+$\nvelEdgesScene$ sequence links), giving $\nvelGroups$ groups; the
+largest holds $\nvelLargest$ images ($\nvelLargestPct$\%). Groups are
+assigned by the v1 algorithm: a greedy pass in decreasing order of
+rarity-weighted class content that minimises a quadratic penalty on
+the deviation of every class proportion from its 70/20/10 target, with
+per-process-independent iteration order and retries over fixed seeds.
+We extend it with background-aware counting, which balances label-free
+images per image rather than per group. On singleton groups the
+extended algorithm reproduces the v1 split for $\ncompatPct$\% of the
+images, so the two releases differ only through the grouping.
+
+The result has $\nvelTrain$, $\nvelVal$ and $\nvelTest$ train,
+validation and test images ($\nvelTrainPct$, $\nvelValPct$ and $\nvelTestPct$\%), of which
+$\nvelBgTrain$, $\nvelBgVal$ and $\nvelBgTest$ are background images. Large groups cost class balance: the largest
+deviation of a class share from its target is $\nvelDev$ percentage
+points, against $\nvOneDev$ in v1; every class still meets its minimum
+support. At the operating point v1.1 has zero cross-split pairs at
+every tier. At the sensitivity thresholds it keeps $\ncopyVelNF$ pairs
+at $\theta=0.95$ ($\nleakImgCopyVelNF$ images) and $\ncopyVelNinety$ at
+$\theta=0.90$ (Table~\ref{tab:audit_v2}). The $\nlabelFixes$ label
+corrections ($\nlabelFixClip$ boxes clipped to the image,
+$\nlabelFixDrop$ contradictory boxes removed) are applied to one
+corrected pool from which two releases are cut: \emph{v1-fix} keeps the
+v1 split and \emph{v1.1} the new one. Both ship a per-file manifest, a
+corrections log and a SHA256SUMS file.
+
+\subsection{Schema-driven eight-point validation}
+\label{sec:validation}
+Every release must pass eight checks:
+(1) class IDs in range and class names matching the schema;
+(2) boxes normalised and inside the image, one label file per image;
+(3) no box labelled both as compliance and as violation of one pair
+(IoU $\ge0.8$), and every pair present in every split;
+(4) uniform image size, where the schema declares one;
+(5) zero cross-split leakage at the group key, MD5, tier~2a
+(exhaustive search) and tier~2b;
+(6) every image fully decodable;
+(7) minimum per-class support in each split;
+(8) background share within tolerance across splits.
+The validator is one program. Everything dataset-specific---format
+(YOLO or COCO), class list, compliance--violation pairs, split names
+and targets, the group key, the thresholds and the support
+minima---lives in a schema file of about twenty lines; a check whose
+input the schema does not declare reports N/A rather than PASS.
+
+Table~\ref{tab:generality} runs the same validator code on four
+datasets. PPE-Unified v1.1 passes 8/8; v1-fix fails only check~5, with
+$\nvalVfixCopy$ copy-level and $\nvalVfixScene$ sequence-level
+cross-split pairs (the exhaustive count exceeds the top-$\nopTopk$
+audit count of Table~\ref{tab:audit_v2}). On Virtual KITTI~2
+($\nimgVk$ frames split 70/20/10 at random, as is common) it reports
+$\npassVk$/$\nfailVk$/$\nnaVk$ PASS/FAIL/N/A, with $\ncopyVkVal$
+copy-level and $\nsceneVkVal$ sequence-level leaks. On VIRAT with
+IARPA DIVA boxes ($\nimgVi$ frames, official clip-level split) it
+reports $\npassVi$/$\nfailVi$/$\nnaVi$, including $\ncopyViVal$
+copy-level pairs across the official split. Neither dataset required a
+code change.
+
+\inputfloat{tp}{\input{generated/tab_generality.tex}}
+
+%% ============================================================
+\section{Experimental setup}
+\label{sec:experiments}
+
+\subsection{Architecture families and protocol}
+\textbf{CNN.} YOLO26s \citep{ultralytics_yolo26} and Faster R-CNN
+R50-FPN \citep{ren2015faster} are trained as detectors; VGG16 and
+ResNet50 as compliance classifiers on ground-truth crops.
+\textbf{Recurrent.} GRU, LSTM and their bidirectional and stacked
+variants read each $128\times128$ crop as a 128-step sequence of row
+vectors. \textbf{Transformer.} RT-DETR-L \citep{zhao2024rtdetr} is
+trained as a detector; ViT-B/16 and ViT-S/16, ImageNet-pretrained
+\citep{deng2009imagenet}, are fine-tuned on crops. Every model has a
+screening HPO stage on the validation split; the test split is used
+once per final model. Detectors report mAP@50 and mAP@50--95.
+Training uses Kaggle T4 instances with checkpoint-resume across
+12-hour sessions.
+
+\subsection{Experiments}
+\label{sec:e-list}
+\textbf{E1 (reference baselines).} All nine models on PPE-Unified v1,
+as published in the earlier version. Because v1 leaks at the
+perceptual tier (Section~\ref{sec:errata}), E1 values are reference
+values, not verified-split estimates.
+
+\textbf{E2$'$ (v1 versus v1.1).} YOLO26s and RT-DETR-L with the HPO
+configuration of E1 (30 epochs, $640$ px, repeat-factor sampling on
+train) on v1-fix and on v1.1. Both use the same corrected images and
+labels, so the comparison isolates the split. YOLO26s runs seeds 0
+and 1 per split; RT-DETR-L runs seed 0.
+
+\textbf{E2$''$ (leaked versus clean test images).} Inference only: the
+v1-fix models of E2$'$ on subsets of the v1 test split defined by the
+audit (Section~\ref{sec:e2pp}).
+
+\textbf{E2-B (four arms of source B).} YOLO26s (15
+epochs, $640$ px) on four splits of the same B pool
+(Table~\ref{tab:arms}): the authors' \emph{original} split; the
+identifier-grouped \emph{clean-exact} split of the earlier study; a
+class-balanced variant of it (\emph{clean-exact-balanced}); and
+\emph{clean2}, grouped by exact $\cup$ 2a $\cup$ 2b and balanced.
+Seeds 42 and 0 for the two new arms. RT-DETR-L was trained on the
+original and clean-exact arms in the earlier study; it was not run on
+the two new arms.
+
+\textbf{E2-C (leave-one-sequence-out on source C).} Grouping C by
+exact $\cup$ 2a $\cup$ 2b leaves $\narmCTwoGroups$ groups, and the
+$\nseqN$ largest are video sequences holding $\nseqPct$\% of the
+images. A sequence must stay in one split, and the sequences hold most
+boxes of several classes (Section~\ref{sec:loso-res}), so no
+class-balanced 70/20/10 split exists. We therefore hold out one
+sequence per fold: train on the other three and on all images outside
+the sequences, test on the held-out sequence. All four folds have zero
+train--test pairs at every tier (Table~\ref{tab:loso}). The protocol
+has no validation split: YOLO26s (seed 42) trains for the fixed E2
+epoch count, is evaluated at the last checkpoint, and a class with no
+test box in a fold is reported N/A. The folds are released; detectors
+were not trained on them for this paper.
+
+\textbf{E3 (cross-dataset).} The best E1 detectors are evaluated
+zero-shot on SH17 on the four shared classes (helmet, vest, gloves,
+mask); only the remapping script is released.
+\textbf{E4--E6.} Seed robustness, repeat-factor sampling and
+resolution ablations of the earlier version, on v1.
+
+\begin{table}[t]
+\centering
+\caption{E2-B: four splits of the same source-B pool. Groups and
+largest group size of the grouping key; Dev.\ = largest deviation of a
+class share from its split target (pp); cross-split pairs by tier
+(cosine at $\theta=0.98$). mAP@50 on each arm's test split; original
+and clean-exact are the earlier E2 runs (seed 42), the other two arms
+the mean of seeds 42 and 0 (YOLO26s, two seeds). n.r.\ = not run.}
+\label{tab:arms}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrcc}
+\toprule
+Arm & Groups & Largest & Dev. & Exact & Cos & pHash & 2b & YOLO26s & RT-DETR-L \\
+\midrule
+original & \narmBOrigGroups & \narmBOrigLargest & \narmBOrigDev & \narmBOrigExact & \narmBOrigCos & \narmBOrigPh & \narmBOrigScene & \neTwoYoloBLeaky & \neTwoDetrBLeaky \\
+clean-exact & \narmBExGroups & \narmBExLargest & \narmBExDev & \narmBExExact & \narmBExCos & \narmBExPh & \narmBExScene & \neTwoYoloBClean & \neTwoDetrBClean \\
+clean-exact-bal. & \narmBExBalGroups & \narmBExBalLargest & \narmBExBalDev & \narmBExBalExact & \narmBExBalCos & \narmBExBalPh & \narmBExBalScene & \ntTwoBExBalYolo & \ntTwoBExBalDetr \\
+clean2 & \narmBTwoGroups & \narmBTwoLargest & \narmBTwoDev & \narmBTwoExact & \narmBTwoCos & \narmBTwoPh & \narmBTwoScene & \ntTwoBTwoYolo & \ntTwoBTwoDetr \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ============================================================
+\section{Results and discussion}
+\label{sec:results}
+
+\subsection{Inflation on PPE-Unified: v1 versus v1.1}
+\label{sec:ppeu-infl}
+Table~\ref{tab:t4} compares the same detectors on v1-fix and v1.1.
+YOLO26s reaches \ntFourYoloFix{} mAP@50 on v1-fix
+(\ntFourYoloFixN{} seeds) and \ntFourYoloVel{} on v1.1
+(\ntFourYoloVelN{} seeds), a difference of \ntFourYoloInfl{}
+points; RT-DETR-L (\ntFourDetrFixN{} seed per split) reaches
+\ntFourDetrFix{} and \ntFourDetrVel{}, a difference of \ntFourDetrInfl{}
+points. The difference is
+not leakage alone: v1.1 holds out whole near-duplicate groups,
+including long video sequences, so its test split also asks for
+generalisation to unseen scenes. The gap therefore measures how much
+the v1 split overstates performance on unseen scenes, not leakage in
+isolation.
+
+\begin{table}[t]
+\centering
+\caption{E2$'$: YOLO26s and RT-DETR-L on v1-fix (v1 split) and v1.1
+(near-duplicate-aware split) of the same corrected images; test
+mAP, mean over \ntFourYoloFixN{} seeds (YOLO26s, seeds 0 and 1) and
+\ntFourDetrFixN{} seed (RT-DETR-L, seed 0) per split. $\Delta$ =
+v1-fix $-$ v1.1 in points.}
+\label{tab:t4}
+\footnotesize
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{2}{c}{v1-fix} & \multicolumn{2}{c}{v1.1} & \multicolumn{2}{c}{$\Delta$} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Detector & @50 & @50--95 & @50 & @50--95 & @50 & @50--95 \\
+\midrule
+YOLO26s   & \ntFourYoloFix & \ntFourYoloFixHi & \ntFourYoloVel & \ntFourYoloVelHi & \ntFourYoloInfl & \ntFourYoloInflHi \\
+RT-DETR-L & \ntFourDetrFix & \ntFourDetrFixHi & \ntFourDetrVel & \ntFourDetrVelHi & \ntFourDetrInfl & \ntFourDetrInflHi \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Same model, leaked versus clean test images (E2$''$)}
+\label{sec:e2pp}
+The v1 versus v1.1 comparison changes the test split as well as the
+leakage, so it cannot say how much of the gap is leakage and how much
+is a harder test set. E2$''$ holds model and test split fixed. We take
+the v1-fix models of E2$'$ (YOLO26s seeds 0 and 1, RT-DETR-L seed 0;
+inference only) and split the v1 test set in two ways
+(Table~\ref{tab:e2pp}). \emph{Group-leaked} images belong to a
+near-duplicate group (exact $\cup$ 2a $\cup$ 2b) that also has training
+or validation images; this covers $\neppGrpImg$ of the $\neppFullImg$
+test images ($\neppGrpPct$\%), leaving $\neppGrpCleanImg$ group-clean
+images. \emph{Copy-leaked} images have a direct exact or copy-level
+partner in training or validation ($\neppCpImg$ images,
+$\neppCpPct$\%). Each pair of subsets is compared on the classes with
+at least $\neppMinGt$ boxes in both ($\neppGrpNCls$ and $\neppCpNCls$
+classes), with $\neppBoot$ bootstrap resamples over images. On the full
+test split the metric reproduces Ultralytics validation
+($\neppYoloAVal$, $\neppYoloBVal$ and $\neppDetrVal$ mAP@50).
+
+All $\neppNModels$ models score $\neppGrpDeltaMin$ to
+$\neppGrpDeltaMax$ mAP@50 points higher on group-leaked than on
+group-clean images, and every 95\% interval excludes zero. A direct copy
+in the training split adds nothing beyond that: copy-leaked and other
+test images differ by $\neppCpDeltaMin$ to $\neppCpDeltaMax$ points,
+with intervals that include zero. At mAP@50--95 the group effect is
+smaller and its interval excludes zero for RT-DETR-L only
+(Table~\ref{tab:e2pp}). The benefit of leakage in v1 therefore comes
+from sharing a scene or sequence with the training data, which most
+test images do, rather than from exact or near copies. Identifier, hash
+and copy-level checks are necessary to find the leak, but they do not
+bound its effect; sequence-aware grouping does, which is why v1.1 holds
+out whole groups.
+
+Tier~2b dominates because of how PPE imagery is acquired. Much of it is
+CCTV or handheld video, and consecutive frames of one camera show the
+same background, workers and equipment under small changes of pose and
+position. Such frames rarely reach the copy-level threshold, yet a
+detector trained on some of them has, in effect, seen the scene of the
+rest. In v1 this channel is the larger one: the audit finds
+$\nsceneV$ sequence-level against $\ncopyV$ copy-level cross-split
+pairs, and the groups they form reach the training or validation split
+for $\neppGrpPct$\% of the test images. The copy-level comparison is
+nested inside this: every copy-leaked image is also group-leaked, and
+the images it is compared with are group-leaked too except for the
+$\neppGrpCleanImg$ group-clean ones, so the comparison asks whether a
+direct copy adds anything once the scene
+is shared. At this sample size it does not.
+
+The comparison has three measured limits. The group-clean subset is
+small ($\neppGrpCleanImg$ images, $\neppGrpCleanBox$ boxes, compared on
+$\neppGrpNCls$ of the twelve classes) and is not a random sample:
+images whose group lies wholly in the test split may differ in source
+and difficulty from the rest, so E2$''$ separates the leakage effect
+from the choice of split but not from every difference between images.
+The \emph{no\_boots} class has four test boxes; it is excluded from both
+paired comparisons, and on the full split the interval of RT-DETR-L
+is asymmetric about the point estimate, as expected when resamples drop
+or repeat these few boxes. And after
+de-duplication the copy-leaked subset is small ($\neppCpImg$ images,
+$\neppCpBox$ boxes), so its intervals span $\neppYoloBCpDeltaLo$ to
+$\neppDetrCpDeltaUp$ points: a copy effect of a few points in either
+direction is compatible with the data. E2$''$ complements the
+re-training comparison of Section~\ref{sec:ppeu-infl}.
+
+\input{generated/tab_e2pp.tex}
+
+\subsection{Source B: four split arms}
+\label{sec:arms-res}
+The earlier experiment trained each detector on B's original split and
+on the clean-exact split: leakage inflated test mAP@50 by
+$\neTwoYoloBInfl$ points (YOLO26s) and $\neTwoDetrBInfl$ (RT-DETR-L),
+and on C by $\neTwoYoloCInfl$ and $\neTwoDetrCInfl$. Since the
+clean-exact arms keep copy-level and sequence-level pairs
+(Table~\ref{tab:arms}), these are lower bounds. Grouping B by all
+three tiers collapses $\narmBExGroups$ identifier groups into
+$\narmBTwoGroups$, the largest with $\narmBTwoLargest$ images, yet a
+class-balanced split remains feasible (deviation $\narmBTwoDev$ pp).
+
+For YOLO26s (Table~\ref{tab:arms}; mean of two seeds, largest seed
+standard deviation $\ntTwoBSeedSdYolo$) the clean2 arm scores
+$\ntTwoBTwoYolo$ mAP@50, so the original split overstates it by
+$\ntTwoBInflYolo$ points, against the $\neTwoYoloBInfl$ measured
+against the clean-exact arm. The intermediate arm decomposes the
+difference: balancing the exact-grouped split lowers the score by
+$\ntTwoBStepBalYolo$ points (to $\ntTwoBExBalYolo$), and adding the
+perceptual tiers to the grouping lowers it by a further
+$\ntTwoBStepTwoYolo$. The arms differ in their test images, so each
+step mixes the removal of near-duplicates with a change of test
+composition; the clean2 arm is the only one with no cross-split pair
+at any tier. RT-DETR-L was not run on the two new arms, so the
+inflation over clean2 is measured for YOLO26s only.
+
+\subsection{Source C: no clean balanced split exists}
+\label{sec:loso-res}
+For C the three-tier grouping is decisive. Its $\nseqN$ largest groups
+are video sequences holding $\nseqPct$\% of the images, and they hold
+most boxes of several classes: one sequence holds $\nseqPPnoglove$\%
+of all \emph{no\_glove} boxes and $\nseqPPglove$\% of \emph{glove}
+boxes, another $\nseqKpGoggles$\% of \emph{goggles}, a third
+$\nseqPackNoGoggles$\% of \emph{no\_goggles}. Because each sequence must
+lie in one split, the best balanced assignment still deviates by
+$\nseqDev$ percentage points from the class targets (tolerance
+$\pm\nseqTarget$). A clean 70/20/10 split of C with balanced classes
+does not exist; any split that reports balanced classes on C must
+cross sequences. We report this as a finding about the dataset and
+define leave-one-sequence-out folds for C (Table~\ref{tab:loso}). Each
+fold can test only the classes present in its held-out sequence;
+\emph{helmet} and \emph{no\_helmet} occur only outside the sequences
+and are not testable in any fold.
+
+\begin{table}[t]
+\centering
+\caption{E2-C: leave-one-sequence-out folds on source C (protocol:
+YOLO26s, seed 42, fixed epochs, last checkpoint; not run for this
+paper). All folds have zero train--test pairs at every tier;
+cos$\ge$0.95 pairs are given for information. Evaluable classes have
+at least one box in the held-out sequence.}
+\label{tab:loso}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{clrrlr}
+\toprule
+Fold & Held-out seq. & Train & Test & Evaluable classes & cos$\ge$0.95 \\
+\midrule
+0 & \nlosoASeq & \nlosoATrain & \nlosoATest & \nlosoAEval & \nlosoACosNF \\
+1 & \nlosoBSeq & \nlosoBTrain & \nlosoBTest & \nlosoBEval & \nlosoBCosNF \\
+2 & \nlosoCSeq & \nlosoCTrain & \nlosoCTest & \nlosoCEval & \nlosoCCosNF \\
+3 & \nlosoDSeq & \nlosoDTrain & \nlosoDTest & \parbox[t]{3.2cm}{\raggedright\nlosoDEval} & \nlosoDCosNF \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Reference baselines (E1) and ablations on v1}
+\label{sec:e1}
+Table~\ref{tab:e1} reports the E1 baselines on v1. Among detectors,
+RT-DETR-L reaches $\neOneDetr$ mAP@50 at $\neOneDetrMs$\,ms per image
+and YOLO26s $\neOneYolo$ at $\neOneYoloMs$\,ms ($\neOneSpeedup\times$
+faster); Faster R-CNN trails ($\neOneFrcnn$). Among crop classifiers
+ViT-B/16 leads (accuracy $\neOneVitBAcc$, macro-F1 $\neOneVitBFone$),
+ViT-S/16 has the best worst-class F1 ($\neOneVitSWorst$), and the best
+recurrent model reaches macro-F1 $\neOneGruFone$, the cost of forcing a
+sequence model onto a spatial task. Both detectors agree on the hard
+classes (Table~\ref{tab:perclass}): \emph{no\_vest} and
+\emph{no\_boots}, the latter with four test boxes. These values were
+measured on the v1 split and share its leakage; the v1-fix runs of
+E2$'$, with the same configuration, give comparable numbers
+(Table~\ref{tab:t4}), while the v1.1 runs give the verified estimate.
+
+Seed variation is small: four YOLO26s seeds give $\neFourMean\pm\neFourStd$
+mAP@50 (E4). Repeat-factor sampling moves overall mAP@50 from
+$\neFiveOff$ to $\neFiveOn$, with the gain concentrated on rare classes
+(E5). Letterboxing source C from 416 to 640 px raises mAP@50 by
+$\neSixGain$ points on the C subset (E6), so the normalisation is not
+harmful.
+
+\begin{table}[t]
+\centering
+\caption{E1 reference baselines on PPE-Unified v1 (test split; HPO on
+validation), as published. Detectors: mAP@50, mAP@50--95, latency.
+Classifiers (ground-truth crops): accuracy, macro-F1, worst-class F1.
+v1 shares near-duplicates across splits (Section~\ref{sec:errata}).}
+\label{tab:e1}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccc}
+\toprule
+Family & Model & mAP@50 & mAP@50--95 & ms/img \\
+\midrule
+CNN & YOLO26s & \neOneYolo & \neOneYoloHi & \neOneYoloMs \\
+CNN & Faster R-CNN R50-FPN & \neOneFrcnn & \neOneFrcnnHi & \neOneFrcnnMs \\
+Transf. & RT-DETR-L & \neOneDetr & \neOneDetrHi & \neOneDetrMs \\
+\midrule
+ & & Accuracy & Macro-F1 & Worst-F1 \\
+\midrule
+CNN & ResNet50 (crops) & \neOneRnAcc & \neOneRnFone & \neOneRnWorst \\
+CNN & VGG16 (crops) & \neOneVggAcc & \neOneVggFone & \neOneVggWorst \\
+RNN & GRU-256 (best RNN) & \neOneGruAcc & \neOneGruFone & \neOneGruWorst \\
+Transf. & ViT-B/16 & \neOneVitBAcc & \neOneVitBFone & \neOneVitBWorst \\
+Transf. & ViT-S/16 & \neOneVitSAcc & \neOneVitSFone & \neOneVitSWorst \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Per-class AP@50 on the PPE-Unified v1 test split (E1).}
+\label{tab:perclass}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\input{generated/tab_app_perclass.tex}
+\end{table}
+
+\subsection{Cross-dataset generalisation (E3)}
+\label{sec:e3}
+Zero-shot on SH17's four shared classes, YOLO26s falls from
+$\neThreeYoloIn$ to $\neThreeYolo$ mAP@50 ($-\neThreeYoloDrop$\%) and
+RT-DETR-L from $\neThreeDetrIn$ to $\neThreeDetr$
+($-\neThreeDetrDrop$\%), the latter driven by helmet
+($\neThreeDetrHelmet$) and vest ($\neThreeDetrVest$)
+(Table~\ref{tab:e3}). The PPE-Unified v1 training split and SH17 share
+no pair at any audited tier or threshold (Section~\ref{sec:audit-results}),
+so the comparison is not contaminated by near-duplicates. Three factors compound: a
+genuine domain gap (diverse industrial settings at high native
+resolution versus construction imagery at $640\times640$, which
+shrinks small objects \citep{cheng2023small}); label-definition
+mismatch (SH17 annotates gloves per hand and masks more narrowly); and
+the absence of any adaptation. Two detectors that are
+indistinguishable in-distribution differ by an order of magnitude
+under shift, so deployment claims need cross-dataset evidence.
+
+\begin{table}[htbp]
+\centering
+\caption{E3: zero-shot evaluation on SH17, restricted to the four
+classes shared by both label spaces. In-dist.\ = four-class mAP@50 on
+the PPE-Unified v1 test split.}
+\label{tab:e3}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Model & In-dist. & SH17 & helmet & vest \\
+\midrule
+YOLO26s   & \neThreeYoloIn & \neThreeYolo & \neThreeYoloHelmet & \neThreeYoloVest \\
+RT-DETR-L & \neThreeDetrIn & \neThreeDetr & \neThreeDetrHelmet & \neThreeDetrVest \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Practical implications for intelligent-system practitioners}
+\label{sec:implications}
+\emph{Treat ``hash-clean'' as a minimum, not a certificate.} Two of
+the five audited datasets, including our own v1, passed identifier and
+MD5 checks and still leaked at the copy level. A perceptual tier
+calibrated on the data at hand, at a precision-conservative threshold,
+is cheap to add and changes the verdict.
+\emph{Calibrate against same-source negatives.} The cross-source
+threshold looked excellent on its own calibration data and was useless
+on the target data; within-set held-out negatives gave a threshold
+that kept both precision and a feasible split.
+\emph{Put the validator in the pipeline.} The validator is a release
+gate: a schema file of about twenty lines configures it for a new
+dataset, a FAIL blocks release, and a run on a dataset of this size
+takes \nvalidatorRuntime{} with cached embeddings. In an MLOps
+pipeline it belongs after every merge, relabel or re-split.
+\emph{Report what cannot be split.} When the data are dominated by a
+few long sequences, as in source C, the honest outputs are a statement
+that no clean balanced split exists and a grouped cross-validation,
+not a balanced split that crosses sequences.
+
+%% ============================================================
+\section{Limitations}
+\label{sec:limitations}
+The copy-level tier has recall $\nholdR$ at the operating point on
+held-out B, so tier~2a counts are lower bounds; v1.1 keeps
+$\ncopyVelNF$ cross-split pairs at $\theta=0.95$ and $\ncopyVelNinety$
+at $\theta=0.90$, whose status we do not resolve. Grouping by all tiers
+raises the largest class deviation of v1.1 to $\nvelDev$ percentage
+points, against $\nvOneDev$ in v1. Source C admits no clean
+class-balanced split, and in leave-one-sequence-out \emph{helmet} and
+\emph{no\_helmet} cannot be tested on C. Two planned runs were not
+performed within our GPU budget: RT-DETR-L on the
+clean-exact-balanced and clean2 arms of B, and the four
+leave-one-sequence-out folds of C. The clean2 inflation on B is
+therefore a single-architecture result, and for C we report that no
+clean balanced split exists, not a detector score. The v1 versus v1.1
+comparison rests on \ntFourYoloFixN{} seeds per split for YOLO26s and
+one for RT-DETR-L. In E2$''$ only
+$\neppGrpCleanImg$ test images of v1 are group-clean; they are compared
+on $\neppGrpNCls$ of the twelve classes and are not a random sample of
+the test split, so the scene-level effect is separated from the choice
+of split but not from every difference between images. The
+copy-level comparison of E2$''$ rests on $\neppCpImg$ copy-leaked test
+images, and its intervals ($\neppYoloBCpDeltaLo$ to
+$\neppDetrCpDeltaUp$ points) are compatible with a copy effect of a
+few points in either direction. Source B's export names
+label different photographs with one stem in $\ncalDropGroupsB$
+groups, so its identifier-level counts include some non-duplicates.
+The \emph{no\_boots} class has four test boxes, too few for per-class
+conclusions. Tier~2b is a file-name rule whose precision we did not
+calibrate; we use it to group, not to classify a dataset as leaky.
+
+\section{Conclusion}
+\label{sec:conclusion}
+Public PPE benchmarks leak more than identifier and hash checks show.
+A two-tier audit, with a copy-level tier calibrated on augmentation
+groups, found cross-split near-duplicates in the leaky public sources
+far beyond their identifier-level leakage, in a source that passes the
+exact tier, in the ``clean'' re-splits used to measure inflation, and
+in our own earlier benchmark. Holding model and test split fixed, test
+images that share a scene with the training data score
+$\neppGrpDeltaMin$ to $\neppGrpDeltaMax$ mAP@50 points higher than
+scene-disjoint images for all three detectors, whereas direct copies
+add no measurable effect at this sample size. Leakage in PPE
+benchmarks is predominantly a scene-level phenomenon: identifier, hash
+and perceptual audits are necessary but insufficient without
+sequence-aware grouping. On source B, a split clean at every tier
+raises the measured inflation from $\neTwoYoloBInfl$ to
+$\ntTwoBInflYolo$ points, so the earlier figures are lower bounds.
+Across the scene-aware comparisons (same model on one test split,
+source B, and v1 versus v1.1 retraining, which also changes the test
+set), leaky evaluation exceeds clean evaluation by \ninflRange{}
+mAP@50 points. We release PPE-Unified v1.1, grouped at all three tiers, with
+errata for v1, and a schema-driven validator that runs unchanged on
+non-PPE data. Benchmarks assembled from video-derived public imagery
+should be split by scene or sequence, and audited at the perceptual
+tier, before their scores are compared.
+
+%% ============================================================
+\appendix
+\setcounter{table}{0}
+\section{Per-class results and ablation detail (PPE-Unified v1)}
+\label{app:detail}
+
+\subsection{Per-class F1 of the five crop classifiers (E8)}
+\label{app:perclass}
+
+\begin{table}[htbp]\centering
+\caption{Per-class F1 on ground-truth test crops of v1 (E8). Support =
+number of test crops.}
+\label{tab:f1all}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\input{generated/tab_app_e8.tex}
+\end{table}
+
+\subsection{Per-class Faster R-CNN results (E9)}
+\label{app:frcnn}
+
+\begin{table}[htbp]\centering
+\caption{Faster R-CNN R50-FPN per-class AP@50--95 and operating-point
+precision/recall at confidence 0.5, IoU 0.5 (re-trained checkpoint,
+E9).}
+\label{tab:frcnnpc}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\input{generated/tab_app_e9.tex}
+\end{table}
+
+\subsection{Resolution ablation detail (E6)}
+\label{app:e6}
+
+\begin{table}[htbp]\centering
+\caption{YOLO26s trained on the source-C subset at native 416 versus
+letterbox-upscaled 640 (15 epochs, seed 42).}
+\label{tab:e6detail}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\input{generated/tab_app_e6.tex}
+\end{table}
+
+\subsection{Individual multi-seed runs (E4)}
+\label{app:e4}
+
+\begin{table}[htbp]\centering
+\caption{Individual YOLO26s runs on v1 under the identical protocol
+(30 epochs).}
+\label{tab:e4detail}
+\footnotesize
+\input{generated/tab_app_e4.tex}
+\end{table}
+
+\section*{Data and code availability}
+\label{sec:availability}
+PPE-Unified v1.1 and v1-fix (images, labels, manifest, corrections
+log, SHA256SUMS, dataset card) are released under CC~BY~4.0; the
+audit, calibration, re-split, validator and training code, the schema
+files and the Kaggle notebooks are in a public repository tagged for
+this version.
+\ifdefined\ANON
+Links are withheld for double-anonymized review and are given on the
+title page.
+\else
+Dataset: \url{https://www.kaggle.com/datasets/quocdatlam/ppe-unified-v1fix-v11};
+code: \url{https://github.com/lamquocdat01/ppe-unified-benchmark}
+(tag \texttt{v5.0-eswa}).
+\fi
+
+\section*{CRediT authorship contribution statement}
+\ifdefined\ANON
+[Author withheld for double-anonymized review]:
+\else
+Dat Lam Quoc:
+\fi
+Conceptualization, Methodology, Software, Data curation, Formal
+analysis, Investigation, Validation, Visualization, Writing -- original
+draft, Writing -- review \& editing.
+
+\section*{Declaration of generative AI and AI-assisted technologies
+in the manuscript preparation process}
+During the preparation of this work the author used Claude
+(Anthropic) to assist with drafting and editing text and code. After
+using this tool, the author reviewed and edited the content as needed
+and takes full responsibility for the content of the published
+article.
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{references}
+
+\end{document}

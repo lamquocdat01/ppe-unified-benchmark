@@ -1,4 +1,5 @@
 ,mAP50_val,mAP50_val,mAP50_val,mAP50_test,mAP50_test,mAP50_test,mAP50_95_test,mAP50_95_test,mAP50_95_test
 ,mean,std,count,mean,std,count,mean,std,count
 variant,,,,,,,,,
+v1.1,0.6408,,1,0.5796,,1,0.3346,,1
 v1fix,0.8148,,1,0.7901,,1,0.4814,,1

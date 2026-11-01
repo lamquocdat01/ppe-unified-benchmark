@@ -38,7 +38,7 @@ def import_v4(e2b_dir):
     f = float
     out = {
         "_source": {"E1": "results/final_{detection,classification}_compare.csv",
-                    "E2": "results/extended/e2_runs.csv", "E2b": str(Path(e2b_dir) / "e2b_runs.csv"),
+                    "E2": "results/extended/e2_runs.csv", "E2b": "results/extended/e2b_runs.csv (Kaggle output of notebooks/E2b_LeakyVsClean_RTDETR.ipynb)",
                     "E3": "results/extended/e3_sh17.csv", "E4": "results/extended/e4_stats.json",
                     "E5": "results/extended/e5_ablation_rfs.csv", "E6": "results/extended/e6_resolution.csv",
                     "note": "PPE-Unified v1 (E1, E3-E6) and original vs exact-clean splits of B/C (E2); published in v4.0"},

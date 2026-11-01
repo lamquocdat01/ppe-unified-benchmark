@@ -139,7 +139,7 @@ def tex_audit(aud):
     pts = list(aud["points"])
     head = " & ".join(rf"\multicolumn{{2}}{{c}}{{$\theta={aud['points'][p]['cos']}$}}" for p in pts)
     L = [r"\begin{table*}[t]", r"\centering\footnotesize",
-         r"\caption{Two-level cross-split audit. Exact: same source ID or MD5. Copy level (2a): cosine "
+         r"\caption{Two-tier cross-split audit. Exact: same source ID or MD5. Copy level (2a): cosine "
          rf"$\ge\theta$ among FAISS top-{aud['topk']} neighbours or pHash $\le {aud['points'][pts[0]]['ph']}$ "
          r"(flip-invariant); $\theta=0.98$ is the operating point, 0.95 and 0.90 are sensitivity. "
          rf"Scene level (2b): same file-name sequence, frame numbers within $\pm{aud['scene_k']}$, no threshold. "

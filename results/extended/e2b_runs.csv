@@ -1,0 +1,5 @@
+dataset,model,arm,epochs,mAP50_val,mAP50_test,mAP50_95_test,min
+B_testcasque,RT-DETR-L,leaky,15,0.494,0.5278,0.3211,71.9
+B_testcasque,RT-DETR-L,clean,15,0.4951,0.5076,0.313,71.5
+C_mohamed,RT-DETR-L,leaky,15,0.9428,0.9476,0.5761,498.8
+C_mohamed,RT-DETR-L,clean,15,0.9074,0.9131,0.5425,464.6

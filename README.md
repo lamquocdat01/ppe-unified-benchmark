@@ -13,6 +13,9 @@ audit, a verified multi-source benchmark, and a schema-driven validation protoco
 - `scripts/` — result aggregation (`t4_partial.py`, `t4_2b_numbers.py`, `e2pp_leaked_vs_clean.py`)
   and `make_numbers_tex.py`, which writes every number of the manuscript from
   `paper/generated/numbers.json`.
+- `paper/latex_source/` — LaTeX source of the manuscript (`main.tex`; `main_anon.tex` builds the
+  anonymised version) with `generated/` tables/figures and `numbers.tex`.
+- `results/t4/` — v1-fix vs v1.1 retraining (YOLO26s seeds 0-1, RT-DETR-L seed 0), per-run state and logs.
 - `kaggle/` — generators of the Kaggle notebooks for the retraining runs (v1-fix vs v1.1, source B arms).
 - `SHA256SUMS` — hashes of the files listed in it, at this tag.
 

@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering\footnotesize
-\caption{Two-level cross-split audit. Exact: same source ID or MD5. Copy level (2a): cosine $\ge\theta$ among FAISS top-5 neighbours or pHash $\le 0$ (flip-invariant); $\theta=0.98$ is the operating point, 0.95 and 0.90 are sensitivity. Scene level (2b): same file-name sequence, frame numbers within $\pm2$, no threshold. Pairs are counted across splits; +2a = 2a pairs not caught by the exact tier; groups = connected components of exact $\cup$ 2a $\cup$ 2b spanning more than one split (images).}
+\caption{Two-tier cross-split audit. Exact: same source ID or MD5. Copy level (2a): cosine $\ge\theta$ among FAISS top-5 neighbours or pHash $\le 0$ (flip-invariant); $\theta=0.98$ is the operating point, 0.95 and 0.90 are sensitivity. Scene level (2b): same file-name sequence, frame numbers within $\pm2$, no threshold. Pairs are counted across splits; +2a = 2a pairs not caught by the exact tier; groups = connected components of exact $\cup$ 2a $\cup$ 2b spanning more than one split (images).}
 \label{tab:audit_v2}
 \begin{tabular}{ll r rr rr rr rr}
 \toprule

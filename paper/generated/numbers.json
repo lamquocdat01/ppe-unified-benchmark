@@ -3112,8 +3112,8 @@
   }
  },
  "t4_1_partial": {
-  "status": "PARTIAL",
-  "note": "unequal seed counts; not in ERRATA E7 until T4(1) complete (decision 24-10-2026)",
+  "status": "COMPLETE",
+  "note": "all planned runs present (YOLO26s 2 seeds per variant, RT-DETR-L 1 seed per variant; P6 2026-11-01)",
   "planned": {
    "yolo26s": {
     "v1fix": [
@@ -3346,6 +3346,33 @@
       "no_mask": 0.9714
      },
      "train_min": 501.3
+    },
+    "t4_rtdetr-l_v1.1_s0": {
+     "model": "rtdetr-l",
+     "variant": "v1.1",
+     "seed": 0,
+     "epochs_cfg": 30,
+     "mAP50_val": 0.6408,
+     "mAP50_95_val": 0.395,
+     "mAP50_test": 0.5796,
+     "mAP50_95_test": 0.3346,
+     "P_test": 0.6756,
+     "R_test": 0.5902,
+     "ap50_test_per_class": {
+      "helmet": 0.8893,
+      "no_helmet": 0.9077,
+      "vest": 0.8513,
+      "no_vest": 0.4174,
+      "gloves": 0.6617,
+      "no_gloves": 0.3398,
+      "goggles": 0.1561,
+      "no_goggles": 0.2833,
+      "boots": 0.8134,
+      "no_boots": 0.0,
+      "mask": 0.8761,
+      "no_mask": 0.7595
+     },
+     "train_min": 467.0
     }
    },
    "per_variant": {
@@ -3381,22 +3408,50 @@
      "train_min_mean": 501.3
     },
     "v1.1": {
-     "seeds": [],
-     "n": 0
+     "seeds": [
+      0
+     ],
+     "n": 1,
+     "mAP50_val": {
+      "mean": 0.6408,
+      "std": null
+     },
+     "mAP50_95_val": {
+      "mean": 0.395,
+      "std": null
+     },
+     "mAP50_test": {
+      "mean": 0.5796,
+      "std": null
+     },
+     "mAP50_95_test": {
+      "mean": 0.3346,
+      "std": null
+     },
+     "P_test": {
+      "mean": 0.6756,
+      "std": null
+     },
+     "R_test": {
+      "mean": 0.5902,
+      "std": null
+     },
+     "train_min_mean": 467.0
     }
    },
-   "inflation_v1fix_minus_v11": null,
-   "missing_runs": [
-    "t4_rtdetr-l_v1.1_s0"
-   ],
-   "status": "PARTIAL"
+   "inflation_v1fix_minus_v11": {
+    "mAP50_test": 0.2105,
+    "mAP50_95_test": 0.1468
+   },
+   "missing_runs": [],
+   "status": "COMPLETE"
   }
  },
  "v4_results": {
   "_source": {
    "E1": "results/final_{detection,classification}_compare.csv",
    "E2": "results/extended/e2_runs.csv",
-   "E2b": "D:\\THS Programing\\06.09 Deep Learning\\Final Project\\Result from Kaggle notebook\\E2b notebook003f769f4c\\results (2)\\results\\e2b_runs.csv",
+   "E2b": "results/extended/e2b_runs.csv (Kaggle output of notebooks/E2b_LeakyVsClean_RTDETR.ipynb)",
    "E3": "results/extended/e3_sh17.csv",
    "E4": "results/extended/e4_stats.json",
    "E5": "results/extended/e5_ablation_rfs.csv",
