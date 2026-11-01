@@ -1,0 +1,15 @@
+# source yolo: notebook01_v2_log.txt sha256=50fa01b73282553d8a601270a94f6867fb50e3149aabb58b20fe72431d10df26
+# source rtdetr: notebook75023f5e97/__output__.json sha256=79641f0b1088d9891ef3c4927b0a572086c87d7bdece3b96e493ee4d453e0818
+class,boxes_test,ap50_yolo26s,ap50_rtdetr_l
+helmet,1649,0.9521,0.9464
+no_helmet,827,0.9166,0.9337
+vest,290,0.9072,0.9183
+no_vest,112,0.5136,0.5369
+gloves,501,0.8027,0.8003
+no_gloves,616,0.8361,0.8385
+goggles,368,0.8894,0.9282
+no_goggles,386,0.8304,0.8367
+boots,111,0.8987,0.8964
+no_boots,4,0.0117,0.0614
+mask,118,0.9392,0.9124
+no_mask,132,0.9696,0.9418

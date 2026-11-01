@@ -116,6 +116,9 @@ def main():
         M[f"tv{k}"], M[f"tt{k}"], M[f"vt{k}"] = n(e["groups_train_val"]), n(e["groups_train_test"]), n(e["groups_val_test"])
         M[f"multi{k}"] = n(e["groups_multi_split"])
     M["mdfiveCrossB"] = n(E["B"]["md5_groups_cross_split"])
+    pv4 = E.get("v4_printed", {})  # values printed in v4.0, quoted in the errata paragraph
+    if pv4:
+        M["vFourImgB"], M["vFourImgC"] = n(pv4["B_images"]), n(pv4["C_images"])
     M["mdfiveUniqueB"] = n(E["B"]["md5_unique"])
 
     # --- two-tier audit at the operating point and sensitivity
@@ -182,6 +185,9 @@ def main():
     for s in ("train", "val", "test"):
         M[f"vel{s.capitalize()}"] = n(R["images_v11"][s])
         M[f"velBg{s.capitalize()}"] = n(R["background_per_split"][s])
+    tot = sum(R["images_v11"].values())
+    for sp in ("train", "val", "test"):
+        M[f"vel{sp.capitalize()}Pct"] = pct(R["images_v11"][sp], tot, 1)
     M["velDev"] = d(R["max_class_ratio_dev_pp"]["v11"], 2)
     M["vOneDev"] = d(R["max_class_ratio_dev_pp"]["v1"], 2)
     M["velEdgesCos"], M["velEdgesPh"], M["velEdgesScene"] = (n(R["edges"]["copy_cos"]), n(R["edges"]["copy_phash"]),

@@ -172,6 +172,11 @@
    "clean2_max_class_dev_pp": 25.69,
    "clean2_worst_class": "glove@train",
    "target_pp": 5.0
+  },
+  "v4_printed": {
+   "B_images": 4666,
+   "C_images": 11110,
+   "source": "v4.0 manuscript (EAAI-26-25933), Tab. tab:audit column 'Images' (see docs/ERRATA_v4.md E1)"
   }
  },
  "audit_v2": {
