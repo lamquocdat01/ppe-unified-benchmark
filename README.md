@@ -1,11 +1,36 @@
-# PPE-Unified Benchmark — leakage-free Safety-PPE detection
+# PPE-Unified Benchmark — two-tier leakage audit, PPE-Unified v1.1 and a schema-driven validator
 
-A controlled comparison of **CNN – RNN – Transformer** architectures for personal protective
-equipment (PPE) detection on **PPE-Unified v1** — a benchmark of 17,951 images / 51,179 boxes /
-12 classes (6 compliant-violation pairs), merged from three public sources and
-**split by source-image group so that train/test leakage is eliminated at the root**.
+Code and results for the manuscript *How leaky are public PPE detection benchmarks? A two-tier
+audit, a verified multi-source benchmark, and a schema-driven validation protocol* (v5, tag
+`v5.0-eswa`).
 
-## Main finding
+- `audit_v2/` — two-tier leakage audit: tier 1 (identifier + MD5), tier 2a (copy-level: DINOv2
+  cosine + perceptual hash, calibrated on augmentation groups), tier 2b (adjacent video frames);
+  calibration, near-duplicate-aware group re-split (`resplit.py`, `stratify_bg.py`), clean2 arms
+  of sources B/C and the leave-one-sequence-out folds of C.
+- `validator/` — eight-point validator, configured only by a schema file
+  (`python -m validator <schema.yaml> --out report.json`); schemas in `results/generality/`.
+- `scripts/` — result aggregation (`t4_partial.py`, `t4_2b_numbers.py`, `e2pp_leaked_vs_clean.py`)
+  and `make_numbers_tex.py`, which writes every number of the manuscript from
+  `paper/generated/numbers.json`.
+- `kaggle/` — generators of the Kaggle notebooks for the retraining runs (v1-fix vs v1.1, source B arms).
+- `SHA256SUMS` — hashes of the files listed in it, at this tag.
+
+**Erratum to the earlier version.** PPE-Unified v1 passed identifier and MD5 checks but still holds
+copy-level and sequence-level near-duplicates across its splits; it is **not** leakage-free, and
+the "clean" re-splits of sources B/C used in the earlier study still leak at the perceptual tier.
+PPE-Unified v1.1 (same corrected images, near-duplicate-aware split) replaces it; see the dataset
+card and ERRATA of the Kaggle dataset `ppe-unified-v1fix-v11`.
+
+Dataset paths resolve under the environment variable `THS_DATASETS`; feature caches under
+`$THS_DATASETS/_derived/ppe_unified`.
+
+## Earlier version (v4.0, PPE-Unified v1) — superseded
+
+The section below describes the earlier version and is kept for provenance. Its "clean" splits are
+lower bounds on inflation (see the erratum above).
+
+### Main finding (v4.0)
 
 **Two of the four most widely used public PPE datasets leak between train and test** — the hosting
 platform augments images *before* splitting, so variants of the same source image land in both the
@@ -21,7 +46,7 @@ leaky-vs-clean experiment across **2 architectures × 2 sources**:
 
 The effect scales with augmentation intensity and reproduces fully across architectures.
 
-## Headline results (PPE-Unified v1 test split, seed 42)
+### Headline results (v4.0, PPE-Unified v1 test split, seed 42)
 
 **Detection:** RT-DETR-L **0.7959** mAP@50 (37.5 ms) · YOLO26s **0.7890** (9.78 ms — recommended for
 edge deployment) · Faster R-CNN R50-FPN 0.7207 (86.3 ms, reference baseline).
@@ -35,7 +60,7 @@ GRU-256 (best RNN) 0.8075/0.6780.
 mandatory under domain shift (E3) · 640-upscale normalisation is harmless (E6) · complete per-class
 breakdowns for all 8 models (E8/E9).
 
-## Repository layout
+### Repository layout (v4.0 notebooks)
 
 ```
 notebooks/
@@ -57,7 +82,7 @@ results/extended/ # CSVs for E2–E9
 requirements.txt
 ```
 
-## Reproducing the results
+### Reproducing the v4.0 results
 
 1. Dataset (public): https://www.kaggle.com/datasets/quocdatlam/ppe-unified-v1 (CC BY 4.0)
 2. Trained weights: Kaggle dataset `quocdatlam/ppe-trained-weights`

@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering\footnotesize
+\caption{Eight-point validation with one unchanged, schema-driven validator on PPE and non-PPE data. Leakage cell: (groups or MD5 across splits / copy-level 2a pairs, any cosine $\ge0.98$ or pHash $=0$ / scene-level 2b pairs). N/A = the schema declares nothing to check. $^a$Virtual KITTI~2 clone, Camera~0, 5 scenes, frames shuffled 70/20/10 (common practice); $^b$VIRAT ground video, IARPA DIVA boxes, 1 frame/s, official train/validate split by clip.}
+\label{tab:generality}
+\begin{tabular}{lllll}
+\toprule
+Check & PPE-U v1.1 & PPE-U v1-fix & VKITTI2$^a$ & VIRAT-DIVA$^b$ \\
+Images & 17{,}951 & 17{,}951 & 2{,}126 & 1{,}227 \\
+\midrule
+1 Class IDs & PASS & PASS & PASS & PASS \\
+2 Boxes / pairing & PASS & PASS & FAIL (2 bad) & PASS \\
+3 Compl.--viol.\ pairs & PASS & PASS & N/A (no pairs) & N/A (no pairs) \\
+4 Uniform size & PASS & PASS & PASS & N/A (mixed sizes) \\
+5 Leakage (ID, MD5, 2a, 2b) & PASS (0/0/0) & FAIL (0/12{,}582/11{,}978) & FAIL (0/2{,}221/1{,}961) & FAIL (0/44{,}109/0) \\
+6 Corrupt images & PASS (17{,}951 dec.) & PASS (17{,}951 dec.) & PASS (2{,}126 dec.) & PASS (1{,}227 dec.) \\
+7 Min.\ support & PASS & PASS & FAIL (2 viol.) & FAIL (3 viol.) \\
+8 Background share & PASS (0.3 pp) & PASS (0.1 pp) & FAIL (5.0 pp) & N/A (no bg.\ images) \\
+\midrule
+PASS / FAIL / N/A & 8 / 0 / 0 & 7 / 1 / 0 & 3 / 4 / 1 & 3 / 2 / 3 \\
+\bottomrule
+\end{tabular}
+\end{table*}

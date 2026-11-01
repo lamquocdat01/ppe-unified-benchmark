@@ -23,6 +23,12 @@ numpy>=1.26.0
 pandas>=2.1.0
 PyYAML>=6.0
 
+# --- Two-tier audit, re-split and validator (audit_v2/, validator/) ---
+faiss-cpu>=1.8.0
+ImageHash>=4.3.1
+scipy>=1.11.0
+psutil>=5.9.0
+
 # --- Evaluation & visualisation ---
 scikit-learn>=1.4.0
 matplotlib>=3.8.0

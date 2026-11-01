@@ -299,24 +299,25 @@ def main():
             M[f"epp{s}DeltaMin"], M[f"epp{s}DeltaMax"] = pts(min(v), 1), pts(max(v), 1)
         M["eppNModels"] = n(len(P2["models"]))
 
-    # --- T4 (PARTIAL or pending): always wrapped in \TBD
+    # --- T4(1): a model's cells are final once its runs are COMPLETE (t4_partial.py), else wrapped in \TBD
     T = J.get("t4_1_partial", {})
     tbd = {}
+    t4_infl = []  # final PPE-U inflations (mAP50) for \inflRange
     if T:
-        y, r = T["yolo26s"], T["rtdetr-l"]
-        tbd["tFourYoloFix"] = d(y["per_variant"]["v1fix"]["mAP50_test"]["mean"], 3)
-        tbd["tFourYoloFixN"] = n(y["per_variant"]["v1fix"]["n"])
-        tbd["tFourYoloVel"] = d(y["per_variant"]["v1.1"]["mAP50_test"]["mean"], 3) if y["per_variant"]["v1.1"]["n"] else "pending"
-        tbd["tFourYoloVelN"] = n(y["per_variant"]["v1.1"]["n"])
-        yi = y["inflation_v1fix_minus_v11"]
-        tbd["tFourYoloInfl"] = pts(yi["mAP50_test"], 1) if yi else "pending"
-        tbd["tFourYoloInflHi"] = pts(yi["mAP50_95_test"], 1) if yi else "pending"
-        tbd["tFourYoloFixHi"] = d(y["per_variant"]["v1fix"]["mAP50_95_test"]["mean"], 3)
-        tbd["tFourYoloVelHi"] = d(y["per_variant"]["v1.1"]["mAP50_95_test"]["mean"], 3) if y["per_variant"]["v1.1"]["n"] else "pending"
-        tbd["tFourDetrFix"] = d(r["per_variant"]["v1fix"]["mAP50_test"]["mean"], 3)
-        tbd["tFourDetrFixHi"] = d(r["per_variant"]["v1fix"]["mAP50_95_test"]["mean"], 3)
-        for k in ("tFourDetrVel", "tFourDetrVelHi", "tFourDetrInfl", "tFourDetrInflHi"):
-            tbd[k] = "pending"
+        for mk, key in (("Yolo", "yolo26s"), ("Detr", "rtdetr-l")):
+            r = T[key]
+            tgt = M if r.get("status") == "COMPLETE" else tbd
+            pv = r["per_variant"]
+            for vk, var in (("Fix", "v1fix"), ("Vel", "v1.1")):
+                ok = pv[var]["n"] > 0
+                tgt[f"tFour{mk}{vk}"] = d(pv[var]["mAP50_test"]["mean"], 3) if ok else "pending"
+                tgt[f"tFour{mk}{vk}Hi"] = d(pv[var]["mAP50_95_test"]["mean"], 3) if ok else "pending"
+                tgt[f"tFour{mk}{vk}N"] = n(pv[var]["n"])
+            ri = r["inflation_v1fix_minus_v11"]
+            tgt[f"tFour{mk}Infl"] = pts(ri["mAP50_test"], 1) if ri else "pending"
+            tgt[f"tFour{mk}InflHi"] = pts(ri["mAP50_95_test"], 1) if ri else "pending"
+            if ri and tgt is M:
+                t4_infl.append(ri["mAP50_test"])
     # T4(2)-B arms (kernels t4-2b-e2-*): final when the model's runs are complete, else \TBD
     TB = J.get("t4_2B", {})
     for model, key in (("Yolo", "yolo26s"), ("Detr", "rtdetr-l")):
@@ -337,10 +338,33 @@ def main():
         else:
             for k in ("Infl", "StepBal", "StepTwo", "SeedSd"):
                 tgt[f"tTwoB{k}{model}"] = "pending"
-    # T4(2)-C LOSO folds: no result yet
+    # optional runs that were decided "not run" (numbers.json decisions.optional_not_run): printed as n.r., not \TBD
+    NR = J.get("decisions", {}).get("optional_not_run", {})
+    if "t4_2B_rtdetr-l" in NR and TB.get("rtdetr-l", {}).get("status") != "complete":
+        for name in ("tTwoBExBalDetr", "tTwoBExBalDetrHi", "tTwoBTwoDetr", "tTwoBTwoDetrHi", "tTwoBInflDetr",
+                     "tTwoBStepBalDetr", "tTwoBStepTwoDetr", "tTwoBSeedSdDetr"):
+            tbd.pop(name, None)
+            M[name] = "n.r."
+    # T4(2)-C LOSO folds
     for k in "ABCD":
-        tbd[f"loso{k}Map"] = "pending"
-    tbd["inflRange"] = "+a to +b"
+        (M if "t4_2C_loso" in NR else tbd)[f"loso{k}Map"] = "n.r." if "t4_2C_loso" in NR else "pending"
+    # \inflRange: min-max of the measured inflations (mAP50 points) -- PPE-U v1-fix -> v1.1 (T4(1), every COMPLETE
+    # model), B original -> clean2 (T4(2)-B, every complete model), E2'' group-leaked - group-clean (all models).
+    # Final only when T4(1) is COMPLETE for both models; else \TBD.
+    rng = list(t4_infl)
+    for key in ("yolo26s", "rtdetr-l"):
+        res = TB.get(key, {})
+        if res.get("status") == "complete" and res.get("arms"):
+            m_ = "YOLO26s" if key == "yolo26s" else "RT-DETR-L"
+            rng.append(V["E2"][f"{m_}_B"]["leaky_mAP50"] - res["arms"]["clean2"]["mAP50"]["mean"])
+    if P2:
+        rng += [r["leaked_minus_clean"]["mAP50"] for r in P2["models"].values()]
+    lo, hi = pts(min(rng), 1), pts(max(rng), 1)
+    if T.get("status") == "COMPLETE":
+        M["inflRange"] = f"{lo} to {hi}"
+        M["inflLo"], M["inflHi"] = lo, hi
+    else:
+        tbd["inflRange"] = f"{lo} to {hi}"
     VR = J.get("validator_runtime")
     if VR and VR.get("exit_code") in (0, 1) and not VR.get("other_python_processes"):
         M["validatorRuntime"] = f"{VR['wall_min']:.0f}~min"   # exit 1 = a check FAILed, still a complete run

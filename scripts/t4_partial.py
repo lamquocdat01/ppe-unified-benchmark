@@ -5,6 +5,9 @@ At 24-10: YOLO26s v1fix seeds 0,1 + v1.1 seed 0; RT-DETR-L v1fix seed 0 only. La
 the inflation v1fix - v1.1 uses unequal seed counts and is NOT in ERRATA E7 until T4(1) is complete
 (YOLO v1.1_s1 resume; RT-DETR v1.1_s0 in week 2, RT-DETR cut to 1 seed).
 
+P6 (01-11-2026): per-model "status" COMPLETE/PARTIAL; top-level status COMPLETE when nothing is missing.
+make_numbers_tex.py prints a model's T4 cells without \TBD once that model is COMPLETE.
+
 Usage:
   python -u scripts/t4_partial.py --paper <paper folder>
 """
@@ -51,7 +54,13 @@ def main():
     for model in PLANNED:
         st = Path(a.results) / model / "state.json"
         out[model] = summarise(json.loads(st.read_text(encoding="utf-8")), model)
-        print(model, json.dumps({k: out[model][k] for k in ("inflation_v1fix_minus_v11", "missing_runs")}))
+        out[model]["status"] = "COMPLETE" if not out[model]["missing_runs"] else "PARTIAL"
+        print(model, out[model]["status"],
+              json.dumps({k: out[model][k] for k in ("inflation_v1fix_minus_v11", "missing_runs")}))
+    if all(out[m]["status"] == "COMPLETE" for m in PLANNED):
+        out["status"] = "COMPLETE"
+        out["note"] = ("all planned runs present (YOLO26s 2 seeds per variant, RT-DETR-L 1 seed per variant; "
+                       "P6 2026-11-01)")
     p = Path(a.paper) / "generated" / "numbers.json"
     nums = json.loads(p.read_text(encoding="utf-8"))
     nums["t4_1_partial"] = out
