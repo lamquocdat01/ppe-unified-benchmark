@@ -165,7 +165,7 @@ the operating point (Section~\ref{sec:audit-results}).
 \item \textbf{PPE-Unified v1.1}, a re-split of the same corrected
 image pool into near-duplicate groups with zero cross-split pairs at
 every tier, together with a public \textbf{errata} for v1 and for the
-earlier version of this study (Sections~\ref{sec:errata}
+results released with it (Sections~\ref{sec:errata}
 and~\ref{sec:dataset}).
 \item \textbf{Scene-level versus copy-level leakage, separated by a
 same-model evaluation.} On one fixed test split, the same v1 detectors
@@ -476,15 +476,15 @@ $\theta=0.90$ only.
 
 \inputfloat{p}{\renewcommand{\arraystretch}{0.92}\input{generated/tab_audit_v2.tex}}
 
-\subsection{Errata to PPE-Unified v1 and to the earlier study}
+\subsection{Errata to PPE-Unified v1 and its released results}
 \label{sec:errata}
-The audit changes statements made in the earlier version of this
-study and in the v1 release; we list them here.
+The audit changes statements that accompanied the v1 release and its
+baseline results; we list them here.
 (i) \emph{PPE-Unified v1 is not leak-free.} It passes the exact tier
 but holds $\ncopyV$ copy-level and $\nsceneV$ sequence-level
 cross-split pairs (above), inherited from source C's video frames.
 Baseline scores measured on v1 (E1, Section~\ref{sec:e1}) are
-therefore reported as published reference values, and v1.1 replaces
+therefore reported as the reference values released with v1, and v1.1 replaces
 v1 (Section~\ref{sec:dataset}).
 (ii) \emph{Source statistics.} The earlier audit table reported
 $\nvFourImgB$ images for B and $\nvFourImgC$ for C; the exports hold $\nimgB$ and
@@ -629,7 +629,7 @@ Training uses Kaggle T4 instances with checkpoint-resume across
 \subsection{Experiments}
 \label{sec:e-list}
 \textbf{E1 (reference baselines).} All nine models on PPE-Unified v1,
-as published in the earlier version. Because v1 leaks at the
+as released with v1. Because v1 leaks at the
 perceptual tier (Section~\ref{sec:errata}), E1 values are reference
 values, not verified-split estimates.
 
@@ -646,11 +646,11 @@ audit (Section~\ref{sec:e2pp}).
 \textbf{E2-B (four arms of source B).} YOLO26s (15
 epochs, $640$ px) on four splits of the same B pool
 (Table~\ref{tab:arms}): the authors' \emph{original} split; the
-identifier-grouped \emph{clean-exact} split of the earlier study; a
+identifier-grouped \emph{clean-exact} split released with v1; a
 class-balanced variant of it (\emph{clean-exact-balanced}); and
 \emph{clean2}, grouped by exact $\cup$ 2a $\cup$ 2b and balanced.
 Seeds 42 and 0 for the two new arms. RT-DETR-L was trained on the
-original and clean-exact arms in the earlier study; it was not run on
+original and clean-exact arms for the v1 release; it was not run on
 the two new arms.
 
 \textbf{E2-C (leave-one-sequence-out on source C).} Grouping C by
@@ -671,7 +671,7 @@ were not trained on them for this paper.
 zero-shot on SH17 on the four shared classes (helmet, vest, gloves,
 mask); only the remapping script is released.
 \textbf{E4--E6.} Seed robustness, repeat-factor sampling and
-resolution ablations of the earlier version, on v1.
+resolution ablations released with v1, on v1.
 
 \begin{table}[t]
 \centering
@@ -894,7 +894,7 @@ harmful.
 \begin{table}[t]
 \centering
 \caption{E1 reference baselines on PPE-Unified v1 (test split; HPO on
-validation), as published. Detectors: mAP@50, mAP@50--95, latency.
+validation), as released with v1. Detectors: mAP@50, mAP@50--95, latency.
 Classifiers (ground-truth crops): accuracy, macro-F1, worst-class F1.
 v1 shares near-duplicates across splits (Section~\ref{sec:errata}).}
 \label{tab:e1}
