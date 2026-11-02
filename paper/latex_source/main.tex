@@ -40,6 +40,8 @@
 
 % Generated tables use table*[t]; in single-column review mode a
 % near-full-page one must also be allowed on a float page.
+% P6 (02-11-2026): \anonor{third-person text for the anonymised build}{first-person text for the full build}
+\newcommand{\anonor}[2]{\ifdefined\ANON#1\else#2\fi}
 \newcommand{\inputfloat}[2]{{\renewenvironment{table*}[1][]
   {\begin{table}[#1]}{\end{table}}#2}}
 
@@ -81,7 +83,7 @@ tier~2a matches copy-level near-duplicates (DINOv2 and perceptual hash;
 held-out precision $\nholdP$), and tier~2b links
 adjacent video frames. Two public datasets leak at tier~1, and
 tier~2a adds $\nextraCopyB$ and $\nextraCopyC$ cross-split pairs that
-hashing cannot see. Our earlier release, PPE-Unified v1, passed
+hashing cannot see. \anonor{The publicly released PPE-Unified v1 benchmark}{Our earlier release, PPE-Unified v1,} passed
 tier~1 yet holds $\ncopyV$ copy-level and $\nsceneV$ sequence-level
 cross-split pairs. Holding model and test split fixed, the v1 detectors
 score $\neppGrpDeltaMin$ to $\neppGrpDeltaMax$ mAP@50 points higher on
@@ -104,7 +106,7 @@ including v1 versus v1.1 retraining, leaky exceeds clean evaluation by
 \begin{highlights}
 \item Two-tier audit finds cross-split near-duplicates that hash checks miss
 \item Copy-level tier calibrated on augmentation groups (precision \nholdP)
-\item Our own hash-clean v1 benchmark still leaked near-duplicates across splits
+\item \anonor{The publicly released hash-clean v1 benchmark still leaked near-duplicates}{Our own hash-clean v1 benchmark still leaked near-duplicates across splits}
 \item PPE-Unified v1.1: \nimgV{} images, zero cross-split pairs at every tier
 \item One schema-driven validator runs unchanged on PPE and non-PPE datasets
 \end{highlights}
@@ -147,8 +149,9 @@ identical bytes can be detected by hashing. Leakage through
 \emph{transformed} copies and adjacent frames cannot, and it has not
 been measured for PPE detection.
 
-This paper measures it, and applies the measurement to our own
-benchmark as well as to the public sources. Our contributions are:
+This paper measures it, and applies the measurement to \anonor{the publicly
+released PPE-Unified v1 benchmark}{our own
+benchmark} as well as to the \anonor{other public sources}{public sources}. Our contributions are:
 \begin{enumerate}
 \item A \textbf{two-tier leakage audit} with an exact tier (source
 identifier, MD5) and a perceptual tier split into copy level (2a;
@@ -157,7 +160,7 @@ frame adjacency). The copy-level threshold is \textbf{calibrated} on
 augmentation groups recovered from export file names, which serve as
 labelled positives (Section~\ref{sec:audit}).
 \item An \textbf{audit of five datasets}: three public PPE sources
-(A, B, C), the SH17 benchmark \citep{ahmad2024sh17} and our own
+(A, B, C), the SH17 benchmark \citep{ahmad2024sh17} and \anonor{the publicly released}{our own}
 PPE-Unified v1. Both leaky sources leak at the exact tier and
 substantially more at the copy level; A and PPE-Unified v1, which pass
 the exact tier, leak at the copy level; SH17 has no copy-level pairs at
@@ -177,7 +180,7 @@ sample size (Section~\ref{sec:e2pp}). Leakage in PPE benchmarks is
 therefore predominantly a scene-level phenomenon, and identifier, hash
 and perceptual audits are necessary but insufficient without
 sequence-aware grouping. Inflation is also measured on controlled
-splits: v1 versus v1.1 of our benchmark and four split arms of
+splits: v1 versus v1.1 of \anonor{PPE-Unified}{our benchmark} and four split arms of
 source B; for source C we show that no clean class-balanced split
 exists and define leave-one-sequence-out folds (Sections~\ref{sec:experiments}
 and~\ref{sec:results}). Because the earlier ``clean'' arms still leak,
@@ -966,7 +969,7 @@ RT-DETR-L & \neThreeDetrIn & \neThreeDetr & \neThreeDetrHelmet & \neThreeDetrVes
 \subsection{Practical implications for intelligent-system practitioners}
 \label{sec:implications}
 \emph{Treat ``hash-clean'' as a minimum, not a certificate.} Two of
-the five audited datasets, including our own v1, passed identifier and
+the five audited datasets, including \anonor{the v1 release}{our own v1}, passed identifier and
 MD5 checks and still leaked at the copy level. A perceptual tier
 calibrated on the data at hand, at a precision-conservative threshold,
 is cheap to add and changes the verdict.
@@ -1023,7 +1026,7 @@ A two-tier audit, with a copy-level tier calibrated on augmentation
 groups, found cross-split near-duplicates in the leaky public sources
 far beyond their identifier-level leakage, in a source that passes the
 exact tier, in the ``clean'' re-splits used to measure inflation, and
-in our own earlier benchmark. Holding model and test split fixed, test
+in \anonor{the publicly released PPE-Unified v1 benchmark}{our own earlier benchmark}. Holding model and test split fixed, test
 images that share a scene with the training data score
 $\neppGrpDeltaMin$ to $\neppGrpDeltaMax$ mAP@50 points higher than
 scene-disjoint images for all three detectors, whereas direct copies
@@ -1104,8 +1107,8 @@ audit, calibration, re-split, validator and training code, the schema
 files and the Kaggle notebooks are in a public repository tagged for
 this version.
 \ifdefined\ANON
-Links are withheld for double-anonymized review and are given on the
-title page.
+Dataset: [withheld for double-anonymized review]; code: [withheld for
+double-anonymized review]. The links are given on the title page.
 \else
 Dataset: \url{https://www.kaggle.com/datasets/quocdatlam/ppe-unified-v1fix-v11};
 code: \url{https://github.com/lamquocdat01/ppe-unified-benchmark}
